@@ -133,7 +133,9 @@ def level10_function():
               else:
                      II_function()
  
-       Connect4Board = f'''6 | {C4List[35]} | {C4List[36]} | {C4List[37]} | {C4List[38]} | {C4List[39]} | {C4List[40]} | {C4List[41]}
+       Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
+-----------------------------
+6 | {C4List[35]} | {C4List[36]} | {C4List[37]} | {C4List[38]} | {C4List[39]} | {C4List[40]} | {C4List[41]}
 -----------------------------
 5 | {C4List[28]} | {C4List[29]} | {C4List[30]} | {C4List[31]} | {C4List[32]} | {C4List[33]} | {C4List[34]}
 -----------------------------
@@ -187,7 +189,7 @@ def level10_function():
               if Quitchoice == 2:
                      continue
 
-              for i in range(0, 35, 7): # Doesn't go to 42 as it will go over the limit
+              for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
                      SideFull = True
                      if C4List[Yourgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                             continue
@@ -257,7 +259,7 @@ def level10_function():
                      else:
                             Botgo = random.randrange(1,8)
 
-                     for i in range(0, 35, 7): # Doesn't go to 42 as it will go over the limit
+                     for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
                             SideFull = True # May delete because by this time, the bot may already know where they wanna go
                             if C4List[Botgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                                    continue
@@ -272,13 +274,21 @@ def level10_function():
                      if SideFull == True:
                             continue
                      
-                     for i in range(28): # Diagonals
-                            if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21] or C4List[i] == C4List[i + 8] == C4List[i + 16] == C4List[i + 24] or C4List[i] == C4List[i + 6] == C4List[i + 12] == C4List[i + 18]:
-                                   if C4List[i] == BotSd:
+                     for i in range(28): # Towers (Goes through all 1st 4 rows and check if a tower occurs)
+                            if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21]:
+                                   winstatement = "loss" # Match occurs after bot's turn means they won
+                     NextLevel = 0 # Wait for it...
+                     for i in range(0,28,7): # For going to the next row
+                            for i2 in range(4): # Diagonal Rights (Goes to the right)
+                                   if C4List[i2 + i] == C4List[i2 + i + 8] == C4List[i2 + i + 16] == C4List[i2 + i + 24]:
                                           winstatement = "loss"
-                     for i in range(4): # Straights
-                            if C4List[i] == C4List[i + 1] == C4List[i + 2] == C4List[i + 3] or C4List[i + 7] == C4List[i + 8] == C4List[i + 9] == C4List[i + 10] or C4List[i + 14] == C4List[i + 15] == C4List[i + 16] == C4List[i + 17] or C4List[i + 21] == C4List[i + 22] == C4List[i + 23] == C4List[i + 24]:
-                                   if C4List[i] == BotSd:
+                     for i in range(0,28,7): 
+                            for i2 in range(6,2,-1): # Diagonal Lefts (Starts from the right this time)
+                                   if C4List[i2 + i] == C4List[i2 + i + 6] == C4List[i2 + i + 12] == C4List[i2 + i + 18]:
+                                          winstatement = "loss"
+                     for i in range(0,42,7): # Straights (Starts at each row, and checks if there's a connect 4 starting from index 0 up to starting at index 3)
+                            for i2 in range(4):
+                                   if C4List[i2] == C4List[i2 + 1] == C4List[i2 + 2] == C4List[i2 + 3]:
                                           winstatement = "loss"
                      if "_" not in C4List and winstatement == "":
                             winstatement = "draw"
@@ -347,18 +357,20 @@ def pvplevel10_function(OnePlayerName,TwoPlayerName):
               else:
                      II_function()
        Yourturn = True
-       Connect4Board = f'''6 | {C4List[35]} | {C4List[36]} | {C4List[37]} | {C4List[38]} | {C4List[39]} | {C4List[40]} | {C4List[41]}
- -----------------------------
+       Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
+-----------------------------
+6 | {C4List[35]} | {C4List[36]} | {C4List[37]} | {C4List[38]} | {C4List[39]} | {C4List[40]} | {C4List[41]}
+-----------------------------
 5 | {C4List[28]} | {C4List[29]} | {C4List[30]} | {C4List[31]} | {C4List[32]} | {C4List[33]} | {C4List[34]}
- -----------------------------
+-----------------------------
 4 | {C4List[21]} | {C4List[22]} | {C4List[23]} | {C4List[24]} | {C4List[25]} | {C4List[26]} | {C4List[27]}
- -----------------------------
+-----------------------------
 3 | {C4List[14]} | {C4List[15]} | {C4List[16]} | {C4List[17]} | {C4List[18]} | {C4List[19]} | {C4List[20]}
- -----------------------------
+-----------------------------
 2 | {C4List[7]} | {C4List[8]} | {C4List[9]} | {C4List[10]} | {C4List[11]} | {C4List[12]} | {C4List[13]}
- -----------------------------
+-----------------------------
 1 | {C4List[0]} | {C4List[1]} | {C4List[2]} | {C4List[3]} | {C4List[4]} | {C4List[5]} | {C4List[6]}
-    1 | 2 | 3 | 4 | 5 | 6 | 7'''
+1 | 2 | 3 | 4 | 5 | 6 | 7'''
        while True: 
               YourSd = Red+"O"+reset
               BotSd = Blue+"O"+reset
@@ -400,7 +412,7 @@ def pvplevel10_function(OnePlayerName,TwoPlayerName):
                             break
                      if Quitchoice == 2:
                             continue
-                     for i in range(0, 35, 7): # Doesn't go to 42 as it will go over the limit
+                     for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
                             SideFull = True
                             if C4List[Yourgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                                    continue
@@ -419,11 +431,12 @@ def pvplevel10_function(OnePlayerName,TwoPlayerName):
                             continue
 
                      winstatement = ""
-                     for i in range(28): # Diagonals
-                            if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21] or C4List[i] == C4List[i + 8] == C4List[i + 16] == C4List[i + 24] or C4List[i] == C4List[i + 6] == C4List[i + 12] == C4List[i + 18]:
+                     for i in range(28): # Towers
+                            if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21]:
                                    if C4List[i] == YourSd:
                                           winstatement = "win"
-                     for i in range(4): # Straights
+                     for in 
+                     for i in range(0,4,): # Straights
                             if C4List[i] == C4List[i + 1] == C4List[i + 2] == C4List[i + 3] or C4List[i + 7] == C4List[i + 8] == C4List[i + 9] == C4List[i + 10] or C4List[i + 14] == C4List[i + 15] == C4List[i + 16] == C4List[i + 17] or C4List[i + 21] == C4List[i + 22] == C4List[i + 23] == C4List[i + 24]:
                                    if C4List[i] == YourSd:
                                           winstatement = "win"
@@ -483,7 +496,7 @@ def pvplevel10_function(OnePlayerName,TwoPlayerName):
                      if Quitchoice == 2:
                             continue
 
-                     for i in range(0, 35, 7): # Doesn't go to 42 as it will go over the limit
+                     for i in range(0, 42, 7): # Doesn't go to 42 as it will go over the limit
                             SideFull = True # May delete because by this time, the bot may already know where they wanna go
                             if C4List[Botgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                                    continue
