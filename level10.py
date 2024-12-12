@@ -32,7 +32,7 @@ underline = "\033[4m"
 italic = "\033[3m"
 darken = "\033[2m"
 reset = "\033[0m"
-
+# Fixed bugs such as program thinking empty boxes were a connect 4, missing some statements for connect check, clearScreens() not in order, and fixed explanation indentation
 def clearScreen():
  if osname == "nt":
   sys("cls")
@@ -221,7 +221,7 @@ def level10_function():
                      ListColumnChoices()
                      try:
                             Yourgo = int(input(""))
-                            if Yourgo not in [1,2,3,4,5,6,7]:
+                            if Yourgo not in [0,1,2,3,4,5,6,7]:
                                    II_function()
                                    continue
                      except:
@@ -327,7 +327,7 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      ListColumnChoices() # List Choices
                      try:
                             Yourgo = int(input(""))
-                            if Yourgo not in [1,2,3,4,5,6,7]:
+                            if Yourgo not in [0,1,2,3,4,5,6,7]:
                                    II_function()
                                    continue
                      except:
@@ -374,7 +374,7 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      ListColumnChoices()
                      try:
                             Oppgo = int(input(""))
-                            if Oppgo not in [1,2,3,4,5,6,7]:
+                            if Oppgo not in [0,1,2,3,4,5,6,7]:
                                    II_function()
                                    continue
                      except:
