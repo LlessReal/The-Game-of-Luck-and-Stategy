@@ -104,6 +104,9 @@ for i in range(49):
 1 | {C4List[0]} | {C4List[1]} | {C4List[2]} | {C4List[3]} | {C4List[4]} | {C4List[5]} | {C4List[6]}
 1 | 2 | 3 | 4 | 5 | 6 | 7''' # Connect4Board meant to be used by all functions
 
+YourSd = Blue+"O"+reset # Your defaultly blue
+BotSd = Red+"O"+reset # Bot is defaultly red
+
 def ListColumnChoices():
        time.sleep(0.25)
        print("1 - 1st Column",end = '   ')
@@ -136,6 +139,16 @@ def Connect4Check(): # Win condition
        if "_" not in C4List and Connect4Analyzation == "": # If there's no more empty areas
               Connect4Analyzation = "draw"
        return Connect4Analyzation
+
+def DrawFunction():
+       print("\n DRAW! \n")
+       PETC_function()
+       clearScreen()
+       temp = BotSd
+       BotSd = YourSd 
+       YourSd = temp # Swap variables/coin colors
+       for i in C4List:
+              C4List[i] = "_" # All items are _ again
 
 def ExplanationFunction(): # Custom Explanation
        Explained = False
@@ -219,23 +232,24 @@ def level10_function():
                                    continue
 
                      for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
-                            SideFull = True
+                            ColumnFull = True
                             if C4List[Yourgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                                    continue
                             else:
                                    C4List[Yourgo - 1 + i] = YourSd
-                                   SideFull = False
+                                   ColumnFull = False
                                    print(Connect4Board)
                                    print(f"You chose to fill in Row {math.ceil(Yourgo + i)}, Column {Yourgo}")
                                    Yourturn = False
                                    time.sleep(1)
+                                   clearScreen()
                                    break
-                     if SideFull == True:
+                     if ColumnFull == True:
                             print(Red+"Column is filled"+reset)
                             PETC_function()
                             continue
 
-              Connect4Results = Connect4Check()
+              Connect4Results = Connect4Check()  # Checks if your go was the win
               if Connect4Results != "":
                      print(Connect4Board)
                      if Connect4Results == "game":
@@ -248,16 +262,10 @@ def level10_function():
                             elif DifficultyChoice == "Hard":
                                    return "HW"
                      elif Connect4Results == "draw":
-                            print("\n DRAW! \n")
-                            PETC_function()
-                            clearScreen()
-                            YourSd = Blue+"O"+reset
-                            BotSd = Red+"O"+reset
-                            for i in C4List:
-                                   C4List[i] = "_" # Replacement of all sides equaling _ again
-                                   # R1Clmn1T means taken R1Clmn1TBY means taken by you R1Clmn1TBB means Taken by bot (All no longer needed)
+                            DrawFunction()
+       
               while Yourturn == False:
-                     if DifficultyChoice == "Hard":
+                     if DifficultyChoice == "Hard": # Still working on this lol
                             for i in range(28): # Diagonals
                                    TowerCheckList = [C4List[i],C4List[i + 7],C4List[i + 14],C4List[i + 21]]
                                    DiagonalRightCheckList = [C4List[i],C4List[i + 8],C4List[i + 16],C4List[i + 24]]
@@ -278,18 +286,18 @@ def level10_function():
                             Botgo = random.randrange(1,8)
 
                      for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
-                            SideFull = True # May delete because by this time, the bot may already know where they wanna go
+                            ColumnFull = True # May delete because by this time, the bot may already know where they wanna go
                             if C4List[Botgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                                    continue
                             else:
                                    C4List[Botgo - 1 + i] = BotSd
-                                   SideFull = False # Same
+                                   ColumnFull = False # Same
                                    print(Connect4Board)
                                    print(f"Bot chose to fill in Row {math.ceil(Botgo + i)}, Column {Botgo}")
                                    Yourturn = True
                                    time.sleep(1)
                                    clearScreen()
-                     if SideFull == True:
+                     if ColumnFull == True:
                             continue
                      Connect4Results = Connect4Check() # Solves the winner
                      if Connect4Results != "":
@@ -304,76 +312,62 @@ def level10_function():
                                    elif DifficultyChoice == "Hard":
                                           return "HL"
                             elif Connect4Results == "draw":
-                                   print("\n DRAW! \n")
-                                   PETC_function()
-                                   clearScreen()
-                                   YourSd = Red+"O"+reset
-                                   BotSd = Blue+"O"+reset
-                                   for i in C4List:
-                                          C4List[i] = "_" # Replacement of all sides equaling _ again
-                                          # R1Clmn1T means taken R1Clmn1TBY means taken by you R1Clmn1TBB means Taken by bot (All no longer needed)
+                                   DrawFunction()
    
-def pvplevel10_function(OnePlayerName,TwoPlayerName):
-       ExplainFunction()
+def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
+       ExplanationFunction() # Game gets explained
        Yourturn = True
        while True: 
-              YourSd = Red+"O"+reset
-              BotSd = Blue+"O"+reset
               while Yourturn == True:
                      print(Connect4Board)
-                     print(f"It's {OnePlayerName}'s turn! Choose your Column")
-                     ListColumnChoices()
+                     print(f"It's {Player1Name}'s turn! Choose your Column")
+                     ListColumnChoices() # List Choices
                      try:
                             Yourgo = int(input(""))
-                            clearScreen()
                      except:
                             II_function()
                             continue
                      if Yourgo == 0:
-                            if Quit_function() == "Quit":
+                            if Quit_function() == "Quit": # Asks quit if quit was chosen
                                    return "Quit"
                             else:
                                    continue
-                     for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
-                            SideFull = True
-                            if C4List[Yourgo - 1 + i] != "_": # If your slot in the row is not empty, continues
+
+                     for i in range(0,42,7): # Doesn't go to 49 as it will go over the limit
+                            ColumnFull = True # Assumes column is full for now
+                            if C4List[Yourgo - 1 + i] != "_": # If your slot in the current row isn't empty, goes to next row
                                    continue
                             else:
-                                   C4List[Yourgo - 1 + i] = YourSd
-                                   SideFull = False
-                                   print(Connect4Board)
-                                   print(f"{OnePlayerName} chose to fill in Row {math.ceil(Yourgo + i)}, Column {Yourgo}")
-                                   Yourturn = False
+                                   C4List[Yourgo - 1 + i] = YourSd # Puts coin in designate row
+                                   ColumnFull = False # Column wasn't full after all
+                                   clearScreen()
+                                   print(Connect4Board) # Clear screen and show new board
+                                   print(f"{Player1Name} chose to fill in Row {math.ceil((Yourgo + i) / 7)}, Column {Yourgo}") # Row Calculation: You chose column 2. (2 + 7) / 7 ceiled is 2, so you're on row 2. Ofc column is the # u chose
+                                   Yourturn = False # No longer your turn
                                    time.sleep(1)
+                                   clearScreen()
                                    break
-                     if SideFull == True:
+                     if ColumnFull == True: # Column isn't proved to not be full
                             print(Red+"Column is filled"+reset)
                             PETC_function()
-                            continue
+                            continue # Turn repeats
 
                      Connect4Results = Connect4Check()
                      if Connect4Results != "":
                             print(Connect4Board)
                             if Connect4Results == "game":
-                                   print(Blue+f"\n {OnePlayerName} have connected four! \n"+reset)
+                                   print(Blue+f"\n {Player1Name} have connected four! \n"+reset)
                                    PETC_function()
-                                   return "W"
+                                   return "W" # Returns back to select, signifying Player 1 the winner
                             elif Connect4Results == "draw":
-                                   print("\n DRAW! \n")
-                                   PETC_function()
-                                   clearScreen()
-                                   YourSd = Blue+"O"+reset
-                                   BotSd = Red+"O"+reset
-                                   for i in C4List:
-                                          C4List[i] = "_" # Replacement of all sides equaling _ again
+                                   DrawFunction() # Announces draw, swaps coins, resets board
  
-              while Yourturn == False:
+              while Yourturn == False: # Player 2's turn
                      print(Connect4Board)
-                     print(f"It's {TwoPlayerName}'s turn!")
+                     print(f"It's {Player2Name}'s turn!")
                      ListColumnChoices()
                      try:
                             Botgo = int(input(""))
-                            clearScreen()
                      except:
                             II_function()
                             continue
@@ -383,35 +377,32 @@ def pvplevel10_function(OnePlayerName,TwoPlayerName):
                             else:
                                    continue
 
-                     for i in range(0, 42, 7): # Doesn't go to 42 as it will go over the limit
-                            SideFull = True # May delete because by this time, the bot may already know where they wanna go
-                            if C4List[Botgo - 1 + i] != "_": # If your slot in the row is not empty, continues
+                     for i in range(0, 42, 7): 
+                            ColumnFull = True 
+                            if C4List[Botgo - 1 + i] != "_": 
                                    continue
                             else:
                                    C4List[Botgo - 1 + i] = BotSd
-                                   SideFull = False # Same
+                                   ColumnFull = False # Same
+                                   clearScreen()
                                    print(Connect4Board)
-                                   print(f"{TwoPlayerName} chose to fill in Row {math.ceil(Botgo + i)}, Column {Botgo}")
+                                   print(f"{Player2Name} chose to fill in Row {math.ceil(Botgo + i)}, Column {Botgo}")
                                    Yourturn = True
                                    time.sleep(1)
                                    clearScreen()
-                     if SideFull == True:
-                            continue
+                                   break # breaks outta loop to not repeat
+                     if ColumnFull == True:
+                            print(Red+"Column is filled"+reset)
+                            PETC_function()
+                            continue # Turn repeats
                      
                      Connect4Results = Connect4Check()
                      if Connect4Results != "":
                             print(Connect4Board)
                             if Connect4Results == "game":
-                                   print(Red+f"\n {TwoPlayerName} has connected four! \n"+reset)
+                                   print(Red+f"\n {Player2Name} has connected four! \n"+reset)
                                    PETC_function()
-                                   return "L"
+                                   return "L" # Loser for player 1
                             elif Connect4Results == "draw":
-                                   print("\n DRAW! \n")
-                                   PETC_function()
-                                   clearScreen()
-                                   YourSd = Red+"O"+reset
-                                   BotSd = Blue+"O"+reset
-                                   for i in C4List:
-                                          C4List[i] = "_" # Replacement of all sides equaling _ again
-                                          # R1Clmn1T means taken R1Clmn1TBY means taken by you R1Clmn1TBB means Taken by bot (All no longer needed)
+                                   DrawFunction()
 #CONNECT FOUR
