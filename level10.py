@@ -89,7 +89,7 @@ def Quit_function(): # Want to Quit?
 C4List = []
 for i in range(49):
        C4List.append("_") # Makes a list 49 elements index 0 - 48
-       Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
+Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
 -----------------------------
 6 | {C4List[35]} | {C4List[36]} | {C4List[37]} | {C4List[38]} | {C4List[39]} | {C4List[40]} | {C4List[41]}
 -----------------------------
@@ -102,7 +102,7 @@ for i in range(49):
 2 | {C4List[7]} | {C4List[8]} | {C4List[9]} | {C4List[10]} | {C4List[11]} | {C4List[12]} | {C4List[13]}
 -----------------------------
 1 | {C4List[0]} | {C4List[1]} | {C4List[2]} | {C4List[3]} | {C4List[4]} | {C4List[5]} | {C4List[6]}
-1 | 2 | 3 | 4 | 5 | 6 | 7''' # Connect4Board meant to be used by all functions
+    1 | 2 | 3 | 4 | 5 | 6 | 7''' # Connect4Board meant to be used by all functions
 
 YourSd = Blue+"O"+reset # Your defaultly blue
 BotSd = Red+"O"+reset # Bot is defaultly red
@@ -122,19 +122,19 @@ def ListColumnChoices():
 def Connect4Check(): # Win condition
        Connect4Analyzation = ""
        for i in range(28): # Towers (Goes through all 1st 4 rows and check if a tower occurs)
-              if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21]:
-                     Connect4Analyzation = "game" # Match occurs after bot's turn means they won
+              if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21] and C4List[i] != "_": # Checks for a match (That aren't empty)
+                     Connect4Analyzation = "game" # Match occurs after either person's turn means they won
        for i in range(0,28,7): # For going to the next row
-              for i2 in range(4): # Diagonal Rights (Goes to the right)
-                     if C4List[i2 + i] == C4List[i2 + i + 8] == C4List[i2 + i + 16] == C4List[i2 + i + 24]:
+              for i2 in range(4): # Starts at column indexes 0 - 3, 7 - 10, etc and goes up
+                     if C4List[i2 + i] == C4List[i2 + i + 8] == C4List[i2 + i + 16] == C4List[i2 + i + 24] and C4List[i2] != "_":
                             Connect4Analyzation = "game"
        for i in range(0,28,7): 
-              for i2 in range(6,2,-1): # Diagonal Lefts (Starts from the right this time)
-                     if C4List[i2 + i] == C4List[i2 + i + 6] == C4List[i2 + i + 12] == C4List[i2 + i + 18]:
+              for i2 in range(6,2,-1): # Starts at column indexes 6 - 3 and goes down (Starts from the right edge this time)
+                     if C4List[i2 + i] == C4List[i2 + i + 6] == C4List[i2 + i + 12] == C4List[i2 + i + 18 and C4List[i2] != "_"]:
                             Connect4Analyzation = "game"
        for i in range(0,42,7): # Straights (Starts at each row, and checks if there's a connect 4 starting from index 0 up to starting at index 3)
-              for i2 in range(4):
-                     if C4List[i2] == C4List[i2 + 1] == C4List[i2 + 2] == C4List[i2 + 3]:
+              for i2 in range(4): 
+                     if C4List[i2 + i] == C4List[i2 + i + 1] == C4List[i2 + i + 2] == C4List[i2 + i + 3] and C4List[i2] != "_": 
                             Connect4Analyzation = "game"
        if "_" not in C4List and Connect4Analyzation == "": # If there's no more empty areas
               Connect4Analyzation = "draw"
@@ -157,7 +157,7 @@ def ExplanationFunction(): # Custom Explanation
                      print('''Would you like an explanation on this game?''')
               elif Explained == True:
                      print('''Would you like another explanation on this game?''')
-                     YOR_function()
+              YOR_function()
               try:
                      Explanationchoice = int(input(""))
               except:
@@ -221,7 +221,9 @@ def level10_function():
                      ListColumnChoices()
                      try:
                             Yourgo = int(input(""))
-                            clearScreen()
+                            if Yourgo not in [1,2,3,4,5,6,7]:
+                                   II_function()
+                                   continue
                      except:
                             II_function()
                             continue
@@ -238,6 +240,7 @@ def level10_function():
                             else:
                                    C4List[Yourgo - 1 + i] = YourSd
                                    ColumnFull = False
+                                   clearScreen()
                                    print(Connect4Board)
                                    print(f"You chose to fill in Row {math.ceil(Yourgo + i)}, Column {Yourgo}")
                                    Yourturn = False
@@ -271,11 +274,11 @@ def level10_function():
                                    DiagonalRightCheckList = [C4List[i],C4List[i + 8],C4List[i + 16],C4List[i + 24]]
                                    DiagonalLeftCheckList = [C4List[i],C4List[i + 6],C4List[i + 12],C4List[i + 18]]
                                    if TowerCheckList.count(YourSd) == 3:
-                                          Botgo = TowerCheckList[TowerCheckList.index("_")]   
+                                          Oppgo = TowerCheckList[TowerCheckList.index("_")]   
                                    elif DiagonalRightCheckList.count(YourSd) == 3:
-                                          Botgo = DiagonalRightCheckList[DiagonalRightCheckList.index("_")]  
+                                          Oppgo = DiagonalRightCheckList[DiagonalRightCheckList.index("_")]  
                                    elif DiagonalLeftCheckList.count(YourSd) == 3:
-                                          Botgo = DiagonalLeftCheckList[DiagonalLeftCheckList.index("_")]  
+                                          Oppgo = DiagonalLeftCheckList[DiagonalLeftCheckList.index("_")]  
                                          
                             for i in range(4): # Straights
                                    RowCheckList1 = C4List[i] == C4List[i + 1] == C4List[i + 2] == C4List[i + 3]
@@ -283,17 +286,17 @@ def level10_function():
                                    RowCheckList3 = C4List[i + 14] == C4List[i + 15] == C4List[i + 16] == C4List[i + 17]
                                    RowCheckList4 = C4List[i + 21] == C4List[i + 22] == C4List[i + 23] == C4List[i + 24]
                      else:
-                            Botgo = random.randrange(1,8)
+                            Oppgo = random.randrange(1,8)
 
                      for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
                             ColumnFull = True # May delete because by this time, the bot may already know where they wanna go
-                            if C4List[Botgo - 1 + i] != "_": # If your slot in the row is not empty, continues
+                            if C4List[Oppgo - 1 + i] != "_": # If your slot in the row is not empty, continues
                                    continue
                             else:
-                                   C4List[Botgo - 1 + i] = BotSd
+                                   C4List[Oppgo - 1 + i] = BotSd
                                    ColumnFull = False # Same
                                    print(Connect4Board)
-                                   print(f"Bot chose to fill in Row {math.ceil(Botgo + i)}, Column {Botgo}")
+                                   print(f"Bot chose to fill in Row {math.ceil(Oppgo + i)}, Column {Oppgo}")
                                    Yourturn = True
                                    time.sleep(1)
                                    clearScreen()
@@ -324,6 +327,9 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      ListColumnChoices() # List Choices
                      try:
                             Yourgo = int(input(""))
+                            if Yourgo not in [1,2,3,4,5,6,7]:
+                                   II_function()
+                                   continue
                      except:
                             II_function()
                             continue
@@ -367,11 +373,14 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      print(f"It's {Player2Name}'s turn!")
                      ListColumnChoices()
                      try:
-                            Botgo = int(input(""))
+                            Oppgo = int(input(""))
+                            if Oppgo not in [1,2,3,4,5,6,7]:
+                                   II_function()
+                                   continue
                      except:
                             II_function()
                             continue
-                     if Botgo == 0:
+                     if Oppgo == 0:
                             if Quit_function() == "Quit":
                                    return "Quit"
                             else:
@@ -379,14 +388,14 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
 
                      for i in range(0, 42, 7): 
                             ColumnFull = True 
-                            if C4List[Botgo - 1 + i] != "_": 
+                            if C4List[Oppgo - 1 + i] != "_": 
                                    continue
                             else:
-                                   C4List[Botgo - 1 + i] = BotSd
+                                   C4List[Oppgo - 1 + i] = BotSd
                                    ColumnFull = False # Same
                                    clearScreen()
                                    print(Connect4Board)
-                                   print(f"{Player2Name} chose to fill in Row {math.ceil(Botgo + i)}, Column {Botgo}")
+                                   print(f"{Player2Name} chose to fill in Row {math.ceil(Oppgo + i)}, Column {Oppgo}")
                                    Yourturn = True
                                    time.sleep(1)
                                    clearScreen()
