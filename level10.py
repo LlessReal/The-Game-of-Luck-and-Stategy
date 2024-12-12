@@ -123,18 +123,23 @@ def Connect4Check(): # Win condition
        Connect4Analyzation = ""
        for i in range(28): # Towers (Goes through all 1st 4 rows and check if a tower occurs)
               if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21] and C4List[i] != "_": # Checks for a match (That aren't empty)
+                     input("Error 1")
                      Connect4Analyzation = "game" # Match occurs after either person's turn means they won
        for i in range(0,28,7): # For going to the next row
               for i2 in range(4): # Starts at column indexes 0 - 3, 7 - 10, etc and goes up
                      if C4List[i2 + i] == C4List[i2 + i + 8] == C4List[i2 + i + 16] == C4List[i2 + i + 24] and C4List[i2] != "_":
+                            print(i2)
+                            input("Error 2")
                             Connect4Analyzation = "game"
        for i in range(0,28,7): 
               for i2 in range(6,2,-1): # Starts at column indexes 6 - 3 and goes down (Starts from the right edge this time)
                      if C4List[i2 + i] == C4List[i2 + i + 6] == C4List[i2 + i + 12] == C4List[i2 + i + 18 and C4List[i2] != "_"]:
+                            input("Error 3")
                             Connect4Analyzation = "game"
        for i in range(0,42,7): # Straights (Starts at each row, and checks if there's a connect 4 starting from index 0 up to starting at index 3)
               for i2 in range(4): 
-                     if C4List[i2 + i] == C4List[i2 + i + 1] == C4List[i2 + i + 2] == C4List[i2 + i + 3] and C4List[i2] != "_": 
+                     if C4List[i2 + i] == C4List[i2 + i + 1] == C4List[i2 + i + 2] == C4List[i2 + i + 3] and C4List[i2] != "_":
+                            input("Error 4") 
                             Connect4Analyzation = "game"
        if "_" not in C4List and Connect4Analyzation == "": # If there's no more empty areas
               Connect4Analyzation = "draw"
@@ -213,8 +218,6 @@ def level10_function():
        ExplanationFunction()
        Yourturn = True
        while True: 
-              YourSd = Red+"O"+reset # You're side one
-              BotSd = Blue+"O"+reset # bot is side 2
               while Yourturn == True:
                      print(Connect4Board)
                      print("It's your turn! Choose your Column")
@@ -326,6 +329,8 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      print(f"It's {Player1Name}'s turn! Choose your Column")
                      ListColumnChoices() # List Choices
                      try:
+                            print(YourSd)
+                            print(BotSd)
                             Yourgo = int(input(""))
                             if Yourgo not in [0,1,2,3,4,5,6,7]:
                                    II_function()
