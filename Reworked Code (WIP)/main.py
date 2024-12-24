@@ -8,8 +8,6 @@ import level9
 import level10
 from os import system as sys
 from os import name as osname
-# https://replit.com/@Isarmore/The-Game-of-Luck-and-Strategy replit link
-# oh yea and this https://replit.com/@Lless/Old-Python-Project-I-did-last-semester#main.py
 YFSPrintNumbers = 0
 Red = "\033[0;31m"
 Green = "\033[0;32m"
