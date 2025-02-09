@@ -1,56 +1,12 @@
 
 import time, random
-from guide import NumChoiceWithQuit, InvalidInput, PETC_function, PNTC_function, YesOrNo
+from guide import NumChoiceWithQuit, InvalidInput, MessageStop, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, blue_back, red, clearScreen
 import level4, level6, level7, level8, level9, level10
-
-def GameSelected(TheGame,Points):
-    if Points == "UC":
-        print(f"{red}{TheGame} is under construction at the moment.{reset}")
-        PETC_function()
-        return "Redecide"
-    
-    while True:
-        clearScreen()
-        print(f"Game selected: {yellow}{TheGame}{reset}")
-        time.sleep(0.5)
-        print("\nContinue?")
-        try:
-            GameChoice = YesOrNo()
-            break
-        except:
-            InvalidInput()
-            continue
-    if GameChoice == 1:
-        print(f"Alright! {TheGame} loading!")
-        time.sleep(1.5)
-        clearScreen()
-        return TheGame
-    elif GameChoice == 2:
-        print("Understood.")
-        time.sleep(1)
-        clearScreen()
-        return "Redecide"
-
-def WinStatementFunc(GameStatus,TheGame,ThePoints,PointsNow,Difficulty="N/A"):
-    if "W" in GameStatus and Difficulty == "N/A":
-        print(f'''{Blue}Congratulations on your win in {TheGame}. \n  
-You gained {ThePoints} points so you have {PointsNow} points in total now.'''+reset)
-    elif "L" in GameStatus and Difficulty == "N/A":
-        print(f'''{Red}It looks like you lost a game of {TheGame}. \n
-You lost {ThePoints / 2} points so you have {PointsNow} points in total now.'''+reset)
-        
-    elif "W" in GameStatus and Difficulty != "N/A":   
-        print(Blue+f'''Congratulations on your win in {TheGame} ({Difficulty} Difficulty) \n 
-You gained {ThePoints} points so you have {PointsNow} points in total now.'''+reset)
-    elif "L" in GameStatus and Difficulty != "N/A":  
-        print(Red+f'''It looks like you lost a game of {TheGame} ({Difficulty} Difficulty) \n  
-You lost {ThePoints} points so you have {PointsNow} points in total now.'''+reset)
                              
 def PVC():
+    MessageStop("Gain as many points as you can in 5 games! \n You can win some and you can lose some.")
     GamePoints = 0
-    print("Gain as many points as you can in 5 games! \n You can win some and you can lose some.")
-    PETC_function()
     GamesLeft = 5
     while GamesLeft != 0:
         print("\nChoose your game.")
@@ -79,6 +35,7 @@ def PVC():
             continue  
         while True:
             GameDecision = GameSelected(GameChosen,PointWorth)
+            ChosenDifficulty = "N/A" # By default there's no difficulty
             # Checks to see what game we're doing, and calls that script based on it
             # RPS 
             if GameDecision == "Rock Paper Scissors":
@@ -88,8 +45,7 @@ def PVC():
                 if GameInSession == "Quit":
                     return # Back to the main screen
                 GamePoints += GamePointChange if GameInSession == "W" else -(GamePointChange / 2)
-                WinStatementFunc(GameInSession,GameDecision,GamePointChange,GamePoints)
-            
+                # This is all used to generate a statement            
             # Four Corners    
             elif GameDecision == "Four Corners":
                 GameInSession = level6.level6_function()
@@ -105,8 +61,7 @@ def PVC():
                             if GameInSession in meaning:
                                 GamePoints += meaning[1]
                                 GamePointChange = abs(meaning[1])
-                WinStatementFunc(GameInSession,GameDecision,GamePointChange,GamePoints,ChosenDifficulty)
-                                    
+
             # Guess the number
             elif GameDecision == "Guess the number":
                 GameInSession = level7.level7_function()
@@ -115,7 +70,6 @@ def PVC():
                 if GameInSession == "Quit":
                     return
                 GamePoints += GamePointChange if GameInSession == "W" else -(GamePointChange / 2)
-                WinStatementFunc(GameInSession,GameDecision,GamePointChange,GamePoints)
 
             elif GameDecision == "Board Game":
                 GameInSession = level8.level8_function()
@@ -131,9 +85,8 @@ def PVC():
                             if GameInSession in meaning:
                                 GamePoints += meaning[1]
                                 GamePointChange = abs(meaning[1])
-                WinStatementFunc(GameInSession,GameDecision,GamePointChange,GamePoints,ChosenDifficulty)
 
-            # Tic-Taco-Toe
+            # Tic-Tac-Toe
             elif GameDecision == "Tic-Tac-Toe":
                 GameInSession = level9.level9_function()
                 clearScreen()
@@ -148,7 +101,6 @@ def PVC():
                             if GameInSession in meaning:
                                 GamePoints += meaning[1]
                                 GamePointChange = abs(meaning[1])
-                WinStatementFunc(GameInSession,GameDecision,GamePointChange,GamePoints,ChosenDifficulty)
 
             # Connect Four
             elif GameDecision == "Connect Four":
@@ -166,25 +118,21 @@ def PVC():
                             if GameInSession in meaning:
                                 GamePoints += meaning[1]
                                 GamePointChange = abs(meaning[1])
-                WinStatementFunc(GameInSession,GameDecision,GamePointChange,GamePoints,ChosenDifficulty)
             # If no game, redecide
             elif GameDecision == "Redecide":
                 pass
-
             break # Breaks out of decision loop
 
         if GameDecision == "Redecide": # If we chose to redecide
             continue    
 
         else: # If we just finishe a game
-            PETC_function()
+            MessageStop(WinLoseStatement(GameInSession,GameDecision,GamePointChange,GamePoints,ChosenDifficulty))
             clearScreen()
             GamesLeft -= 1
-            print(f"\nYou and your opponent get to play {GamesLeft} more game(s)")
-            PETC_function()
+            MessageStop(f"\nYou and your opponent get to play {GamesLeft} more game(s)")
     # Once we break out of the big loop
-    print(Blue+'''You have finished your trial of 7 games!''' + reset)
-    PETC_function()
+    MessageStop(f"{Blue}You have finished your trial of 7 games! {reset}")
     for resultcount in range(5):
         print(f"Your final score is{"." * resultcount}")
         time.sleep(0.25)
@@ -217,5 +165,45 @@ def PVC():
                 if glazelines.index(glazing) != len(glazelines) - 1:
                     time.sleep(1)
     time.sleep(1)
-    print('''\nFeel free to share your score with your friends!''')
-    PETC_function()
+    MessageStop("\nFeel free to share your score with your friends!")
+
+
+def GameSelected(TheGame,Points):
+    if Points == "UC":
+        MessageStop(f"{red}{TheGame} is under construction at the moment.{reset}")
+        return "Redecide"
+    
+    while True:
+        clearScreen()
+        print(f"Game selected: {yellow}{TheGame}{reset}")
+        time.sleep(0.5)
+        try:
+            GameChoice = YesOrNo("\nContinue?")
+        except:
+            InvalidInput()
+            continue
+        if GameChoice == 1:
+            print(f"Alright! {TheGame} loading!")
+            time.sleep(1.5)
+            clearScreen()
+            return TheGame
+        elif GameChoice == 2:
+            print("Understood.")
+            time.sleep(1)
+            clearScreen()
+            return "Redecide"
+
+def WinLoseStatement(GameStatus,TheGame,ThePoints,PointsNow,Difficulty="N/A"):
+    if "W" in GameStatus and Difficulty == "N/A":
+        return f'''{Blue}Congratulations on your win in {TheGame}. \n  
+You gained {ThePoints} points so you have {PointsNow} points in total now.{reset}'''
+    elif "L" in GameStatus and Difficulty == "N/A":
+        return f'''{Red}It looks like you lost a game of {TheGame}. \n
+You lost {ThePoints / 2} points so you have {PointsNow} points in total now.{reset}'''
+        
+    elif "W" in GameStatus and Difficulty != "N/A":   
+        return f'''{Blue}Congratulations on your win in {TheGame} ({Difficulty} Difficulty) \n 
+You gained {ThePoints} points so you have {PointsNow} points in total now.{reset}'''
+    elif "L" in GameStatus and Difficulty != "N/A":  
+        return f'''{Red}It looks like you lost a game of {TheGame} ({Difficulty} Difficulty) \n  
+You lost {ThePoints} points so you have {PointsNow} points in total now.{reset}'''

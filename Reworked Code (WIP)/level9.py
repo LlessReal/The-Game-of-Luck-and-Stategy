@@ -1,5 +1,5 @@
 import time, random
-from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, PETC_function, PNTC_function, YesOrNo
+from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop, NumChoice, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, clearScreen
 
 def level9_function():
@@ -56,7 +56,7 @@ Choose your difficulty for Tic-Tac-Toe''')
   print('''
 3 - ''' + Red + '''Hard (Bot has a big brain)''' + reset)
   time.sleep(0.25)
-  PNTC_function()
+  NumChoice()
   try:
    DifficultyChoice = int(input(""))
   except:
@@ -97,18 +97,18 @@ Choose your difficulty for Tic-Tac-Toe''')
    time.sleep(2)
    clearScreen()
    print('''1 - On a 3x3 grid graph, you mark a spot.''') 
-   PETC_function()
+   MessageStop()
    print('''2 - The sign that you mark on the spot depends on the winner''')
-   PETC_function()
+   MessageStop()
    print('''3 - You mark a row on the 3x3 grid graph in order to win a point''')
-   PETC_function()
+   MessageStop()
    print('''4 - The goal for you and your opponent is to get 2 points''')
-   PETC_function()
+   MessageStop()
    print('''5 - You can stop your opponent from winning.
 This is by stopping your opponent from marking a row on the graph.''')
-   PETC_function()
+   MessageStop()
    print('''6 - Strategy is key on this game.''')
-   PETC_function()
+   MessageStop()
    Explained = True
    continue
   if Explanationchoice == 2:
@@ -194,7 +194,7 @@ Alrighty then!''')
      S1T = True
     elif S1T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 2:
     if S2T == False:
@@ -206,7 +206,7 @@ Alrighty then!''')
      S2T = True
     elif S2T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 3:
     if S3T == False:
@@ -218,7 +218,7 @@ Alrighty then!''')
      S3T = True
     elif S3T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 4:
     if S4T == False:
@@ -230,7 +230,7 @@ Alrighty then!''')
      S4T = True
     elif S4T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 5:
     if S5T == False:
@@ -242,7 +242,7 @@ Alrighty then!''')
      S5T = True
     elif S5T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 6:
     if S6T == False:
@@ -254,7 +254,7 @@ Alrighty then!''')
      S6T = True
     elif S6T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 7:
     if S7T == False:
@@ -266,7 +266,7 @@ Alrighty then!''')
      S7T = True
     elif S7T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 8:
     if S8T == False:
@@ -278,7 +278,7 @@ Alrighty then!''')
      S8T = True
     elif S8T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 9:
     if S9T == False:
@@ -290,7 +290,7 @@ Alrighty then!''')
      S9T = True
     elif S9T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    else:
     InvalidInput()
@@ -304,7 +304,7 @@ Alrighty then!''')
     print(Blue+"You have made a cross!"+reset)
     print("")
     Yourpoints = Yourpoints + 1
-    PETC_function()
+    MessageStop()
     Yourshape = 2
     Botshape = 1
     YourSd = "O"
@@ -350,7 +350,7 @@ Alrighty then!''')
     print("")
     print("Full Board!")
     print("")
-    PETC_function()
+    MessageStop()
     Yourshape = 2
     Botshape = 1
     YourSd = "O"
@@ -530,7 +530,7 @@ Alrighty then!''')
     print(Red+"Your opponent has made a cross."+reset)
     Botpoints = Botpoints + 1
     print("")
-    PETC_function()
+    MessageStop()
     Yourshape = 1
     Botshape = 2
     YourSd = "X"
@@ -576,7 +576,7 @@ Alrighty then!''')
     print("")
     print("Full Board!")
     print("")
-    PETC_function()
+    MessageStop()
     Yourshape = 1
     Botshape = 2
     YourSd = "X"
@@ -693,18 +693,18 @@ def pvplevel9_function(PlayerOneName,PlayerTwoName):
    time.sleep(2)
    clearScreen()
    print('''1 - On a 3x3 grid graph, you mark a spot.''') 
-   PETC_function()
+   MessageStop()
    print('''2 - The sign that you mark on the spot depends on the winner''')
-   PETC_function()
+   MessageStop()
    print('''3 - You mark a row on the 3x3 grid graph in order to win a point''')
-   PETC_function()
+   MessageStop()
    print('''4 - The goal for you and your opponent is to get 2 points''')
-   PETC_function()
+   MessageStop()
    print('''5 - You can stop your opponent from winning.
 This is by stopping your opponent from marking a row on the graph.''')
-   PETC_function()
+   MessageStop()
    print('''6 - Strategy is key on this game.''')
-   PETC_function()
+   MessageStop()
    Explained = True
    continue
   if Explanationchoice == 2:
@@ -790,7 +790,7 @@ Alrighty then!''')
      S1T = True
     elif S1T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 2:
     if S2T == False:
@@ -802,7 +802,7 @@ Alrighty then!''')
      S2T = True
     elif S2T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 3:
     if S3T == False:
@@ -814,7 +814,7 @@ Alrighty then!''')
      S3T = True
     elif S3T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 4:
     if S4T == False:
@@ -826,7 +826,7 @@ Alrighty then!''')
      S4T = True
     elif S4T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 5:
     if S5T == False:
@@ -838,7 +838,7 @@ Alrighty then!''')
      S5T = True
     elif S5T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 6:
     if S6T == False:
@@ -850,7 +850,7 @@ Alrighty then!''')
      S6T = True
     elif S6T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 7:
     if S7T == False:
@@ -862,7 +862,7 @@ Alrighty then!''')
      S7T = True
     elif S7T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 8:
     if S8T == False:
@@ -874,7 +874,7 @@ Alrighty then!''')
      S8T = True
     elif S8T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    elif Yourgo == 9:
     if S9T == False:
@@ -886,7 +886,7 @@ Alrighty then!''')
      S9T = True
     elif S9T == True:
      print(Red+"Spot is already filled."+reset)
-     PETC_function()
+     MessageStop()
      continue
    else:
     InvalidInput()
@@ -900,7 +900,7 @@ Alrighty then!''')
     print("{} ".format(PlayerOneName)+Blue+"has made a cross!"+reset)
     print("")
     Yourpoints = Yourpoints + 1
-    PETC_function()
+    MessageStop()
     Yourshape = 2
     Botshape = 1
     YourSd = "O"
@@ -946,7 +946,7 @@ Alrighty then!''')
     print("")
     print("Full Board!")
     print("")
-    PETC_function()
+    MessageStop()
     Yourshape = 2
     Botshape = 1
     YourSd = "O"
@@ -1147,7 +1147,7 @@ Alrighty then!''')
     print("{} ".format(PlayerTwoName)+Blue+"has made a cross!"+reset)
     Botpoints = Botpoints + 1
     print("")
-    PETC_function()
+    MessageStop()
     Yourshape = 1
     Botshape = 2
     YourSd = "X"
@@ -1193,7 +1193,7 @@ Alrighty then!''')
     print("")
     print("Full Board!")
     print("")
-    PETC_function()
+    MessageStop()
     Yourshape = 1
     Botshape = 2
     YourSd = "X"

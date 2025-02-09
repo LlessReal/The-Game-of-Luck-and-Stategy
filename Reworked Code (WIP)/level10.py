@@ -1,5 +1,5 @@
 import time, math, random
-from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, PETC_function, PNTC_function
+from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop, NumChoice
 from UsefulStuff import Red, reset, yellow, Blue, red, clearScreen
 
 C4List = []
@@ -89,7 +89,7 @@ def Connect4Check(): # Win condition
 
 def DrawFunction():
        print("\n DRAW! \n")
-       PETC_function()
+       MessageStop()
        clearScreen()
        temp = BotSd
        BotSd = YourSd 
@@ -106,7 +106,7 @@ def level10_function():
               time.sleep(0.25)
               print("\n" + Red + "Hard (Bot has big brain) " + reset)
               time.sleep(0.25)
-              PNTC_function()
+              NumChoice()
               try:
                      DifficultyChoice = DifficultyModes[int(input(""))] - 1
                      print(f"Alright! {DifficultyChoice} difficulty of Connect FOUR loading!")
@@ -151,7 +151,7 @@ def level10_function():
                                    break
                      if ColumnFull == True:
                             print(Red+"Column is filled"+reset)
-                            PETC_function()
+                            MessageStop()
                             continue
 
               Connect4Results = Connect4Check()  # Checks if your go was the win
@@ -159,7 +159,7 @@ def level10_function():
                      print(Connect4Board)
                      if Connect4Results == "game":
                             print(Blue+"\n You have connected four! \n"+reset)
-                            PETC_function()
+                            MessageStop()
                             if DifficultyChoice == "Easy":
                                    return "EW"
                             elif DifficultyChoice == "Medium":
@@ -209,7 +209,7 @@ def level10_function():
                             print(Connect4Board)
                             if Connect4Results == "game":
                                    print(Red+"\n Your opponent has connected four! \n"+reset)
-                                   PETC_function()
+                                   MessageStop()
                                    if DifficultyChoice == "Easy":
                                           return "EL"
                                    elif DifficultyChoice == "Medium":
@@ -256,7 +256,7 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                                    break
                      if ColumnFull == True: # Column isn't proved to not be full
                             print(Red+"Column is filled"+reset)
-                            PETC_function()
+                            MessageStop()
                             continue # Turn repeats
 
                      Connect4Results = Connect4Check()
@@ -264,7 +264,7 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                             print(Connect4Board)
                             if Connect4Results == "game":
                                    print(Blue+f"\n {Player1Name} have connected four! \n"+reset)
-                                   PETC_function()
+                                   MessageStop()
                                    return "W" # Returns back to select, signifying Player 1 the winner
                             elif Connect4Results == "draw":
                                    DrawFunction() # Announces draw, swaps coins, resets board
@@ -303,7 +303,7 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                                    break # breaks outta loop to not repeat
                      if ColumnFull == True:
                             print(Red+"Column is filled"+reset)
-                            PETC_function()
+                            MessageStop()
                             continue # Turn repeats
                      
                      Connect4Results = Connect4Check()
@@ -311,7 +311,7 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                             print(Connect4Board)
                             if Connect4Results == "game":
                                    print(Red+f"\n {Player2Name} has connected four! \n"+reset)
-                                   PETC_function()
+                                   MessageStop()
                                    return "L" # Loser for player 1
                             elif Connect4Results == "draw":
                                    DrawFunction()

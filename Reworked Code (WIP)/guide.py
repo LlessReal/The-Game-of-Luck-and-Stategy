@@ -2,193 +2,153 @@ import time
 from UsefulStuff import clearScreen
 from UsefulStuff import Red, reset, yellow, Blue
 import inspect
-# Press enter to continue
-def PETC_function(): 
-    input(yellow + "\n(Press Enter to Continue)\n" + reset)
+# Press enter to continue (With Message if there is one)
+def MessageStop(Message=""): 
+    if Message != "":
+        print(Message)
+    input(f"\n{yellow}(Press Enter to Continue){reset}\n")
     clearScreen()
 # Press a number to continue
-def PNTC_function(): 
-    print(yellow + "\n(Press a number and then Enter to choose)" + reset)
+def NumChoice(): 
+    print(f"\n{yellow}(Press a number and then Enter to choose){reset}")
+    return int(input(""))
 # Press a number to continue, but with a quit option.
 
-# Invalid Input detected, 
-def InvalidInput(IS="You must press the number on the left. \nThen, you press enter to choose."):
+# Invalid Input detected (Usually put this under except:) 
+def InvalidInput(IS="You must press the number on the left. \nThen, you press enter to choose."): # Default message
     clearScreen()
-    print(Red + "Invalid Input" + reset)
+    print(f"{Red}Invalid Input{reset}")
     time.sleep(1)
-    print(IS) # Custom input
-    PETC_function()
+    MessageStop(IS)
+    # ALWAYS PUT A CONTINUE AFTER THIS FUNCTION ENDS
 
-# Yes or no.
-def YesOrNo():
+# Yes / No | (ALWAYS PUT THIS UNDER try: IN A TRY AND EXCEPT PLS)
+# clearScreen before this is optional
+def YesOrNo(YNQuestion="\nConfirm?"):
+    print(YNQuestion)
     time.sleep(0.5)
-    print("\n 1 - "+Blue+"Yes"+reset)
+    print(f"\n 1 - {Blue}Yes{reset}")
     time.sleep(0.25)
-    print("\n 2 - "+Red+"No"+reset)
+    print(f"\n 2 - {Red}No{reset}")
     time.sleep(0.25)
-    PNTC_function()
-    try:
-        YONChoice = int(input(""))
-        if YONChoice not in range (1,3):
-            return Exception
-        else:
-            return YONChoice
-    except:
-       return Exception
-    
-def Quitmoment(OGFile="N/A"):
-    while True:
-        print("Are you sure you want to "+Red+"quit"+reset+"?")
-        try:
-            YON = YesOrNo()
-        except: 
-            InvalidInput()
-            continue
-        if YON == 1:
-            if "MenuScreen" in OGFile: # If the function was called from MenuScreen.py
-                return "Quit" # Get on with it
-            print("Understood.")
-            time.sleep(1)
-            print("\n You will now return to the menu screen.")
-            time.sleep(2)
-            return "Quit"
-        if YON == 2:
-            print("\n Alrighty then!")
-            time.sleep(1)
-            return "Redo"
-        
+    YONChoice = NumChoice() # An error could occur here (Follow above if u havent)
+    if YONChoice not in range(1,3):
+        raise ValueError("not 1 or 2")
+    else:
+        return YONChoice
+# Similar to Yes or No, try to put under try 
 def NumChoiceWithQuit(): 
-    print(yellow + "\n(Press a number and then Enter to choose. "+reset+Red+"Press 0 to "+reset+Red+"quit."+reset+yellow+")"+reset)
     frame = inspect.currentframe().f_back
     FileThatCalledFunction = frame.f_code.co_filename
     while True:
-        try:
-            NumberChoice = int(input(""))
-        except:
-            return Exception
-        if NumberChoice == 0:
-            QuitChoice = Quitmoment(FileThatCalledFunction)
-            if QuitChoice == "Continue":
-                return "Redo"
-            else:
-                return "Quit"
-        else:
+        NumberChoice = int(input(f"\n{yellow}(Press a number and then Enter to choose. {reset}{Red}Press 0 to {reset}{Red}quit.{reset}{yellow}){reset}\n"))
+        if NumberChoice != 0: # If we didn't choose to quit
             return NumberChoice
-
-# Explains the game
-def explainGame():
-    clearScreen()
-    print('''Once again, it is the game of luck and strategy, \nso you win THROUGH luck and strategy.''')
-    PETC_function()
-    print('''It is not just one game we are talking here. It is multiple.''')
-    PETC_function()
-    print('''These games are such as Tic-Tac-Toe,\nRock Paper Scissors,\nand Four Corners.''')
-    PETC_function()
-    print('''You will most likely be prompted to type in a certain number in the games.
-This is in order for you to make a move on that game.
-For example,\nYou must type in 1 in order to fill the top-left spot on Tic Tac Toe''')
-    PETC_function()
-    print('''There are two modes to this game:\n"Player vs Computer" and "Player vs Player"''')
-    PETC_function()
-    print('''When you choose "Player vs Computer",
-Your goal is to get the highest score that you can get in 7 games.
-You gain points by winning/getting close to winning games on this mode''')
-    PETC_function()
-    print('''When you choose "Player vs Player",
-Your goal is the same as "Player vs Computer" except for a few things.
-You must have a higher score than your opponent to win!
-You gain points on this mode by winning games against your opponent
-OR by having a bigger lead than your opponent on certain games.''')
-    PETC_function()
+        else: # If we chose to quit
+            while True:
+                clearScreen()
+                try:
+                    YON = YesOrNo(f"Are you sure you want to {Red}quit{reset}?")
+                except: 
+                    InvalidInput()
+                    continue
+                if YON == 1:
+                    if "MenuScreen" in FileThatCalledFunction: # If the function was called from MenuScreen.py
+                        return "Quit" # Get on with it
+                    else:
+                        print("\nUnderstood. You will now return to the menu screen.")
+                        time.sleep(2)
+                        return "Quit"
+                if YON == 2:
+                    print("\n Alrighty then!")
+                    time.sleep(1)
+                    return "Redo"
+# Prepare to put something like below after this.
+"""
+if GameChoice == "Redo":
+    continue
+elif GameChoice == "Quit":
+    return
+"""
         
 ####################################
 #### GAME EXPLANATIONS
 ####################################
-
-def RPSExplanation():
+# Put Numbers before each explanation ty :)
+def GameExplanation(GameBeingExplained):
     clearScreen()
-    print('''1 - You choose rock, paper, or scissors to be your weapon.''') 
-    PETC_function()
-    print('''2 - Your opponent will do the same and you both will clash''')
-    PETC_function()
-    print('''3 - Rock beats scissors,\npaper beats rock,\nand scissors beats paper.''')
-    PETC_function()
-    print('''4 - If you and your opponent choose the same weapon,\nthen the clash will be a draw.''')
-    PETC_function()
-    print('''5 - Whenever you win a clash, you gain a point ''')
-    PETC_function()
-    print('''6 - Whoever gets 3 points between you and your opponent will win!''')
-    PETC_function()
+    if GameBeingExplained == "Game System":  
+        MessageStop("Once again, it is the game of luck and strategy, \nso you win THROUGH luck and strategy.")
+        MessageStop("It is not just one game we are talking here. It is multiple.")
+        MessageStop("These games are such as Tic-Tac-Toe,\nRock Paper Scissors,\nand Four Corners.")
+        MessageStop('''You will most likely be prompted to type in a certain number in the games.
+This is in order for you to make a move on that game.
+For example,\nYou must type in 1 in order to fill the top-left spot on Tic Tac Toe''')
+        MessageStop("There are two modes to this game:\n\"Player vs Computer\" and \"Player vs Player\"")
+        MessageStop('''When you choose "Player vs Computer",
+Your goal is to get the highest score that you can get in 7 games.
+You gain points by winning/getting close to winning games on this mode''')
+        MessageStop('''When you choose "Player vs Player",
+Your goal is the same as "Player vs Computer" except for a few things.
+You must have a higher score than your opponent to win!
+You gain points on this mode by winning games against your opponent
+OR by having a bigger lead than your opponent on certain games.''')
+    elif GameBeingExplained == "RPS":
+        MessageStop("1 - You choose rock, paper, or scissors to be your weapon.")
+        MessageStop("2 - Your opponent will do the same and you both will clash")
+        MessageStop("3 - Rock beats scissors,\npaper beats rock,\nand scissors beats paper.")
+        MessageStop("4 - If you and your opponent choose the same weapon,\nthen the clash will be a draw.")
+        MessageStop("5 - Whenever you win a clash, you gain a point ")
+        MessageStop("6 - Whoever gets 3 points between you and your opponent will win!")
+    elif GameBeingExplained == "Connect4":
+        MessageStop("1 - It's like tic-tac-toe, but it's not tic-tac-toe.")
+        MessageStop("2 - There are 6 rows and 7 columns. Each turn, you fill and mark a row in a column.")
+        MessageStop("3 - The location that you mark depends on how many rows are filled in that column.")
+        MessageStop("4 - You have to get four marks either horizontal or vertical in order to win a point")
+        MessageStop("5 - Your opponent can block you from getting four marks vertically or horizontally, but you can bypass that somehow.")
+        MessageStop("6 - First player to obtain 2 points will win the game of Connect FOUR")
+        MessageStop("7 - If you have a strategy for Connect FOUR, now is the best time to use it.")
+    elif GameBeingExplained == "4C":
+        MessageStop("1 - A random color is chosen by the system") 
+        MessageStop("2 - There is a list of four colors that will be randomly chosen")
+        MessageStop("3 - Those colors are red, green, yellow, and blue.")
+        MessageStop("4 - You will also choose the color that you want to pick")
+        MessageStop("5 - You have 3 lives in this game.")
+        MessageStop('''6 - If the color that you choose gets picked, you lose a life
+Once you run out of lives, you lose''')
+        MessageStop('''7 - Only a certain amount of players can win.
+This depends on difficulty.''')
+        
+    elif GameBeingExplained == "GTN":
+        MessageStop("1 - A random number is generated by the system.") 
+        MessageStop("2 - You and your opponent has the goal of guessing that number.")
+        MessageStop("3 - When you guess the number correctly, you get a point.")
+        MessageStop("4 - When you guess the number incorrectly but almost correctly,\nYou get half a point")
+        MessageStop("5 - You and your opponent also has a goal of getting 3 points.")
+        MessageStop('''6 - If you both manage to get 3 points, there will be a tiebreaker.
+In the tiebreaker, There is no getting half a point.
+You and your opponent will instead have to guess the number correctly
+The range of numbers generated is smaller in the tiebreaker.''')
+        MessageStop('''7 - If you and your oppponent guess the correct number,
+You both get a point, unless it is a tiebreaker.''')
 
-def FourCornersExplanation():
-    clearScreen()
-    print('''1 - It's like tic-tac-toe, but it's not tic-tac-toe.''') 
-    PETC_function()
-    print('''2 - There are 6 rows and 7 columns. Each turn, you fill and mark a row in a column.''')
-    PETC_function()
-    print('''3 - The location that you mark depends on how many rows are filled in that column.''')
-    PETC_function()
-    print('''4 - You have to get four marks either horizontal or vertical in order to win a point''')
-    PETC_function()
-    print('''5 - Your opponent can block you from getting four marks vertically or horizontally, but you can bypass that somehow.''')
-    PETC_function()
-    print('''6 - First player to obtain 2 points will win the game of Connect FOUR''')
-    PETC_function()
-    print('''7 - If you have a strategy for Connect FOUR, now is the best time to use it.''')
-    PETC_function()
-
-def GuessTheNumberExplanation():
-    print('''1 - A random number is generated by the system.''') 
-    PETC_function()
-    print('''2 - You and your opponent has the goal of guessing that number.''')
-    PETC_function()
-    print('''3 - When you guess the number correctly, you get a point.''')
-    PETC_function()
-    print('''4 - When you guess the number incorrectly but almost correctly,
-    You get half a point''')
-    PETC_function()
-    print('''5 - You and your opponent also has a goal of getting 3 points.''')
-    PETC_function()
-    print('''6 - If you both manage to get 3 points, there will be a tiebreaker.
-    In the tiebreaker, There is no getting half a point.
-    You and your opponent will instead have to guess the number correctly
-    The range of numbers generated is smaller in the tiebreaker.''')
-    PETC_function()
-    print('''7 - If you and your oppponent guess the correct number,
-    You both get a point, unless it is a tiebreaker.
-    if ''')
-    PETC_function()
-
-
-def ExplanationSuggestion(GameExplained):
+def ExplanationSuggestion(GametoExplain):
     Explained = False
     clearScreen()
     while True:
-        if Explained == False:
-            print('''Would you like an explanation on this game?''')
-        elif Explained == True:
-            print('''Would you like another explanation on this game?''')
-        YesOrNo()
         try:
-            Explanationchoice = int(input(""))
+            Explanationchoice = YesOrNo("Would you like an explanation on this game?" if Explained == False else "Would you like another explanation on this game?")
         except:
             InvalidInput()
             continue
         if Explanationchoice == 1:
             print("Alright, allow me to explain the game for you.")
             time.sleep(2)
-            if GameExplained == "RPS":
-                RPSExplanation()
-            elif GameExplained == "4C":
-                FourCornersExplanation()
-            elif GameExplained == "GTN":
-                GuessTheNumberExplanation()
-            Explained = True
-            continue
+            clearScreen()
+            GameExplanation(GametoExplain) # "Game System", "RPS" , "4C" , "GTN"
+            Explained = True # No Continue needed
         elif Explanationchoice == 2:
             print("Alright, GOOD LUCK!")
             time.sleep(1.5)
             clearScreen()
             break
-        else:
-            InvalidInput()

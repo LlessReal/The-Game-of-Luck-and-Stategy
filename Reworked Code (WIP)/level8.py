@@ -35,12 +35,12 @@ def clearScreen():
   sys("cls")
  else:
   sys("clear")
-def PETC_function(): 
+def MessageStop(): 
  Help = input(yellow + '''
 (Press Enter to Continue)
 ''' + reset)
  clearScreen()
-def PNTC_function(): 
+def NumChoice(): 
  print(yellow + '''
 (Press a number and then Enter to choose)''' + reset)
 def NumChoiceWithQuit(): 
@@ -52,7 +52,7 @@ def InvalidInput():
  time.sleep(1)
  print('''You must press the number on the left.
 Then, you press enter to choose.''')
- PETC_function()
+ MessageStop()
 def YesOrNo():
  time.sleep(0.5)
  print('''
@@ -61,7 +61,7 @@ def YesOrNo():
  print('''
 2 - '''+Red+'''No'''+reset)
  time.sleep(0.25)
- PNTC_function()
+ NumChoice()
 def YORBG_function():
  time.sleep(0.5)
  print('''
@@ -73,7 +73,7 @@ def YORBG_function():
  print('''
 3 - Check Player Progress''')
  time.sleep(0.25)
- PNTC_function()
+ NumChoice()
 def level8_function():
  Yourrt = 50
  Jalenrt = 50
@@ -108,7 +108,7 @@ Choose your difficulty for Board Game:''')
   print('''
 3 - ''' + Red + '''Hard (Atleast one winner)''' + reset)
   time.sleep(0.25)
-  PNTC_function()
+  NumChoice()
   try:
    DifficultyChoice = int(input(""))
   except:
@@ -150,27 +150,27 @@ Choose your difficulty for Board Game:''')
    clearScreen()
    print('''1 - It's a board game. 
 You cross through the trail to win.''') 
-   PETC_function()
+   MessageStop()
    print('''2 - There are 50 tiles on the trail''')
-   PETC_function()
+   MessageStop()
    print('''3 - You roll an imaginary dice that I made to move
 (You do this by pressing enter)''')
-   PETC_function()
+   MessageStop()
    print('''4 - Whenever you land on an even tile (tile 92 for example), 
 You are given a chance to test your luck.
 When you take the chance to test your luck,
 you have a chance of getting boosts or traps.
 You will be introduced to that later.''')
-   PETC_function()
+   MessageStop()
    print('''5 - The farther you go/the more tiles you walk through on the trail,
 the higher the chances of you encountering a trap when testing luck
 However, you can avoid this but not testing your luck.''')
-   PETC_function()
+   MessageStop()
    print('''6 - While you can play safe by not testing your luck throughout the board game,
 Other players can use weapons against you when having good luck''')
-   PETC_function()
+   MessageStop()
    print('''7 - First player to cross through the entire trail of the board game wins!''')
-   PETC_function()
+   MessageStop()
    Explained = True
    continue
   if Explanationchoice == 2:
@@ -219,7 +219,7 @@ Jeremiah has escaped the board!'''+reset)
    print(Blue+'''
 Kris has escaped the board!'''+reset)
   time.sleep(0.25)
-  PNTC_function()
+  NumChoice()
  def Progress_function():
   print("Progress of all players:")
   time.sleep(0.5)
@@ -247,12 +247,12 @@ Kris has escaped the board!'''+reset)
   elif Krisrt > 0:
    print(Krisnrt.format(Krisrt))
   time.sleep(0.25)
-  PETC_function()
+  MessageStop()
  while PlayersLeft > DifficultyChoice and Yourrt > 0:
   Yourturn = True
   if Yourstuck == True:
    print(Red+"You are stuck so you cannot move."+reset)
-   PETC_function()
+   MessageStop()
    Yourstuck = False
    Yourturn = False
   elif Yourstuck == False:
@@ -1135,7 +1135,7 @@ Alrighty then!''')
   if Yourrt <= 0:
    clearScreen()
    print(Blue+"You have successfully crossed the entire trail of the game so you win!"+reset)
-   PETC_function()
+   MessageStop()
    if DifficultyChoice == 1:
     return "EW"
    elif DifficultyChoice == 2:
@@ -1996,7 +1996,7 @@ Alrighty then!''')
   if Jalenrt <= 0 and Jalenwon == False:
    clearScreen()
    print(Blue+"Jalen has successfully crossed the entire trail of the game!"+reset)
-   PETC_function()
+   MessageStop()
    PlayersLeft = PlayersLeft - 1
    Jalenwon = True
   Jeremiahturn = True
@@ -2871,7 +2871,7 @@ Alrighty then!''')
   if Jeremiahrt <= 0 and Jeremiahwon == False:
    clearScreen()
    print(Blue+"Jeremiah has successfully crossed the entire trail of the game!"+reset)
-   PETC_function()
+   MessageStop()
    PlayersLeft = PlayersLeft - 1
    Jeremiahwon = True
   Kristurn = True
@@ -3741,7 +3741,7 @@ Alrighty then!''')
   if Krisrt <= 0 and Kriswon == False:
    clearScreen()
    print(Blue+"Kris has successfully crossed the entire trail of the game!"+reset)
-   PETC_function()
+   MessageStop()
    PlayersLeft = PlayersLeft - 1
    Kriswon = True
   Progress_function()
@@ -3761,7 +3761,7 @@ Alrighty then!''')
   print("YOU WIN")
  elif Yourrt > 0:
   print("YOU LOSE")
- PETC_function()
+ MessageStop()
  if Yourrt <= 0 and DifficultyChoice == 1:
   return "EW"
  elif Yourrt <= 0 and DifficultyChoice == 2:
@@ -3816,27 +3816,27 @@ def pvplevel8_function(PlayerOneName,PlayerTwoName):
    clearScreen()
    print('''1 - It's a board game. 
 You cross through the trail to win.''') 
-   PETC_function()
+   MessageStop()
    print('''2 - There are 50 tiles on the trail''')
-   PETC_function()
+   MessageStop()
    print('''3 - You roll an imaginary dice that I made to move
 (You do this by pressing enter)''')
-   PETC_function()
+   MessageStop()
    print('''4 - Whenever you land on an even tile (tile 92 for example), 
 You are given a chance to test your luck.
 When you take the chance to test your luck,
 you have a chance of getting boosts or traps.
 You will be introduced to that later.''')
-   PETC_function()
+   MessageStop()
    print('''5 - The farther you go/the more tiles you walk through on the trail,
 the higher the chances of you encountering a trap when testing luck
 However, you can avoid this but not testing your luck.''')
-   PETC_function()
+   MessageStop()
    print('''6 - While you can play safe by not testing your luck throughout the board game,
 Other players can use weapons against you when having good luck''')
-   PETC_function()
+   MessageStop()
    print('''7 - First player to cross through the entire trail of the board game wins!''')
-   PETC_function()
+   MessageStop()
    Explained = True
    continue
   if Explanationchoice == 2:
@@ -3884,7 +3884,7 @@ Jeremiah has escaped the board!'''+reset)
    print(Blue+'''
 Kris has escaped the board!'''+reset)
   time.sleep(0.25)
-  PNTC_function()
+  NumChoice()
  def Progress_function():
   print("Progress of all players:")
   time.sleep(0.5)
@@ -3912,12 +3912,12 @@ Kris has escaped the board!'''+reset)
   elif Krisrt > 0:
    print(Krisnrt.format(Krisrt))
   time.sleep(0.25)
-  PETC_function()
+  MessageStop()
  while TwoPlrrt > 0 and Yourrt > 0:
   Yourturn = True
   if Yourstuck == True:
    print(Red+"You are stuck so you cannot move."+reset)
-   PETC_function()
+   MessageStop()
    Yourstuck = False
    Yourturn = False
   elif Yourstuck == False:
@@ -4800,7 +4800,7 @@ Alrighty then!''')
   if Yourrt <= 0:
    clearScreen()
    print(Blue+"You have successfully crossed the entire trail of the game so you win!"+reset)
-   PETC_function()
+   MessageStop()
    return "W"
   TwoPlrturn = True
   if TwoPlrstuck == True:
@@ -5656,7 +5656,7 @@ Alrighty then!''')
   if TwoPlrrt <= 0 and TwoPlrwon == False:
    clearScreen()
    print(Blue+"{0} has successfully crossed the entire trail of the game!"+reset)
-   PETC_function()
+   MessageStop()
    PlayersLeft = PlayersLeft - 1
    TwoPlrwon = True
   Jeremiahturn = True
@@ -6531,7 +6531,7 @@ Alrighty then!''')
   if Jeremiahrt <= 0 and Jeremiahwon == False:
    clearScreen()
    print(Blue+"Jeremiah has successfully crossed the entire trail of the game!"+reset)
-   PETC_function()
+   MessageStop()
    PlayersLeft = PlayersLeft - 1
    Jeremiahwon = True
   Kristurn = True
@@ -7401,7 +7401,7 @@ Alrighty then!''')
   if Krisrt <= 0 and Kriswon == False:
    clearScreen()
    print(Blue+"Kris has successfully crossed the entire trail of the game!"+reset)
-   PETC_function()
+   MessageStop()
    PlayersLeft = PlayersLeft - 1
    Kriswon = True
   Progress_function()
@@ -7421,7 +7421,7 @@ Alrighty then!''')
   print("YOU WIN")
  elif Yourrt > 0:
   print("YOU LOSE")
- PETC_function()
+ MessageStop()
  if Yourrt <= 0 and TwoPlrrt > 0:
   return "W"
  elif TwoPlrrt <= 0 and Yourrt > 0:

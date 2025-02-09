@@ -1,5 +1,5 @@
 import time, math, random
-from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, PETC_function, PNTC_function, YesOrNo
+from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop, NumChoice, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, red, clearScreen
 
 def level7_function():
@@ -45,16 +45,16 @@ def level7_function():
          BotsDecision = f"Your opponent chose {BotChoice}, so your opponent gets no points"
       time.sleep(1)
       print("\n" + Scorebrd.format(GTNWins,GTNLoses))
-      PETC_function()
+      MessageStop()
       if GTNWins >= 3 and GTNLoses < 3:
          print('''You were the first to reach 3 points, 
 Therefore, '''+Blue+'''you won the game of Guess the Number!'''+reset)
-         PETC_function()
+         MessageStop()
          return "W"
       elif GTNWins < 3 and GTNLoses >= 3:
          print('''Your opponent was the first to reach 3 points, 
 Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
-         PETC_function()
+         MessageStop()
          return "L"
       elif GTNWins >= 3 and GTNLoses >= 3:
          print("It looks like you both hit 3 or over 3 at the same time! ")
@@ -65,7 +65,7 @@ Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
             print('''This time, the number generated will be from 1 - 5
    First challenger to guess it wins!
    This will recur if both you and your opponent guess it right though.''')
-            PETC_function()
+            MessageStop()
             while True:
                v = random.randrange(1,6)
                BotChoice = random.randrange(1,6)
@@ -85,22 +85,22 @@ Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
                if YourChoice == v and BotChoice == v :
                   print('''\nYou and your opponent guessed the number correctly
 \nTherefore, the tiebreaker has not been settled yet''')
-                  PETC_function()
+                  MessageStop()
                   continue
                elif YourChoice != v and BotChoice != v:
                   print('''You and your opponent guessed the number incorrectly
 \nTherefore, the tiebreaker has not been settled yet''')
-                  PETC_function()
+                  MessageStop()
                   continue 
                elif YourChoice == v and BotChoice != v:
                   print('''You guessed the number correctly and your opponent did not
 \nTherefore, '''+Blue+'''YOU WON THE TIEBREAKER FOR GUESS THE NUMBER!'''+reset)
-                  PETC_function()
+                  MessageStop()
                   return "W"
                elif YourChoice != v and BotChoice == v:
                   print('''You guessed the number correctly and your opponent did not
 \nTherefore, '''+Red+'''you lost the tiebreaker for Guess the number.'''+reset)
-                  PETC_function()
+                  MessageStop()
                   return "L"
          TheTieBreaker = tiebreaker_function()
          return "W" if TheTieBreaker == "W" else "L"
@@ -159,14 +159,14 @@ def pvplevel7_function(OnePlayerName,TwoPlayerName):
       time.sleep(0.25)
       print("")
       print(Scorebrdpvp.format(OnePlayerName,GTNWins,TwoPlayerName,GTNLoses))
-      PETC_function()
+      MessageStop()
       if GTNWins >= 3 and GTNLoses < 3:
          print('''{} '''.format(OnePlayerName)+Blue+'''was the first to reach 3 points!'''+reset)
-         PETC_function()
+         MessageStop()
          return "W"
       elif GTNWins < 3 and GTNLoses >= 3:
          print('''{} '''.format(TwoPlayerName)+Blue+'''was the first to reach 3 points!'''+reset)
-         PETC_function()
+         MessageStop()
          return "L"
       elif GTNWins >= 3 and GTNLoses >= 3:
          print("It looks like {0} and {1} both hit 3 or over 3 at the same time! ".format(OnePlayerName,TwoPlayerName))
@@ -177,7 +177,7 @@ def pvplevel7_function(OnePlayerName,TwoPlayerName):
             print('''This time, the number generated will be from 1 - 5
          First challenger to guess it wins!
          This will recur if both you and your opponent guess it right though.''')
-            PETC_function()
+            MessageStop()
             while True:
                v = random.randrange(1,6)
                BotChoice = random.randrange(1,6)
@@ -199,22 +199,22 @@ def pvplevel7_function(OnePlayerName,TwoPlayerName):
                if YourChoice == v and BotChoice == v:
                   print(f'''\nIt looks like {OnePlayerName} and {TwoPlayerName} guessed the number correctly
          \nTherefore, the tiebreaker has not been settled yet''')
-                  PETC_function()
+                  MessageStop()
                   continue
                elif YourChoice != v and BotChoice != v:
                   print(f'''It looks like {OnePlayerName} and {TwoPlayerName} guessed the number incorrectly
          \nTherefore, the tiebreaker has not been settled yet''')
-                  PETC_function()
+                  MessageStop()
                   continue 
                elif YourChoice == v and BotChoice != v:
                   print(f'''{OnePlayerName} guessed the number correctly and {TwoPlayerName} did not
          \nTherefore, '''+f'''{OnePlayerName} '''+Blue+'''won the tiebreaker for Guess the Number!'''+reset)
-                  PETC_function()
+                  MessageStop()
                   return "W"
                elif YourChoice != v and BotChoice == v:
                   print(f'''{TwoPlayerName} guessed the number correctly and {OnePlayerName} did not
          \nTherefore, '''+Red+f'''{TwoPlayerName} '''+Blue+'''won the tiebreaker for Guess the number.'''+reset)
-                  PETC_function()
+                  MessageStop()
                   return "L"
          TheTieBreaker = tiebreaker_function()
          return "W" if TheTieBreaker == "W" else "L"
