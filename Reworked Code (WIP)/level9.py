@@ -1,69 +1,7 @@
-import random
-import time
-from os import system as sys
-from os import name as osname
-Red = "\033[0;31m"
-Green = "\033[0;32m"
-Orange = "\033[0;33m"
-Blue = "\033[0;34m"
-Purple = "\033[0;35m"
-Cyan = "\033[0;36m"
-White = "\033[0;37m" 
-black = "\033[0;30m"
-black = "\033[0;90m"
-red = "\033[0;91m"
-green = "\033[0;92m"
-yellow = "\033[0;93m"
-blue = "\033[0;94m"
-magenta = "\033[0;95m"
-cyan = "\033[0;96m"
-white = "\033[0;97m"
-cyan_back="\033[0;46m"
-pink_back="\033[0;45m"
-white_back="\033[0;47m"
-blue_back="\033[0;44m"
-orange_back="\033[0;43m"
-green_back="\033[0;42m"
-red_back="\033[0;41m"
-grey_back="\033[0;40m"
-bold = "\033[1m"
-underline = "\033[4m"
-italic = "\033[3m"
-darken = "\033[2m"
-reset = "\033[0m"
-def clearScreen():
- if osname == "nt":
-  sys("cls")
- else:
-  sys("clear")
-   
-def PETC_function(): 
- Help = input(yellow + '''
-(Press Enter to Continue)
-''' + reset)
- clearScreen()
-def PNTC_function(): 
- print(yellow + '''
-(Press a number and then Enter to choose)''' + reset)
-def PNTCOQ_function(): 
- print(yellow + '''
-(Press a number and then Enter to choose. '''+reset+red+'''Press 0 to '''+reset+Red+'''quit.'''+reset+yellow+''')'''+reset)
-def II_function():
- clearScreen()
- print(Red + "Invalid Input" + reset)
- time.sleep(1)
- print('''You must press the number on the left.
-Then, you press enter to choose.''')
- PETC_function()
-def YOR_function():
- time.sleep(0.5)
- print('''
-1 - '''+Blue+'''Yes'''+reset)
- time.sleep(0.25)
- print('''
-2 - '''+Red+'''No'''+reset)
- time.sleep(0.25)
- PNTC_function()
+import time, random
+from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, PETC_function, PNTC_function, YesOrNo
+from UsefulStuff import Red, reset, yellow, Blue, clearScreen
+
 def level9_function():
  Yourpoints = 0
  Botpoints = 0
@@ -122,7 +60,7 @@ Choose your difficulty for Tic-Tac-Toe''')
   try:
    DifficultyChoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if DifficultyChoice == 1:
      print("Alright! Easy difficulty for Tic-Tac-Toe loading!")
@@ -140,7 +78,7 @@ Choose your difficulty for Tic-Tac-Toe''')
      clearScreen()
      break
   else:
-    II_function()
+    InvalidInput()
     continue
  Explained = False
  while True:
@@ -148,11 +86,11 @@ Choose your difficulty for Tic-Tac-Toe''')
    print('''Would you like an explanation on this game?''')
   elif Explained == True:
    print('''Would you like another explanation on this game?''')
-  YOR_function()
+  YesOrNo()
   try:
    Explanationchoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if Explanationchoice == 1:
    print("Alright, allow me to explain the game for you.")
@@ -179,7 +117,7 @@ This is by stopping your opponent from marking a row on the graph.''')
    clearScreen()
    break
   else:
-   II_function()
+   InvalidInput()
  TicTacToeBoard = '''{0} | {1} | {2}
 ----------
 {3} | {4} | {5} 
@@ -215,21 +153,21 @@ This is by stopping your opponent from marking a row on the graph.''')
    print("9 - Bot-right")
    time.sleep(0.25)
    print("")
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    try:
     Yourgo = int(input(""))
     clearScreen()
    except:
-    II_function()
+    InvalidInput()
     continue
    Quitchoice = 0
    while Yourgo == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -355,7 +293,7 @@ Alrighty then!''')
      PETC_function()
      continue
    else:
-    II_function()
+    InvalidInput()
     continue
    time.sleep(1)
    clearScreen()
@@ -694,7 +632,7 @@ Alrighty then!''')
   return "HL"
 #Tic-Tac-Toe
 
-def pvplevel9_function(OnePlayerName,TwoPlayerName):
+def pvplevel9_function(PlayerOneName,PlayerTwoName):
  Yourpoints = 0
  Botpoints = 0
  Yourshape = 1
@@ -744,11 +682,11 @@ def pvplevel9_function(OnePlayerName,TwoPlayerName):
    print('''Would you like an explanation on this game?''')
   elif Explained == True:
    print('''Would you like another explanation on this game?''')
-  YOR_function()
+  YesOrNo()
   try:
    Explanationchoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if Explanationchoice == 1:
    print("Alright, allow me to explain the game for you.")
@@ -775,7 +713,7 @@ This is by stopping your opponent from marking a row on the graph.''')
    clearScreen()
    break
   else:
-   II_function()
+   InvalidInput()
  TicTacToeBoard = '''{0} | {1} | {2}
 ----------
 {3} | {4} | {5} 
@@ -793,7 +731,7 @@ This is by stopping your opponent from marking a row on the graph.''')
   Yourturn = True
   while Yourturn == True:
    print(TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9))
-   print("It's {}'s turn!".format(OnePlayerName))
+   print("It's {}'s turn!".format(PlayerOneName))
    time.sleep(0.5)
    print("")
    print("1 - Top-left",end = '       ')
@@ -811,21 +749,21 @@ This is by stopping your opponent from marking a row on the graph.''')
    print("9 - Bot-right")
    time.sleep(0.25)
    print("")
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    try:
     Yourgo = int(input(""))
     clearScreen()
    except:
-    II_function()
+    InvalidInput()
     continue
    Quitchoice = 0
    while Yourgo == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -847,7 +785,7 @@ Alrighty then!''')
      Sd1 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Top-left.".format(OnePlayerName))
+     print("{} chose to fill in Top-left.".format(PlayerOneName))
      S1TBY = True
      S1T = True
     elif S1T == True:
@@ -859,7 +797,7 @@ Alrighty then!''')
      Sd2 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Top-middle.".format(OnePlayerName))
+     print("{} chose to fill in Top-middle.".format(PlayerOneName))
      S2TBY = True
      S2T = True
     elif S2T == True:
@@ -871,7 +809,7 @@ Alrighty then!''')
      Sd3 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Top-right.".format(OnePlayerName))
+     print("{} chose to fill in Top-right.".format(PlayerOneName))
      S3TBY = True
      S3T = True
     elif S3T == True:
@@ -883,7 +821,7 @@ Alrighty then!''')
      Sd4 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Mid-left.".format(OnePlayerName))
+     print("{} chose to fill in Mid-left.".format(PlayerOneName))
      S4TBY = True
      S4T = True
     elif S4T == True:
@@ -895,7 +833,7 @@ Alrighty then!''')
      Sd5 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Mid-middle.".format(OnePlayerName))
+     print("{} chose to fill in Mid-middle.".format(PlayerOneName))
      S5TBY = True
      S5T = True
     elif S5T == True:
@@ -907,7 +845,7 @@ Alrighty then!''')
      Sd6 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Mid-right.".format(OnePlayerName))
+     print("{} chose to fill in Mid-right.".format(PlayerOneName))
      S6TBY = True
      S6T = True
     elif S6T == True:
@@ -919,7 +857,7 @@ Alrighty then!''')
      Sd7 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Bot-left.".format(OnePlayerName))
+     print("{} chose to fill in Bot-left.".format(PlayerOneName))
      S7TBY = True
      S7T = True
     elif S7T == True:
@@ -931,7 +869,7 @@ Alrighty then!''')
      Sd8 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Bot-middle.".format(OnePlayerName))
+     print("{} chose to fill in Bot-middle.".format(PlayerOneName))
      S8TBY = True
      S8T = True
     elif S8T == True:
@@ -943,7 +881,7 @@ Alrighty then!''')
      Sd9 = YourSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} to fill in Bot-right.".format(OnePlayerName))
+     print("{} to fill in Bot-right.".format(PlayerOneName))
      S9TBY = True
      S9T = True
     elif S9T == True:
@@ -951,7 +889,7 @@ Alrighty then!''')
      PETC_function()
      continue
    else:
-    II_function()
+    InvalidInput()
     continue
    time.sleep(1)
    clearScreen()
@@ -959,7 +897,7 @@ Alrighty then!''')
    if (S1TBY == True and S2TBY == True and S3TBY == True) or (S1TBY == True and S5TBY == True and S9TBY == True) or (S1TBY == True and S4TBY == True and S7TBY == True) or (S2TBY == True and S5TBY == True and S8TBY == True) or (S3TBY == True and S6TBY == True and S9TBY == True) or (S3TBY == True and S5TBY == True and S7TBY == True) or (S4TBY == True and S5TBY == True and S6TBY == True) or (S7TBY == True and S8TBY == True and S9TBY == True):
     print(NewTicTacToeBoard)
     print("")
-    print("{} ".format(OnePlayerName)+Blue+"has made a cross!"+reset)
+    print("{} ".format(PlayerOneName)+Blue+"has made a cross!"+reset)
     print("")
     Yourpoints = Yourpoints + 1
     PETC_function()
@@ -1052,7 +990,7 @@ Alrighty then!''')
   Botturn = True
   while Botturn == True and Yourpoints != 1:
    print(TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9))
-   print("It's {}'s turn!".format(TwoPlayerName))
+   print("It's {}'s turn!".format(PlayerTwoName))
    time.sleep(0.5)
    print("")
    print("1 - Top-left",end = '       ')
@@ -1070,21 +1008,21 @@ Alrighty then!''')
    print("9 - Bot-right")
    time.sleep(0.25)
    print("")
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    try:
     Botgo = int(input(""))
     clearScreen()
    except:
-    II_function()
+    InvalidInput()
     continue
    Quitchoice = 0
    while Botgo == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -1106,7 +1044,7 @@ Alrighty then!''')
      Sd1 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Top-left.".format(TwoPlayerName))
+     print("{} chose to fill in Top-left.".format(PlayerTwoName))
      S1T = True
      S1TBB = True
     elif S1T == True:
@@ -1117,7 +1055,7 @@ Alrighty then!''')
      Sd2 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Top-middle.".format(TwoPlayerName))
+     print("{} chose to fill in Top-middle.".format(PlayerTwoName))
      S2T = True
      S2TBB = True
     elif S2T == True:
@@ -1128,7 +1066,7 @@ Alrighty then!''')
      Sd3 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Top-right.".format(TwoPlayerName))
+     print("{} chose to fill in Top-right.".format(PlayerTwoName))
      S3T = True
      S3TBB = True
     elif S3T == True:
@@ -1139,7 +1077,7 @@ Alrighty then!''')
      Sd4 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Mid-left.".format(TwoPlayerName))
+     print("{} chose to fill in Mid-left.".format(PlayerTwoName))
      S4T = True
      S4TBB = True
     elif S4T == True:
@@ -1150,7 +1088,7 @@ Alrighty then!''')
      Sd5 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Mid-middle.".format(TwoPlayerName))
+     print("{} chose to fill in Mid-middle.".format(PlayerTwoName))
      S5T = True
      S5TBB = True
     elif S5T == True:
@@ -1161,7 +1099,7 @@ Alrighty then!''')
      Sd6 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Mid-right.".format(TwoPlayerName))
+     print("{} chose to fill in Mid-right.".format(PlayerTwoName))
      S6T = True
      S6TBB = True
     elif S6T == True:
@@ -1172,7 +1110,7 @@ Alrighty then!''')
      Sd7 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Bot-left.".format(TwoPlayerName))
+     print("{} chose to fill in Bot-left.".format(PlayerTwoName))
      S7T = True
      S7TBB = True
     elif S7T == True:
@@ -1183,7 +1121,7 @@ Alrighty then!''')
      Sd8 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Bot-middle.".format(TwoPlayerName))
+     print("{} chose to fill in Bot-middle.".format(PlayerTwoName))
      S8T = True
      S8TBB = True
     elif S8T == True:
@@ -1194,7 +1132,7 @@ Alrighty then!''')
      Sd9 = BotSd
      NewTicTacToeBoard = TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9)
      print(NewTicTacToeBoard)
-     print("{} chose to fill in Bot-right.".format(TwoPlayerName))
+     print("{} chose to fill in Bot-right.".format(PlayerTwoName))
      S9T = True
      S9TBB = True
     elif S9T == True:
@@ -1206,7 +1144,7 @@ Alrighty then!''')
    if (S1TBB == True and S2TBB == True and S3TBB == True) or (S1TBB == True and S5TBB == True and S9TBB == True) or (S1TBB == True and S4TBB == True and S7TBB == True) or (S2TBB == True and S5TBB == True and S8TBB == True) or (S3TBB == True and S6TBB == True and S9TBB == True) or (S3TBB == True and S5TBB == True and S7TBB == True) or (S4TBB == True and S5TBB == True and S6TBB == True) or (S7TBB == True and S8TBB == True and S9TBB == True):
     print(NewTicTacToeBoard)
     print("")
-    print("{} ".format(TwoPlayerName)+Blue+"has made a cross!"+reset)
+    print("{} ".format(PlayerTwoName)+Blue+"has made a cross!"+reset)
     Botpoints = Botpoints + 1
     print("")
     PETC_function()

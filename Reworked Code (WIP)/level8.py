@@ -1,6 +1,4 @@
-import random
-import time
-import math
+import random, time, math
 from os import system as sys
 from os import name as osname
 Red = "\033[0;31m"
@@ -45,17 +43,17 @@ def PETC_function():
 def PNTC_function(): 
  print(yellow + '''
 (Press a number and then Enter to choose)''' + reset)
-def PNTCOQ_function(): 
+def NumChoiceWithQuit(): 
  print(yellow + '''
 (Press a number and then Enter to choose. '''+reset+red+'''Press 0 to '''+reset+Red+'''quit.'''+reset+yellow+''')'''+reset)
-def II_function():
+def InvalidInput():
  clearScreen()
  print(Red + "Invalid Input" + reset)
  time.sleep(1)
  print('''You must press the number on the left.
 Then, you press enter to choose.''')
  PETC_function()
-def YOR_function():
+def YesOrNo():
  time.sleep(0.5)
  print('''
 1 - '''+Blue+'''Yes'''+reset)
@@ -114,7 +112,7 @@ Choose your difficulty for Board Game:''')
   try:
    DifficultyChoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if DifficultyChoice == 1:
      print("Alright! Easy difficulty of Board Game loading!")
@@ -132,7 +130,7 @@ Choose your difficulty for Board Game:''')
      clearScreen()
      break
   else:
-    II_function()
+    InvalidInput()
     continue
  Explained = False
  while True:
@@ -140,11 +138,11 @@ Choose your difficulty for Board Game:''')
    print('''Would you like an explanation on this game?''')
   elif Explained == True:
    print('''Would you like another explanation on this game?''')
-  YOR_function()
+  YesOrNo()
   try:
    Explanationchoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if Explanationchoice == 1:
    print("Alright, allow me to explain the game for you.")
@@ -181,7 +179,7 @@ Other players can use weapons against you when having good luck''')
    clearScreen()
    break
   else:
-   II_function()
+   InvalidInput()
  PlayersLeft = 4
  Youwon = False
  Jalenwon = False
@@ -264,14 +262,14 @@ Kris has escaped the board!'''+reset)
    time.sleep(0.25)
    print("2 - Check progress of players")
    time.sleep(0.25)
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    try:
     Yourgo = int(input(""))
    except:
-    II_function()
+    InvalidInput()
     continue
    if Yourgo != 1 and Yourgo != 2:
-    II_function()
+    InvalidInput()
     continue
    elif Yourgo == 2:
     Progress_function()
@@ -279,11 +277,11 @@ Kris has escaped the board!'''+reset)
    Quitchoice = 0
    while Yourgo == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -314,11 +312,11 @@ Alrighty then!''')
      print('''It looks like you stepped on an even tile on the board,''')
      time.sleep(1)
      print('''Want to test your luck?''')
-     YOR_function()
+     YesOrNo()
      try:
       Yourlucktest = int(input(""))
      except: 
-      II_function()
+      InvalidInput()
       continue
      if Yourlucktest == 1:
       Yourrandomnumber = random.randrange(1,101)
@@ -942,7 +940,7 @@ Alrighty then!''')
           try:
            Yourblow = int(input(""))
           except:
-           II_function()
+           InvalidInput()
            continue
           if Yourblow == 1:
            while Yourbc == True:
@@ -951,7 +949,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -1016,7 +1014,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
           elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -1027,7 +1025,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
           else:
-                 II_function()
+                 InvalidInput()
                  continue
        elif YourLuckchoice == 3:
          print(Blue+"You are now protected from debuffs!"+reset)
@@ -1042,7 +1040,7 @@ Alrighty then!''')
              try:
                Yourswap = int(input(""))
              except:
-               II_function()
+               InvalidInput()
                continue
              if Yourswap == 1:
               while Yoursc == True:
@@ -1051,7 +1049,7 @@ Alrighty then!''')
                try:
                 Yourswap = int(input(""))
                except:
-                II_function()
+                InvalidInput()
                 continue
                if Yourswap == 1:
                 if JalenProtection == False and Jalenwon == False:
@@ -1116,7 +1114,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                else:
-                II_function()
+                InvalidInput()
                 continue
              elif Yourswap == 2:
                print("Well that's ok")
@@ -1125,7 +1123,7 @@ Alrighty then!''')
              elif Yourswap == 3:
                Progress_function()
              else:
-              II_function()
+              InvalidInput()
               continue    
        Yourturn = False
      elif Yourlucktest == 2:
@@ -1223,7 +1221,7 @@ Alrighty then!''')
               try:
                Yourblow = int(input(""))
               except:
-               II_function()
+               InvalidInput()
                continue
               if Yourblow == 1:
                while Yourbc == True:
@@ -1232,7 +1230,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -1297,7 +1295,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
               elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -1308,7 +1306,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
               else:
-                 II_function()
+                 InvalidInput()
                  continue
             elif YourLuckchoice == 3:
              print(Blue+"You are now protected from debuffs!"+reset)
@@ -1323,7 +1321,7 @@ Alrighty then!''')
                try:
                  Yourswap = int(input(""))
                except:
-                 II_function()
+                 InvalidInput()
                  continue
                if Yourswap == 1:
                 while Yoursc == True:
@@ -1332,7 +1330,7 @@ Alrighty then!''')
                  try:
                   Yourswap = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourswap == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -1397,7 +1395,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                elif Yourswap == 2:
                  print("Well that's ok")
@@ -1406,7 +1404,7 @@ Alrighty then!''')
                elif Yourswap == 3:
                  Progress_function()
                else:
-                II_function()
+                InvalidInput()
                 continue
          elif RandomNotJalen == PlayerListNotJalen[1]:
             YourLuckchoice = random.randrange(1,5)
@@ -1425,7 +1423,7 @@ Alrighty then!''')
               try:
                Yourblow = int(input(""))
               except:
-               II_function()
+               InvalidInput()
                continue
               if Yourblow == 1:
                while Yourbc == True:
@@ -1434,7 +1432,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -1499,7 +1497,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
               elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -1510,7 +1508,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
               else:
-                 II_function()
+                 InvalidInput()
                  continue
             elif YourLuckchoice == 3:
              print(Blue+"You are now protected from debuffs!"+reset)
@@ -1525,7 +1523,7 @@ Alrighty then!''')
                try:
                  Yourswap = int(input(""))
                except:
-                 II_function()
+                 InvalidInput()
                  continue
                if Yourswap == 1:
                 while Yoursc == True:
@@ -1534,7 +1532,7 @@ Alrighty then!''')
                  try:
                   Yourswap = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourswap == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -1599,7 +1597,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                elif Yourswap == 2:
                  print("Well that's ok")
@@ -1608,7 +1606,7 @@ Alrighty then!''')
                elif Yourswap == 3:
                  Progress_function()
                else:
-                II_function()
+                InvalidInput()
                 continue
          elif RandomNotJalen == PlayerListNotJalen[2]:
            KrisLuckChoice = random.randrange(1,5)
@@ -2080,7 +2078,7 @@ Alrighty then!''')
               try:
                Yourblow = int(input(""))
               except:
-               II_function()
+               InvalidInput()
                continue
               if Yourblow == 1:
                while Yourbc == True:
@@ -2089,7 +2087,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -2158,7 +2156,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
               elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -2169,7 +2167,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
               else:
-                 II_function()
+                 InvalidInput()
                  continue
           elif YourLuckchoice == 3:
              print(Blue+"You are now protected from debuffs!"+reset)
@@ -2184,7 +2182,7 @@ Alrighty then!''')
                try:
                  Yourswap = int(input(""))
                except:
-                 II_function()
+                 InvalidInput()
                  continue
                if Yourswap == 1:
                 while Yoursc == True:
@@ -2193,7 +2191,7 @@ Alrighty then!''')
                  try:
                   Yourswap = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourswap == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -2262,7 +2260,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                elif Yourswap == 2:
                  print("Well that's ok")
@@ -2271,7 +2269,7 @@ Alrighty then!''')
                elif Yourswap == 3:
                  Progress_function()
                else:
-                II_function()
+                InvalidInput()
                 continue
          elif RandomNotJeremiah == PlayerListNotJeremiah[1]:
            JalenLuckChoice = random.randrange(1,5)
@@ -2955,7 +2953,7 @@ Alrighty then!''')
                 try:
                   Yourblow = int(input(""))
                 except:
-                  II_function()
+                  InvalidInput()
                   continue
                 if Yourblow == 1:
                  print("Choose the player that you want to blow away:")
@@ -2963,7 +2961,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if JalenProtection == False and Jalenwon == False:
@@ -3032,7 +3030,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                 elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -3042,7 +3040,7 @@ Alrighty then!''')
                 elif Yourblow == 3:
                  Progress_function()
                 else:
-                 II_function()
+                 InvalidInput()
                  continue
           elif YourLuckchoice == 3:
             print(Blue+"You are now protected from debuffs!"+reset)
@@ -3057,7 +3055,7 @@ Alrighty then!''')
              try:
                Yourswap = int(input(""))
              except:
-               II_function()
+               InvalidInput()
                continue
              if Yourswap == 1:
               while Yoursc == True:
@@ -3066,7 +3064,7 @@ Alrighty then!''')
                try:
                 Yourswap = int(input(""))
                except:
-                II_function()
+                InvalidInput()
                 continue
                if Yourswap == 1:
                 if JalenProtection == False and Jalenwon == False:
@@ -3135,7 +3133,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                else:
-                II_function()
+                InvalidInput()
                 continue
              elif Yourswap == 2:
                print("Well that's ok")
@@ -3144,7 +3142,7 @@ Alrighty then!''')
              elif Yourswap == 3:
                Progress_function()
              else:
-              II_function()
+              InvalidInput()
               continue
          elif RandomNotKris == PlayerListNotKris[1]:
            JalenLuckChoice = random.randrange(1,5)
@@ -3779,7 +3777,7 @@ Alrighty then!''')
    
 #Board Game 
 
-def pvplevel8_function(OnePlayerName,TwoPlayerName):
+def pvplevel8_function(PlayerOneName,PlayerTwoName):
  Yourrt = 50
  TwoPlrrt = 50
  Jeremiahrt = 50
@@ -3806,11 +3804,11 @@ def pvplevel8_function(OnePlayerName,TwoPlayerName):
    print('''Would you like an explanation on this game?''')
   elif Explained == True:
    print('''Would you like another explanation on this game?''')
-  YOR_function()
+  YesOrNo()
   try:
    Explanationchoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if Explanationchoice == 1:
    print("Alright, allow me to explain the game for you.")
@@ -3847,7 +3845,7 @@ Other players can use weapons against you when having good luck''')
    clearScreen()
    break
   else:
-   II_function()
+   InvalidInput()
  Youwon = False
  TwoPlrwon = False
  Jeremiahwon = False
@@ -3869,7 +3867,7 @@ Kris - {} remaining tiles'''
  def ChsPlr_function():
   time.sleep(0.5)
   if TwoPlrrt > 0:
-   print(TwoPlrprt.format(TwoPlayerName,TwoPlrrt))
+   print(TwoPlrprt.format(PlayerTwoName,TwoPlrrt))
   elif TwoPlrrt <= 0:
    print('''
 TwoPlr '''+Blue+'''has escaped the board!'''+reset)
@@ -3929,14 +3927,14 @@ Kris has escaped the board!'''+reset)
    time.sleep(0.25)
    print("2 - Check progress of players")
    time.sleep(0.25)
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    try:
     Yourgo = int(input(""))
    except:
-    II_function()
+    InvalidInput()
     continue
    if Yourgo != 1 and Yourgo != 2:
-    II_function()
+    InvalidInput()
     continue
    elif Yourgo == 2:
     Progress_function()
@@ -3944,11 +3942,11 @@ Kris has escaped the board!'''+reset)
    Quitchoice = 0
    while Yourgo == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -3979,11 +3977,11 @@ Alrighty then!''')
      print('''It looks like you stepped on an even tile on the board,''')
      time.sleep(1)
      print('''Want to test your luck?''')
-     YOR_function()
+     YesOrNo()
      try:
       Yourlucktest = int(input(""))
      except: 
-      II_function()
+      InvalidInput()
       continue
      if Yourlucktest == 1:
       Yourrandomnumber = random.randrange(1,101)
@@ -4607,7 +4605,7 @@ Alrighty then!''')
           try:
            Yourblow = int(input(""))
           except:
-           II_function()
+           InvalidInput()
            continue
           if Yourblow == 1:
            while Yourbc == True:
@@ -4616,7 +4614,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -4681,7 +4679,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
           elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -4692,7 +4690,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
           else:
-                 II_function()
+                 InvalidInput()
                  continue
        elif YourLuckchoice == 3:
          print(Blue+"You are now protected from debuffs!"+reset)
@@ -4707,7 +4705,7 @@ Alrighty then!''')
              try:
                Yourswap = int(input(""))
              except:
-               II_function()
+               InvalidInput()
                continue
              if Yourswap == 1:
               while Yoursc == True:
@@ -4716,7 +4714,7 @@ Alrighty then!''')
                try:
                 Yourswap = int(input(""))
                except:
-                II_function()
+                InvalidInput()
                 continue
                if Yourswap == 1:
                 if TwoPlrProtection == False and TwoPlrwon == False:
@@ -4781,7 +4779,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                else:
-                II_function()
+                InvalidInput()
                 continue
              elif Yourswap == 2:
                print("Well that's ok")
@@ -4790,7 +4788,7 @@ Alrighty then!''')
              elif Yourswap == 3:
                Progress_function()
              else:
-              II_function()
+              InvalidInput()
               continue    
        Yourturn = False
      elif Yourlucktest == 2:
@@ -4819,7 +4817,7 @@ Alrighty then!''')
    TwoPlrdiceroll1 = random.randrange(1,7)
    TwoPlrdiceroll2 = random.randrange(1,7)
    TwoPlrdicerollresults = "It looks like TwoPlr rolled a {0} and a {1}, so {2} moves {3} tiles forward"
-   print(TwoPlrdicerollresults.format(TwoPlrdiceroll1,TwoPlrdiceroll2,TwoPlayerName,TwoPlrdiceroll1 + TwoPlrdiceroll2))
+   print(TwoPlrdicerollresults.format(TwoPlrdiceroll1,TwoPlrdiceroll2,PlayerTwoName,TwoPlrdiceroll1 + TwoPlrdiceroll2))
    TwoPlrtilesadded = TwoPlrdiceroll1 + TwoPlrdiceroll2
    TwoPlrrt = TwoPlrrt - TwoPlrtilesadded
    TwoPlrnt = "{0} has {} tiles remaining on the board"
@@ -4883,7 +4881,7 @@ Alrighty then!''')
               try:
                Yourblow = int(input(""))
               except:
-               II_function()
+               InvalidInput()
                continue
               if Yourblow == 1:
                while Yourbc == True:
@@ -4892,7 +4890,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -4957,7 +4955,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
               elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -4968,7 +4966,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
               else:
-                 II_function()
+                 InvalidInput()
                  continue
             elif YourLuckchoice == 3:
              print(Blue+"You are now protected from debuffs!"+reset)
@@ -4983,7 +4981,7 @@ Alrighty then!''')
                try:
                  Yourswap = int(input(""))
                except:
-                 II_function()
+                 InvalidInput()
                  continue
                if Yourswap == 1:
                 while Yoursc == True:
@@ -4992,7 +4990,7 @@ Alrighty then!''')
                  try:
                   Yourswap = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourswap == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -5057,7 +5055,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                elif Yourswap == 2:
                  print("Well that's ok")
@@ -5066,7 +5064,7 @@ Alrighty then!''')
                elif Yourswap == 3:
                  Progress_function()
                else:
-                II_function()
+                InvalidInput()
                 continue
          elif RandomNotTwoPlr == PlayerListNotTwoPlr[1]:
             YourLuckchoice = random.randrange(1,5)
@@ -5085,7 +5083,7 @@ Alrighty then!''')
               try:
                Yourblow = int(input(""))
               except:
-               II_function()
+               InvalidInput()
                continue
               if Yourblow == 1:
                while Yourbc == True:
@@ -5094,7 +5092,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -5159,7 +5157,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
               elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -5170,7 +5168,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
               else:
-                 II_function()
+                 InvalidInput()
                  continue
             elif YourLuckchoice == 3:
              print(Blue+"You are now protected from debuffs!"+reset)
@@ -5185,7 +5183,7 @@ Alrighty then!''')
                try:
                  Yourswap = int(input(""))
                except:
-                 II_function()
+                 InvalidInput()
                  continue
                if Yourswap == 1:
                 while Yoursc == True:
@@ -5194,7 +5192,7 @@ Alrighty then!''')
                  try:
                   Yourswap = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourswap == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -5259,7 +5257,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                elif Yourswap == 2:
                  print("Well that's ok")
@@ -5268,7 +5266,7 @@ Alrighty then!''')
                elif Yourswap == 3:
                  Progress_function()
                else:
-                II_function()
+                InvalidInput()
                 continue
          elif RandomNotTwoPlr == PlayerListNotTwoPlr[2]:
            KrisLuckChoice = random.randrange(1,5)
@@ -5740,7 +5738,7 @@ Alrighty then!''')
               try:
                Yourblow = int(input(""))
               except:
-               II_function()
+               InvalidInput()
                continue
               if Yourblow == 1:
                while Yourbc == True:
@@ -5749,7 +5747,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -5818,7 +5816,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
               elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -5829,7 +5827,7 @@ Alrighty then!''')
                  Progress_function()
                  continue
               else:
-                 II_function()
+                 InvalidInput()
                  continue
           elif YourLuckchoice == 3:
              print(Blue+"You are now protected from debuffs!"+reset)
@@ -5844,7 +5842,7 @@ Alrighty then!''')
                try:
                  Yourswap = int(input(""))
                except:
-                 II_function()
+                 InvalidInput()
                  continue
                if Yourswap == 1:
                 while Yoursc == True:
@@ -5853,7 +5851,7 @@ Alrighty then!''')
                  try:
                   Yourswap = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourswap == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -5922,7 +5920,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                elif Yourswap == 2:
                  print("Well that's ok")
@@ -5931,7 +5929,7 @@ Alrighty then!''')
                elif Yourswap == 3:
                  Progress_function()
                else:
-                II_function()
+                InvalidInput()
                 continue
          elif RandomNotJeremiah == PlayerListNotJeremiah[1]:
            TwoPlrLuckChoice = random.randrange(1,5)
@@ -6615,7 +6613,7 @@ Alrighty then!''')
                 try:
                   Yourblow = int(input(""))
                 except:
-                  II_function()
+                  InvalidInput()
                   continue
                 if Yourblow == 1:
                  print("Choose the player that you want to blow away:")
@@ -6623,7 +6621,7 @@ Alrighty then!''')
                  try:
                   Yourblow = int(input(""))
                  except:
-                  II_function()
+                  InvalidInput()
                   continue
                  if Yourblow == 1:
                   if TwoPlrProtection == False and TwoPlrwon == False:
@@ -6692,7 +6690,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                  else:
-                  II_function()
+                  InvalidInput()
                   continue
                 elif Yourblow == 2:
                  print("Ah you're so kind")
@@ -6702,7 +6700,7 @@ Alrighty then!''')
                 elif Yourblow == 3:
                  Progress_function()
                 else:
-                 II_function()
+                 InvalidInput()
                  continue
           elif YourLuckchoice == 3:
             print(Blue+"You are now protected from debuffs!"+reset)
@@ -6717,7 +6715,7 @@ Alrighty then!''')
              try:
                Yourswap = int(input(""))
              except:
-               II_function()
+               InvalidInput()
                continue
              if Yourswap == 1:
               while Yoursc == True:
@@ -6726,7 +6724,7 @@ Alrighty then!''')
                try:
                 Yourswap = int(input(""))
                except:
-                II_function()
+                InvalidInput()
                 continue
                if Yourswap == 1:
                 if TwoPlrProtection == False and TwoPlrwon == False:
@@ -6795,7 +6793,7 @@ Alrighty then!''')
                    time.sleep(1)
                    continue
                else:
-                II_function()
+                InvalidInput()
                 continue
              elif Yourswap == 2:
                print("Well that's ok")
@@ -6804,7 +6802,7 @@ Alrighty then!''')
              elif Yourswap == 3:
                Progress_function()
              else:
-              II_function()
+              InvalidInput()
               continue
          elif RandomNotKris == PlayerListNotKris[1]:
            TwoPlrLuckChoice = random.randrange(1,5)

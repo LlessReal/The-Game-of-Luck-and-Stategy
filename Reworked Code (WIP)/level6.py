@@ -46,17 +46,17 @@ def PETC_function():
 def PNTC_function(): 
  print(yellow + '''
 (Press a number and then Enter to choose)''' + reset)
-def PNTCOQ_function(): 
+def NumChoiceWithQuit(): 
  print(yellow + '''
 (Press a number and then Enter to choose. '''+reset+red+'''Press 0 to '''+reset+Red+'''quit.'''+reset+yellow+''')'''+reset)
-def II_function():
+def InvalidInput():
  clearScreen()
  print(Red + "Invalid Input" + reset)
  time.sleep(1)
  print('''You must press the number on the left.
 Then, you press enter to choose.''')
  PETC_function()
-def YOR_function():
+def YesOrNo():
  time.sleep(0.5)
  print('''
 1 - '''+Blue+'''Yes'''+reset)
@@ -96,7 +96,7 @@ Choose your difficulty for Four Corners:''')
   try:
    DifficultyChoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if DifficultyChoice == 1:
      print("Alright! Easy difficulty of Four Corners loading!")
@@ -115,7 +115,7 @@ Choose your difficulty for Four Corners:''')
      break
   else:
     clearScreen()
-    II_function()
+    InvalidInput()
     continue
  Explained = False
  while True:
@@ -123,11 +123,11 @@ Choose your difficulty for Four Corners:''')
    print('''Would you like an explanation on this game?''')
   elif Explained == True:
    print('''Would you like another explanation on this game?''')
-  YOR_function()
+  YesOrNo()
   try:
    Explanationchoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if Explanationchoice == 1:
    print("Alright, allow me to explain the game for you.")
@@ -157,7 +157,7 @@ This depends on difficulty.''')
    clearScreen()
    break
   else:
-   II_function()
+   InvalidInput()
  while True:
   FourColors = random.randrange(1,5)
   Raphael = random.randrange(1,5)
@@ -171,20 +171,20 @@ This depends on difficulty.''')
     print('''
 {0} - {1}'''.format(x,Colorselection[x]))
     time.sleep(0.25)
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    You = int(input(""))
    clearScreen()
   except:
-   II_function()
+   InvalidInput()
    continue
   Quitchoice = 0
   while You == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -204,7 +204,7 @@ Alrighty then!''')
    clearScreen()
    print(Red + "That is not an option" + reset)
    time.sleep(1)
-   II_function()
+   InvalidInput()
    continue
   print("The color chosen is......")
   time.sleep(0.5)
@@ -317,11 +317,11 @@ def pvplevel6_function(OnePlayerName,TwoPlayerName):
    print('''Would you like an explanation on this game?''')
   elif Explained == True:
    print('''Would you like another explanation on this game?''')
-  YOR_function()
+  YesOrNo()
   try:
    Explanationchoice = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   if Explanationchoice == 1:
    print("Alright, allow me to explain the game for you.")
@@ -351,7 +351,7 @@ This depends on difficulty.''')
    clearScreen()
    break
   else:
-   II_function()
+   InvalidInput()
  while True:
   FourColors = random.randrange(1,5)
   Mike = random.randrange(1,5)
@@ -365,19 +365,19 @@ This depends on difficulty.''')
     print('''
 {0} - {1}'''.format(x,Colorselection[x]))
     time.sleep(0.25)
-   PNTCOQ_function()
+   NumChoiceWithQuit()
    You = int(input(""))
   except:
-   II_function()
+   InvalidInput()
    continue
   Quitchoice = 0
   while You == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -394,7 +394,7 @@ Alrighty then!''')
   if Quitchoice == 2:
    continue
   if You > 4 or You < 1:
-   II_function()
+   InvalidInput()
    continue
   while True:
    try:
@@ -408,20 +408,20 @@ Alrighty then!''')
      print('''
 {0} - {1}'''.format(x,Colorselection[x]))
      time.sleep(0.25)
-    PNTCOQ_function()
+    NumChoiceWithQuit()
     TwoPlr = int(input(""))
     clearScreen()
    except:
-    II_function()
+    InvalidInput()
     continue
    Quitchoice = 0
    while TwoPlr == 0:
     print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YOR_function()
+    YesOrNo()
     try:
      Quitchoice = int(input(""))
     except:
-     II_function()
+     InvalidInput()
      continue
     if Quitchoice == 1:
      print("Understood.")
@@ -438,7 +438,7 @@ Alrighty then!''')
    if Quitchoice == 2:
     continue
    if TwoPlr > 4 or TwoPlr < 1:
-    II_function()
+    InvalidInput()
     continue
    elif TwoPlr != 0:
     break
