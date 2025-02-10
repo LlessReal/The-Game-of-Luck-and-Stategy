@@ -44,7 +44,7 @@ def level4_function():
       MessageStop(f'''Scoreboard: \n\nYou - {RPSWins} pts. \n\nBot - {RPSLoses} pts''') # Scoreboard
 
    # If someone hit 3 points, game ends
-   print(f"{"You" if RPSWins == 3 else "Your opponent"} are the first to gain 3 points.")
+   print(f"{"You are" if RPSWins == 3 else "Your opponent is"} the first to gain 3 points.")
    time.sleep(1)
    MessageStop(f"\nTherefore, {f"{Blue}YOU WON A GAME OF ROCK PAPER SCISSORS!{reset}" if RPSWins == 3 else f"{Red}you lost a game of Rock Paper Scissors{reset}"}")
    return "W" if RPSWins == 3 else "L"

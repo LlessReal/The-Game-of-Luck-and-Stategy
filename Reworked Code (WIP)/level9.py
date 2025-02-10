@@ -80,44 +80,7 @@ Choose your difficulty for Tic-Tac-Toe''')
   else:
     InvalidInput()
     continue
- Explained = False
- while True:
-  if Explained == False:
-   print('''Would you like an explanation on this game?''')
-  elif Explained == True:
-   print('''Would you like another explanation on this game?''')
-  YesOrNo()
-  try:
-   Explanationchoice = int(input(""))
-  except:
-   InvalidInput()
-   continue
-  if Explanationchoice == 1:
-   print("Alright, allow me to explain the game for you.")
-   time.sleep(2)
-   clearScreen()
-   print('''1 - On a 3x3 grid graph, you mark a spot.''') 
-   MessageStop()
-   print('''2 - The sign that you mark on the spot depends on the winner''')
-   MessageStop()
-   print('''3 - You mark a row on the 3x3 grid graph in order to win a point''')
-   MessageStop()
-   print('''4 - The goal for you and your opponent is to get 2 points''')
-   MessageStop()
-   print('''5 - You can stop your opponent from winning.
-This is by stopping your opponent from marking a row on the graph.''')
-   MessageStop()
-   print('''6 - Strategy is key on this game.''')
-   MessageStop()
-   Explained = True
-   continue
-  if Explanationchoice == 2:
-   print("Alright, GOOD LUCK!")
-   time.sleep(1.5)
-   clearScreen()
-   break
-  else:
-   InvalidInput()
+ ExplanationSuggestion("TTT")
  TicTacToeBoard = '''{0} | {1} | {2}
 ----------
 {3} | {4} | {5} 
@@ -155,34 +118,11 @@ This is by stopping your opponent from marking a row on the graph.''')
    print("")
    NumChoiceWithQuit()
    try:
-    Yourgo = int(input(""))
+    Yourgo = NumChoiceWithQuit()
     clearScreen()
    except:
     InvalidInput()
     continue
-   Quitchoice = 0
-   while Yourgo == 0:
-    print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YesOrNo()
-    try:
-     Quitchoice = int(input(""))
-    except:
-     InvalidInput()
-     continue
-    if Quitchoice == 1:
-     print("Understood.")
-     time.sleep(1)
-     print("")
-     print("You will now return to the menu screen.")
-     time.sleep(2)
-     return "Quit"
-    if Quitchoice == 2:
-     print('''
-Alrighty then!''')
-     time.sleep(1)
-     break
-   if Quitchoice == 2:
-     continue
    clearScreen()
    if Yourgo == 1:
     if S1T == False:
@@ -676,44 +616,7 @@ def pvplevel9_function(PlayerOneName,PlayerTwoName):
  Scoreboardpvp = '''{0} - {1} pt(s). 
 
 {2} - {3} pt(s).'''
- Explained = False
- while True:
-  if Explained == False:
-   print('''Would you like an explanation on this game?''')
-  elif Explained == True:
-   print('''Would you like another explanation on this game?''')
-  YesOrNo()
-  try:
-   Explanationchoice = int(input(""))
-  except:
-   InvalidInput()
-   continue
-  if Explanationchoice == 1:
-   print("Alright, allow me to explain the game for you.")
-   time.sleep(2)
-   clearScreen()
-   print('''1 - On a 3x3 grid graph, you mark a spot.''') 
-   MessageStop()
-   print('''2 - The sign that you mark on the spot depends on the winner''')
-   MessageStop()
-   print('''3 - You mark a row on the 3x3 grid graph in order to win a point''')
-   MessageStop()
-   print('''4 - The goal for you and your opponent is to get 2 points''')
-   MessageStop()
-   print('''5 - You can stop your opponent from winning.
-This is by stopping your opponent from marking a row on the graph.''')
-   MessageStop()
-   print('''6 - Strategy is key on this game.''')
-   MessageStop()
-   Explained = True
-   continue
-  if Explanationchoice == 2:
-   print("Alright, GOOD LUCK!")
-   time.sleep(1.5)
-   clearScreen()
-   break
-  else:
-   InvalidInput()
+ ExplanationSuggestion("TTT")
  TicTacToeBoard = '''{0} | {1} | {2}
 ----------
 {3} | {4} | {5} 
@@ -749,37 +652,14 @@ This is by stopping your opponent from marking a row on the graph.''')
    print("9 - Bot-right")
    time.sleep(0.25)
    print("")
-   NumChoiceWithQuit()
+   
    try:
-    Yourgo = int(input(""))
+    Yourgo = NumChoiceWithQuit()
     clearScreen()
    except:
     InvalidInput()
     continue
-   Quitchoice = 0
-   while Yourgo == 0:
-    print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YesOrNo()
-    try:
-     Quitchoice = int(input(""))
-    except:
-     InvalidInput()
-     continue
-    if Quitchoice == 1:
-     print("Understood.")
-     time.sleep(1)
-     print("")
-     print("You will now return to the menu screen.")
-     time.sleep(2)
-     return "Quit"
-    if Quitchoice == 2:
-     print('''
-Alrighty then!''')
-     time.sleep(1)
-     break
-   if Quitchoice == 2:
-     clearScreen()
-     continue
+   
    if Yourgo == 1:
     if S1T == False:
      Sd1 = YourSd
@@ -992,10 +872,7 @@ Alrighty then!''')
    print(TicTacToeBoard.format(Sd1,Sd2,Sd3,Sd4,Sd5,Sd6,Sd7,Sd8,Sd9))
    print("It's {}'s turn!".format(PlayerTwoName))
    time.sleep(0.5)
-   print("")
-   print("1 - Top-left",end = '       ')
-   print("2 - Top-middle",end = '      ')
-   print("3 - Top-right")
+   print("\n 1 - Top-left             2 - Top-middle              3 - Top-right\n",end = '       ')
    time.sleep(0.25)
    print("")
    print("4 - Mid-left",end = '       ')
@@ -1008,37 +885,13 @@ Alrighty then!''')
    print("9 - Bot-right")
    time.sleep(0.25)
    print("")
-   NumChoiceWithQuit()
+   
    try:
-    Botgo = int(input(""))
+    Botgo = NumChoiceWithQuit()
     clearScreen()
    except:
     InvalidInput()
     continue
-   Quitchoice = 0
-   while Botgo == 0:
-    print("Are you sure you want to "+Red+"quit"+reset+"?")
-    YesOrNo()
-    try:
-     Quitchoice = int(input(""))
-    except:
-     InvalidInput()
-     continue
-    if Quitchoice == 1:
-     print("Understood.")
-     time.sleep(1)
-     print("")
-     print("You will now return to the menu screen.")
-     time.sleep(2)
-     return "Quit"
-    if Quitchoice == 2:
-     print('''
-Alrighty then!''')
-     time.sleep(1)
-     break
-   if Quitchoice == 2:
-     clearScreen()
-     continue
    if Botgo == 1:
     if S1T == False:
      Sd1 = BotSd

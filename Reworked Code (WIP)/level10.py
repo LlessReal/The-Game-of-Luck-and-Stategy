@@ -4,7 +4,7 @@ from UsefulStuff import Red, reset, yellow, Blue, red, clearScreen
 
 C4List = []
 for i in range(49):
-       C4List.append("_") # Makes a list 49 elements index 0 - 48
+     C4List.append("_") # Makes a list 49 elements index 0 - 48
 
 Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
 -----------------------------
@@ -21,10 +21,6 @@ Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]
 1 | {C4List[0]} | {C4List[1]} | {C4List[2]} | {C4List[3]} | {C4List[4]} | {C4List[5]} | {C4List[6]}
     1 | 2 | 3 | 4 | 5 | 6 | 7''' # Connect4Board meant to be used by all functions
 
-   
-# Universal Functions
-
-# Custom Functions & Stuff
 
 YourSd = Blue+"O"+reset # Your defaultly blue
 BotSd = Red+"O"+reset # Bot is defaultly red
@@ -51,15 +47,9 @@ def NewConnect4Board(a,b):
 
 def ListColumnChoices():
        time.sleep(0.25)
-       print("1 - 1st Column",end = '   ')
-       print("2 - 2nd Column",end = '   ')
-       print("3 - 3rd Column",end = '   ')
-       print("4 - 4th Column")
-       print("\n 5 - 5th Column",end = '   ')
-       print("6 - 6th Column",end = '   ')
-       print("7 - 7th Column")
+       print("1 - 1st Column     2 - 2nd Column     3 - 3rd Column     4 - 4th Column")
        time.sleep(0.25)
-       NumChoiceWithQuit()
+       print("\n5 - 5th Column     6 - 6th Column     7 - 7th Column")
 
 def Connect4Check(): # Win condition
        Connect4Analyzation = ""
@@ -88,8 +78,7 @@ def Connect4Check(): # Win condition
        return Connect4Analyzation
 
 def DrawFunction():
-       print("\n DRAW! \n")
-       MessageStop()
+       MessageStop("\n DRAW! \n")
        clearScreen()
        temp = BotSd
        BotSd = YourSd 
@@ -116,7 +105,7 @@ def level10_function():
               except:
                      InvalidInput()
                      continue
-       ExplanationSuggestion("4C")
+       ExplanationSuggestion("Connect4")
        Yourturn = True
        while True: 
               while Yourturn == True:
@@ -124,18 +113,10 @@ def level10_function():
                      print("It's your turn! Choose your Column")
                      ListColumnChoices()
                      try:
-                            Yourgo = int(input(""))
-                            if Yourgo not in [0,1,2,3,4,5,6,7]:
-                                   InvalidInput()
-                                   continue
+                            Yourgo = NumChoiceWithQuit(range(1,7))
                      except:
                             InvalidInput()
                             continue
-                     if Yourgo == 0:
-                            if Quit_function() == "Quit":
-                                   return "Quit"
-                            else:
-                                   continue
 
                      for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
                             ColumnFull = True
@@ -150,8 +131,7 @@ def level10_function():
                                    clearScreen()
                                    break
                      if ColumnFull == True:
-                            print(Red+"Column is filled"+reset)
-                            MessageStop()
+                            MessageStop(Red+"Column is filled"+reset)
                             continue
 
               Connect4Results = Connect4Check()  # Checks if your go was the win
@@ -208,8 +188,7 @@ def level10_function():
                      if Connect4Results != "":
                             print(Connect4Board)
                             if Connect4Results == "game":
-                                   print(Red+"\n Your opponent has connected four! \n"+reset)
-                                   MessageStop()
+                                   MessageStop(Red+"\n Your opponent has connected four! \n"+reset)
                                    if DifficultyChoice == "Easy":
                                           return "EL"
                                    elif DifficultyChoice == "Medium":
@@ -220,7 +199,7 @@ def level10_function():
                                    DrawFunction()
    
 def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
-       ExplanationFunction() # Game gets explained
+       ExplanationSuggestion("Connect4") # Game gets explained
        Yourturn = True
        while True: 
               while Yourturn == True:
@@ -228,18 +207,10 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      print(f"It's {Player1Name}'s turn! Choose your Column")
                      ListColumnChoices() # List Choices
                      try:
-                            Yourgo = int(input(""))
-                            if Yourgo not in [0,1,2,3,4,5,6,7]:
-                                   InvalidInput()
-                                   continue
+                            Yourgo = NumChoiceWithQuit(range(1,7))
                      except:
                             InvalidInput()
                             continue
-                     if Yourgo == 0:
-                            if Quit_function() == "Quit": # Asks quit if quit was chosen
-                                   return "Quit"
-                            else:
-                                   continue
 
                      for i in range(0,42,7): # Doesn't go to 49 as it will go over the limit
                             ColumnFull = True # Assumes column is full for now
@@ -255,16 +226,14 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                                    clearScreen()
                                    break
                      if ColumnFull == True: # Column isn't proved to not be full
-                            print(Red+"Column is filled"+reset)
-                            MessageStop()
+                            MessageStop(Red+"Column is filled"+reset)
                             continue # Turn repeats
 
                      Connect4Results = Connect4Check()
                      if Connect4Results != "":
                             print(Connect4Board)
                             if Connect4Results == "game":
-                                   print(Blue+f"\n {Player1Name} have connected four! \n"+reset)
-                                   MessageStop()
+                                   MessageStop(Blue+f"\n {Player1Name} have connected four! \n"+reset)
                                    return "W" # Returns back to select, signifying Player 1 the winner
                             elif Connect4Results == "draw":
                                    DrawFunction() # Announces draw, swaps coins, resets board
@@ -274,18 +243,10 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                      print(f"It's {Player2Name}'s turn!")
                      ListColumnChoices()
                      try:
-                            Oppgo = int(input(""))
-                            if Oppgo not in [0,1,2,3,4,5,6,7]:
-                                   InvalidInput()
-                                   continue
+                            Oppgo = NumChoiceWithQuit(range(1,7))
                      except:
                             InvalidInput()
                             continue
-                     if Oppgo == 0:
-                            if Quit_function() == "Quit":
-                                   return "Quit"
-                            else:
-                                   continue
 
                      for i in range(0, 42, 7): 
                             ColumnFull = True 
@@ -302,16 +263,14 @@ def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
                                    clearScreen()
                                    break # breaks outta loop to not repeat
                      if ColumnFull == True:
-                            print(Red+"Column is filled"+reset)
-                            MessageStop()
+                            MessageStop(Red+"Column is filled"+reset)
                             continue # Turn repeats
                      
                      Connect4Results = Connect4Check()
                      if Connect4Results != "":
                             print(Connect4Board)
                             if Connect4Results == "game":
-                                   print(Red+f"\n {Player2Name} has connected four! \n"+reset)
-                                   MessageStop()
+                                   MessageStop(Red+f"\n {Player2Name} has connected four! \n"+reset)
                                    return "L" # Loser for player 1
                             elif Connect4Results == "draw":
                                    DrawFunction()

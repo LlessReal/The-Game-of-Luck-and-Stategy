@@ -3,6 +3,7 @@ from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, Messag
 from UsefulStuff import Red, reset, yellow, Blue, red, clearScreen
 
 def level7_function():
+   ExplanationSuggestion("GTN")
    GTNLoses = GTNWins = 0 # Prereqs
    Scorebrd = '''Scoreboard:\n\nYou - {} pts. \n\nBot - {} pts'''
    
@@ -44,17 +45,14 @@ def level7_function():
       elif BotChoice != v and BotChoiceIsClose == False:
          BotsDecision = f"Your opponent chose {BotChoice}, so your opponent gets no points"
       time.sleep(1)
-      print("\n" + Scorebrd.format(GTNWins,GTNLoses))
-      MessageStop()
+      MessageStop("\n" + Scorebrd.format(GTNWins,GTNLoses))
       if GTNWins >= 3 and GTNLoses < 3:
-         print('''You were the first to reach 3 points, 
+         MessageStop('''You were the first to reach 3 points, 
 Therefore, '''+Blue+'''you won the game of Guess the Number!'''+reset)
-         MessageStop()
          return "W"
       elif GTNWins < 3 and GTNLoses >= 3:
-         print('''Your opponent was the first to reach 3 points, 
+         MessageStop('''Your opponent was the first to reach 3 points, 
 Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
-         MessageStop()
          return "L"
       elif GTNWins >= 3 and GTNLoses >= 3:
          print("It looks like you both hit 3 or over 3 at the same time! ")
@@ -62,10 +60,9 @@ Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
          print("\n Time for a tie breaker!")
          time.sleep(1)
          def tiebreaker_function():
-            print('''This time, the number generated will be from 1 - 5
+            MessageStop('''This time, the number generated will be from 1 - 5
    First challenger to guess it wins!
    This will recur if both you and your opponent guess it right though.''')
-            MessageStop()
             while True:
                v = random.randrange(1,6)
                BotChoice = random.randrange(1,6)
@@ -83,24 +80,20 @@ Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
                print(f"\nYour opponent chose {BotChoice}")
                time.sleep(1)
                if YourChoice == v and BotChoice == v :
-                  print('''\nYou and your opponent guessed the number correctly
+                  MessageStop('''\nYou and your opponent guessed the number correctly
 \nTherefore, the tiebreaker has not been settled yet''')
-                  MessageStop()
                   continue
                elif YourChoice != v and BotChoice != v:
-                  print('''You and your opponent guessed the number incorrectly
+                  MessageStop('''You and your opponent guessed the number incorrectly
 \nTherefore, the tiebreaker has not been settled yet''')
-                  MessageStop()
                   continue 
                elif YourChoice == v and BotChoice != v:
-                  print('''You guessed the number correctly and your opponent did not
+                  MessageStop('''You guessed the number correctly and your opponent did not
 \nTherefore, '''+Blue+'''YOU WON THE TIEBREAKER FOR GUESS THE NUMBER!'''+reset)
-                  MessageStop()
                   return "W"
                elif YourChoice != v and BotChoice == v:
-                  print('''You guessed the number correctly and your opponent did not
+                  MessageStop('''You guessed the number correctly and your opponent did not
 \nTherefore, '''+Red+'''you lost the tiebreaker for Guess the number.'''+reset)
-                  MessageStop()
                   return "L"
          TheTieBreaker = tiebreaker_function()
          return "W" if TheTieBreaker == "W" else "L"
@@ -157,16 +150,12 @@ def pvplevel7_function(OnePlayerName,TwoPlayerName):
          BotsDecision = "{0} chose {1}, so {0} gets no points"
       print(BotsDecision.format(TwoPlayerName,BotChoice))
       time.sleep(0.25)
-      print("")
-      print(Scorebrdpvp.format(OnePlayerName,GTNWins,TwoPlayerName,GTNLoses))
-      MessageStop()
+      MessageStop("\n" + Scorebrdpvp.format(OnePlayerName,GTNWins,TwoPlayerName,GTNLoses))
       if GTNWins >= 3 and GTNLoses < 3:
-         print('''{} '''.format(OnePlayerName)+Blue+'''was the first to reach 3 points!'''+reset)
-         MessageStop()
+         MessageStop(f"{OnePlayerName} {Blue} was the first to reach 3 points! {reset}")
          return "W"
       elif GTNWins < 3 and GTNLoses >= 3:
-         print('''{} '''.format(TwoPlayerName)+Blue+'''was the first to reach 3 points!'''+reset)
-         MessageStop()
+         MessageStop(f"{TwoPlayerName} {Blue} was the first to reach 3 points! {reset}")
          return "L"
       elif GTNWins >= 3 and GTNLoses >= 3:
          print("It looks like {0} and {1} both hit 3 or over 3 at the same time! ".format(OnePlayerName,TwoPlayerName))
@@ -197,24 +186,20 @@ def pvplevel7_function(OnePlayerName,TwoPlayerName):
                BotsDecision = "\n{TwoPlayerName} chose {BotChoice}"
                time.sleep(1)
                if YourChoice == v and BotChoice == v:
-                  print(f'''\nIt looks like {OnePlayerName} and {TwoPlayerName} guessed the number correctly
+                  MessageStop(f'''\nIt looks like {OnePlayerName} and {TwoPlayerName} guessed the number correctly
          \nTherefore, the tiebreaker has not been settled yet''')
-                  MessageStop()
                   continue
                elif YourChoice != v and BotChoice != v:
-                  print(f'''It looks like {OnePlayerName} and {TwoPlayerName} guessed the number incorrectly
+                  MessageStop(f'''It looks like {OnePlayerName} and {TwoPlayerName} guessed the number incorrectly
          \nTherefore, the tiebreaker has not been settled yet''')
-                  MessageStop()
                   continue 
                elif YourChoice == v and BotChoice != v:
-                  print(f'''{OnePlayerName} guessed the number correctly and {TwoPlayerName} did not
+                  MessageStop(f'''{OnePlayerName} guessed the number correctly and {TwoPlayerName} did not
          \nTherefore, '''+f'''{OnePlayerName} '''+Blue+'''won the tiebreaker for Guess the Number!'''+reset)
-                  MessageStop()
                   return "W"
                elif YourChoice != v and BotChoice == v:
-                  print(f'''{TwoPlayerName} guessed the number correctly and {OnePlayerName} did not
+                  MessageStop(f'''{TwoPlayerName} guessed the number correctly and {OnePlayerName} did not
          \nTherefore, '''+Red+f'''{TwoPlayerName} '''+Blue+'''won the tiebreaker for Guess the number.'''+reset)
-                  MessageStop()
                   return "L"
          TheTieBreaker = tiebreaker_function()
          return "W" if TheTieBreaker == "W" else "L"
