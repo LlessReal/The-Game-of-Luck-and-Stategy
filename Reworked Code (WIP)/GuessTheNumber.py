@@ -2,7 +2,7 @@ import time, math, random
 from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop, NumChoice, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, red, clearScreen
 
-def level7_function():
+def GuessTheNumber():
    ExplanationSuggestion("GTN")
    GTNLoses = GTNWins = 0 # Prereqs
    Scorebrd = '''Scoreboard:\n\nYou - {} pts. \n\nBot - {} pts'''
@@ -98,7 +98,7 @@ Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
          TheTieBreaker = tiebreaker_function()
          return "W" if TheTieBreaker == "W" else "L"
 
-def pvplevel7_function(OnePlayerName,TwoPlayerName):
+def GuessTheNumber(OnePlayerName,TwoPlayerName):
    GTNLoses = GTNWins = 0 # Preeqs
    Scorebrdpvp = '''Scoreboard:\n\nYou - {} pts. \n\nBot - {} pts'''
    while True:

@@ -1,92 +1,9 @@
 import random, time, math
-from os import system as sys
-from os import name as osname
-Red = "\033[0;31m"
-Green = "\033[0;32m"
-Orange = "\033[0;33m"
-Blue = "\033[0;34m"
-Purple = "\033[0;35m"
-Cyan = "\033[0;36m"
-White = "\033[0;37m" 
-black = "\033[0;30m"
-black = "\033[0;90m"
-red = "\033[0;91m"
-green = "\033[0;92m"
-yellow = "\033[0;93m"
-blue = "\033[0;94m"
-magenta = "\033[0;95m"
-cyan = "\033[0;96m"
-white = "\033[0;97m"
-cyan_back="\033[0;46m"
-pink_back="\033[0;45m"
-white_back="\033[0;47m"
-blue_back="\033[0;44m"
-orange_back="\033[0;43m"
-green_back="\033[0;42m"
-red_back="\033[0;41m"
-grey_back="\033[0;40m"
-bold = "\033[1m"
-underline = "\033[4m"
-italic = "\033[3m"
-darken = "\033[2m"
-reset = "\033[0m"
-def clearScreen():
- if osname == "nt":
-  sys("cls")
- else:
-  sys("clear")
-def MessageStop(): 
- Help = input(yellow + '''
-(Press Enter to Continue)
-''' + reset)
- clearScreen()
-def NumChoice(): 
- print(yellow + '''
-(Press a number and then Enter to choose)''' + reset)
-def NumChoiceWithQuit(): 
- print(yellow + '''
-(Press a number and then Enter to choose. '''+reset+red+'''Press 0 to '''+reset+Red+'''quit.'''+reset+yellow+''')'''+reset)
-def InvalidInput():
- clearScreen()
- print(Red + "Invalid Input" + reset)
- time.sleep(1)
- print('''You must press the number on the left.
-Then, you press enter to choose.''')
- MessageStop()
-def YesOrNo():
- time.sleep(0.5)
- print('''
-1 - '''+Blue+'''Yes'''+reset)
- time.sleep(0.25)
- print('''
-2 - '''+Red+'''No'''+reset)
- time.sleep(0.25)
- NumChoice()
-def YORBG_function():
- time.sleep(0.5)
- print('''
-1 - '''+Blue+'''Yes'''+reset)
- time.sleep(0.25)
- print('''
-2 - '''+Red+'''No'''+reset)
- time.sleep(0.25)
- print('''
-3 - Check Player Progress''')
- time.sleep(0.25)
- NumChoice()
-def level8_function():
- Yourrt = 50
- Jalenrt = 50
- Jeremiahrt = 50
- Krisrt = 50
- YourProtection = False
- JalenProtection = False
- JeremiahProtection = False
- KrisProtection = False
- Yourstuck = False
- Jalenstuck = False
- Jeremiahstuck = False
- Krisstuck = False
+
+def BoardGame():
+ Yourrt = Jalenrt = Jeremiahrt = Krisrt = 50
+ YourProtection = JalenProtection = JeremiahProtection = KrisProtection = False
+ Yourstuck = Jalenstuck = Jeremiahstuck = Krisstuck = False
  You = 50
  Jalen = 50
  Jeremiah = 50
@@ -108,9 +25,9 @@ Choose your difficulty for Board Game:''')
   print('''
 3 - ''' + Red + '''Hard (Atleast one winner)''' + reset)
   time.sleep(0.25)
-  NumChoice()
+  
   try:
-   DifficultyChoice = int(input(""))
+   DifficultyChoice = NumChoice()
   except:
    InvalidInput()
    continue
@@ -132,54 +49,7 @@ Choose your difficulty for Board Game:''')
   else:
     InvalidInput()
     continue
- Explained = False
- while True:
-  if Explained == False:
-   print('''Would you like an explanation on this game?''')
-  elif Explained == True:
-   print('''Would you like another explanation on this game?''')
-  YesOrNo()
-  try:
-   Explanationchoice = int(input(""))
-  except:
-   InvalidInput()
-   continue
-  if Explanationchoice == 1:
-   print("Alright, allow me to explain the game for you.")
-   time.sleep(2)
-   clearScreen()
-   print('''1 - It's a board game. 
-You cross through the trail to win.''') 
-   MessageStop()
-   print('''2 - There are 50 tiles on the trail''')
-   MessageStop()
-   print('''3 - You roll an imaginary dice that I made to move
-(You do this by pressing enter)''')
-   MessageStop()
-   print('''4 - Whenever you land on an even tile (tile 92 for example), 
-You are given a chance to test your luck.
-When you take the chance to test your luck,
-you have a chance of getting boosts or traps.
-You will be introduced to that later.''')
-   MessageStop()
-   print('''5 - The farther you go/the more tiles you walk through on the trail,
-the higher the chances of you encountering a trap when testing luck
-However, you can avoid this but not testing your luck.''')
-   MessageStop()
-   print('''6 - While you can play safe by not testing your luck throughout the board game,
-Other players can use weapons against you when having good luck''')
-   MessageStop()
-   print('''7 - First player to cross through the entire trail of the board game wins!''')
-   MessageStop()
-   Explained = True
-   continue
-  if Explanationchoice == 2:
-   print("Alright, GOOD LUCK!")
-   time.sleep(1.5)
-   clearScreen()
-   break
-  else:
-   InvalidInput()
+ ExplanationSuggestion("BG")
  PlayersLeft = 4
  Youwon = False
  Jalenwon = False
@@ -3777,7 +3647,7 @@ Alrighty then!''')
    
 #Board Game 
 
-def pvplevel8_function(PlayerOneName,PlayerTwoName):
+def BoardGame(PlayerOneName,PlayerTwoName):
  Yourrt = 50
  TwoPlrrt = 50
  Jeremiahrt = 50

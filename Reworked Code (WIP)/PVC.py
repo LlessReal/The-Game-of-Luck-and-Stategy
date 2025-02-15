@@ -2,7 +2,12 @@
 import time, random
 from guide import NumChoiceWithQuit, InvalidInput, MessageStop, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, blue_back, red, clearScreen
-import level4, level6, level7, level8, level9, level10
+from RPS import RPS
+from GuessTheNumber import GuessTheNumber
+from Connect4 import Connect4
+from TicTacToe import TicTacToe
+from FourCorners import FourCorners
+from BoardGame import BoardGame
                              
 def PVC():
     MessageStop("Gain as many points as you can in 5 games! \n You can win some and you can lose some.")
@@ -40,7 +45,7 @@ def PVC():
             # RPS 
             if GameDecision == "Rock Paper Scissors":
                 GamePointChange = 300
-                GameInSession = level4.level4_function()
+                GameInSession = RPS()
                 clearScreen()
                 if GameInSession == "Quit":
                     return # Back to the main screen
@@ -48,7 +53,7 @@ def PVC():
                 # This is all used to generate a statement            
             # Four Corners    
             elif GameDecision == "Four Corners":
-                GameInSession = level6.level6_function()
+                GameInSession = FourCorners()
                 clearScreen()
                 if GameInSession == "Quit":
                     return 
@@ -64,7 +69,7 @@ def PVC():
 
             # Guess the number
             elif GameDecision == "Guess the number":
-                GameInSession = level7.level7_function()
+                GameInSession = GuessTheNumber()
                 GamePointChange = 300
                 clearScreen()
                 if GameInSession == "Quit":
@@ -72,7 +77,7 @@ def PVC():
                 GamePoints += GamePointChange if GameInSession == "W" else -(GamePointChange / 2)
 
             elif GameDecision == "Board Game":
-                GameInSession = level8.level8_function()
+                GameInSession = BoardGame()
                 clearScreen()
                 if GameInSession == "Quit":
                     return
@@ -88,7 +93,7 @@ def PVC():
 
             # Tic-Tac-Toe
             elif GameDecision == "Tic-Tac-Toe":
-                GameInSession = level9.level9_function()
+                GameInSession = TicTacToe()
                 clearScreen()
                 if GameInSession == "Quit":
                     return 
@@ -104,7 +109,7 @@ def PVC():
 
             # Connect Four
             elif GameDecision == "Connect Four":
-                GameInSession = level10.level10_function()
+                GameInSession = Connect4()
                 clearScreen()
                 if GameInSession == "Quit":
                     return 

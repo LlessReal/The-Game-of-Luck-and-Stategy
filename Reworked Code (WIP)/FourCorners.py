@@ -2,7 +2,7 @@ import random, time
 from UsefulStuff import yellow, Red, green, Blue, reset, clearScreen
 from guide import InvalidInput, NumChoiceWithQuit, NumChoice, ExplanationSuggestion, MessageStop
 # Player Vs. Computer
-def level6_function():
+def FourCorners():
     while True:
         print('''\n Choose your difficulty for Four Corners:''')
         time.sleep(0.5)
@@ -20,6 +20,7 @@ def level6_function():
         # Gets up until space
         DifficultyAlone = Difficulties[DifficultyChoice - 1][0:Difficulties[DifficultyChoice - 1].find(" ")]
         print(f"Alright! {DifficultyAlone} difficulty of Four Corners loading!")
+        GameDecision = DifficultyChoice + 1 # Determines how many players must die for victor
         time.sleep(1.5)
         clearScreen()
         break
@@ -37,7 +38,7 @@ def level6_function():
                 print(f"\n{x} - {AllColors[x]}") # Color choices
                 time.sleep(0.25)
           
-            You = NumChoiceWithQuit(range(1,5))
+            You = NumChoiceWithQuit(range(1,5)) - 1 # -1 for the index
             if You == "Quit":
                 return
             elif You == "Redo":
@@ -64,15 +65,16 @@ def level6_function():
         MessageStop() # Message is already shown, no need for another
         LoseReturns = ["EL","ML","HL"]
         WinReturns = ["EW","MW","HW"]
-        GameDecision = DifficultyChoice + 1
+        
         if YourLives == 0:
             MessageStop(Red+f"You lost a game of Four Corners on {DifficultyAlone.lower()} difficulty."+reset)
             return LoseReturns[DifficultyChoice - 1]
         elif PlayersOut >= GameDecision:
             MessageStop(Blue+f"YOU WON A GAME OF FOUR CORNERS ON {DifficultyAlone.upper()} DIFFICULTY!"+reset)
             return WinReturns[DifficultyChoice - 1]
+    
 # PVP Mode
-def pvplevel6_function(OnePlayerName,TwoPlayerName):
+def FourCorners(OnePlayerName,TwoPlayerName):
     ExplanationSuggestion("4C")
     AllColors = [Red+"RED"+reset,green+"GREEN"+reset,yellow+"YELLOW"+reset,Blue+"BLUE"+reset]
     YourLives = TwoPlrLives = MikeLives = JalenLives = MiguelLives = 2 # Default value of all lives is 2

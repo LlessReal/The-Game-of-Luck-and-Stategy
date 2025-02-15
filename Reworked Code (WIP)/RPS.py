@@ -2,7 +2,7 @@ import random,time
 from UsefulStuff import Blue, Red, reset, clearScreen
 from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop
 
-def level4_function():
+def RPS():
    RPSLoses = RPSWins = 0 # Prereqs
    ExplanationSuggestion("RPS") # Explain
 

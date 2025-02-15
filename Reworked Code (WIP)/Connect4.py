@@ -86,7 +86,7 @@ def DrawFunction():
        for i in C4List:
               C4List[i] = "_" # All items are _ again
 
-def level10_function():  
+def Connect4():  
        while True:
               DifficultyModes = ["Easy","Hard"]
               print("\n Choose your difficulty for Connect FOUR:")
@@ -198,7 +198,7 @@ def level10_function():
                             elif Connect4Results == "draw":
                                    DrawFunction()
    
-def pvplevel10_function(Player1Name,Player2Name): # PVP Mode
+def Connect4(Player1Name,Player2Name): # PVP Mode
        ExplanationSuggestion("Connect4") # Game gets explained
        Yourturn = True
        while True: 
