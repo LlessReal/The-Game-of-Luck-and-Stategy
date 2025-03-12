@@ -2,7 +2,7 @@ import time, random
 from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop, NumChoice, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, clearScreen
 
-def level9_function():
+def TicTacToe():
  Yourpoints = 0
  Botpoints = 0
  Yourshape = 1

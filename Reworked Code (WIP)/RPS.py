@@ -10,20 +10,15 @@ def RPS():
       try:
          print("Choose your weapon:")
          AllChoices = ["Rock","Paper","Scissors","Random"]
-         for Choice in AllChoices:
-            print(f"\n{AllChoices.index(Choice) + 1} - {Choice}") # Lists choices (from above)
-            time.sleep(0.1)
+         # Lists choices (from above)
+         for Choice in AllChoices: print(f"\n{AllChoices.index(Choice) + 1} - {Choice}"); time.sleep(0.1)
          RPSChoice = NumChoiceWithQuit() # Get number
-         if RPSChoice == "Redo":
-            continue
-         elif RPSChoice == "Quit":
-            return "Quit"
-         if RPSChoice == 4: # If you chose 4 (Random), will randomly choose weapon
-            RPSChoice = random.randrange(0,3)
+         if RPSChoice == "Redo": continue
+         elif RPSChoice == "Quit": return "Quit"
+         # If you chose 4 (Random), will randomly choose weapon
+         if RPSChoice == 4: RPSChoice = random.randrange(0,3)
          RPSBot = random.randrange(1,4) # Bot chooses
-      except:
-         InvalidInput() # Invalid Input
-         continue
+      except: InvalidInput(); continue
       
       # State who chose what
       clearScreen()
@@ -33,14 +28,9 @@ def RPS():
       time.sleep(1)
       # Winning condition
       RPSWinCondition = (RPSChoice == 2 and RPSBot == 1) or (RPSChoice == 1 and RPSBot == 3) or (RPSChoice == 3 and RPSBot == 2)
-      if RPSChoice == RPSBot: # Draw
-         MessageStop("Draw!")
-      elif RPSWinCondition: # Win
-         MessageStop("You gain one point.\n")
-         RPSLoses += 1
-      else: # Loss
-         MessageStop("You opponent gains one point.")
-         RPSWins += 1
+      if RPSChoice == RPSBot: MessageStop("Draw!")
+      elif RPSWinCondition: MessageStop("You gain one point.\n"); RPSWins += 1  # Win
+      else: MessageStop("You opponent gains one point."); RPSLoses += 1
       MessageStop(f'''Scoreboard: \n\nYou - {RPSWins} pts. \n\nBot - {RPSLoses} pts''') # Scoreboard
 
    # If someone hit 3 points, game ends

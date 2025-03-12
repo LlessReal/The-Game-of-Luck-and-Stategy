@@ -31,5 +31,4 @@ darken = "\033[2m"
 bold = "\033[4m"
 reset = "\033[0m"
 
-def clearScreen():
-    sys("cls") if osname == "nt" else sys("clear")
+def clearScreen(): sys("cls") if osname == "nt" else sys("clear")

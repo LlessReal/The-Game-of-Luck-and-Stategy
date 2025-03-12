@@ -35,10 +35,8 @@ def YesOrNo(YNQuestion="\nConfirm?"):
     print(f"\n 2 - {Red}No{reset}")
     time.sleep(0.25)
     YONChoice = NumChoice() # An error could occur here (Follow above if u havent)
-    if YONChoice not in range(1,3):
-        raise ValueError("not 1 or 2")
-    else:
-        return YONChoice
+    if YONChoice not in range(1,3): raise ValueError("not 1 or 2")
+    else: return YONChoice
 # Similar to Yes or No, try to put under try 
 def NumChoiceWithQuit(NumberLimit): 
     frame = inspect.currentframe().f_back
