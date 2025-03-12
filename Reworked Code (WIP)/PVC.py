@@ -29,10 +29,8 @@ def PVC():
             time.sleep(0.1)
         try:
             GameChoice = NumChoiceWithQuit()
-            if GameChoice == "Redo":
-                continue
-            elif GameChoice == "Quit":
-                return
+            if GameChoice == "Redo": continue
+            elif GameChoice == "Quit": return
             GameChosen = gamelist[GameChoice - 1][0] # If this is not in the list, an error will return
             PointWorth = gamelist[GameChoice - 1][1]
         except:
@@ -123,13 +121,10 @@ def PVC():
                             if GameInSession in meaning:
                                 GamePoints += meaning[1]
                                 GamePointChange = abs(meaning[1])
-            # If no game, redecide
-            elif GameDecision == "Redecide":
-                pass
+
             break # Breaks out of decision loop
 
-        if GameDecision == "Redecide": # If we chose to redecide
-            continue    
+        if GameDecision == "Redecide": continue    
 
         else: # If we just finishe a game
             MessageStop(WinLoseStatement(GameInSession,GameDecision,GamePointChange,GamePoints,ChosenDifficulty))
@@ -139,10 +134,8 @@ def PVC():
     # Once we break out of the big loop
     MessageStop(f"{Blue}You have finished your trial of 7 games! {reset}")
     for resultcount in range(5):
-        print(f"Your final score is{"." * resultcount}")
-        time.sleep(0.25)
-        if resultcount != 4:
-            clearScreen()
+        print(f"Your final score is{"." * resultcount}"); time.sleep(0.25)
+        if resultcount != 4: clearScreen()
     if GamePoints <= 0:
         RoastingPhrases = ["Well, that's dissappointing.","I guess you're pretty unlucky huh.",
         "Oof, maybe you'll be luckier next time.","Well, that wasn't impressive.",
@@ -150,25 +143,20 @@ def PVC():
         print(f"{Red} {GamePoints} {reset}.")
         print(f"{Red} {random.choice(RoastingPhrases)} {reset}")
 
-    elif GamePoints > 0 and GamePoints < 500:
-        print(f"{GamePoints} {reset}.")
+    elif GamePoints > 0 and GamePoints < 500: print(f"{GamePoints} {reset}.")
 
-    if GamePoints >= 500 and GamePoints < 1000:
-        print(f"{Blue} {GamePoints} {reset}!\n Not bad challenger!")
+    if GamePoints >= 500 and GamePoints < 1000: print(f"{Blue} {GamePoints} {reset}!\n Not bad challenger!")
 
-    elif GamePoints >= 1000 and GamePoints < 2000:
-        print(f"{Blue} {GamePoints} {reset}!\nYou did great challenger!!")
+    elif GamePoints >= 1000 and GamePoints < 2000: print(f"{Blue} {GamePoints} {reset}!\nYou did great challenger!!")
 
-    elif GamePoints >= 2000 and GamePoints < 3000:
-        print(f"{Blue} {GamePoints} {reset}!\n You're crazy challenger! Well done!!")
+    elif GamePoints >= 2000 and GamePoints < 3000: print(f"{Blue} {GamePoints} {reset}!\n You're crazy challenger! Well done!!")
 
     elif GamePoints >= 3000:
             print(f"{Blue} {GamePoints} {reset}.")
             glazelines = ["Woah! That's a very big score!","You're not a challenger anymore...","You're a "+blue_back+"GOD!"+reset]
             for glazing in glazelines:
                 print(glazing)
-                if glazelines.index(glazing) != len(glazelines) - 1:
-                    time.sleep(1)
+                if glazelines.index(glazing) != len(glazelines) - 1: time.sleep(1)
     time.sleep(1)
     MessageStop("\nFeel free to share your score with your friends!")
 
@@ -180,23 +168,11 @@ def GameSelected(TheGame,Points):
     
     while True:
         clearScreen()
-        print(f"Game selected: {yellow}{TheGame}{reset}")
-        time.sleep(0.5)
-        try:
-            GameChoice = YesOrNo("\nContinue?")
-        except:
-            InvalidInput()
-            continue
-        if GameChoice == 1:
-            print(f"Alright! {TheGame} loading!")
-            time.sleep(1.5)
-            clearScreen()
-            return TheGame
-        elif GameChoice == 2:
-            print("Understood.")
-            time.sleep(1)
-            clearScreen()
-            return "Redecide"
+        print(f"Game selected: {yellow}{TheGame}{reset}"); time.sleep(0.5)
+        try: GameChoice = YesOrNo("\nContinue?")
+        except: InvalidInput(); continue
+        if GameChoice == 1: print(f"Alright! {TheGame} loading!"); time.sleep(1.5); clearScreen(); return TheGame
+        elif GameChoice == 2: print("Understood."); time.sleep(1); clearScreen(); return "Redecide"
 
 def WinLoseStatement(GameStatus,TheGame,ThePoints,PointsNow,Difficulty="N/A"):
     if "W" in GameStatus and Difficulty == "N/A":

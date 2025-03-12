@@ -1,15 +1,16 @@
-import random, time
+import random
 from UsefulStuff import yellow, Red, green, Blue, reset, clearScreen
 from guide import InvalidInput, NumChoiceWithQuit, NumChoice, ExplanationSuggestion, MessageStop
+from time import sleep
 # Player Vs. Computer
 def FourCorners():
     while True:
         print('''\n Choose your difficulty for Four Corners:''')
-        time.sleep(0.5)
+        sleep(0.5)
         Difficulties = [f"{Blue}Easy (3+ winners){reset}",f"{yellow}Medium (2+ winners){reset}", f"{Red}Hard (1+ winners){reset}"]
         for difficulty in Difficulties:
             print(f"\n {Difficulties.index(difficulty) + 1} - {difficulty}")
-            time.sleep(0.25) # Display difficulty choices
+            sleep(0.25) # Display difficulty choices
 
         try:
             DifficultyChoice = NumChoice(range(1,4))
@@ -21,7 +22,7 @@ def FourCorners():
         DifficultyAlone = Difficulties[DifficultyChoice - 1][0:Difficulties[DifficultyChoice - 1].find(" ")]
         print(f"Alright! {DifficultyAlone} difficulty of Four Corners loading!")
         GameDecision = DifficultyChoice + 1 # Determines how many players must die for victor
-        time.sleep(1.5)
+        sleep(1.5)
         clearScreen()
         break
     
@@ -33,10 +34,10 @@ def FourCorners():
     while True:
         try:
             print("Pick your color.")
-            time.sleep(0.5)
+            sleep(0.5)
             for x in range(1,5):
                 print(f"\n{x} - {AllColors[x]}") # Color choices
-                time.sleep(0.25)
+                sleep(0.25)
           
             You = NumChoiceWithQuit(range(1,5)) - 1 # -1 for the index
             if You == "Quit":
@@ -51,9 +52,9 @@ def FourCorners():
         # Tally up choices n lives n allat
         AllPlayers = [[Raphael,RaphaelLives,"Raphael"],[Mike,MikeLives,"Mike"],[Jalen,JalenLives,"Jalen"],[Miguel,MiguelLives,"Miguel"],[You,YourLives,"You"]]
         print("The color chosen is......")
-        time.sleep(0.5)
+        sleep(0.5)
         print(f"{AllColors[FourColors]}!!!")
-        time.sleep(0.5)
+        sleep(0.5)
         for Character in AllPlayers:
             if Character[1] > 0: # If the character aint dead
                 if Character[0] != FourColors: # If the same color wasn't chosen
@@ -85,10 +86,10 @@ def FourCorners(OnePlayerName,TwoPlayerName):
         try:
             clearScreen()
             print(f"{OnePlayerName}! Choose your color.")
-            time.sleep(0.5)
+            sleep(0.5)
             for x in range(1,5):
                 print(f'''\n {x} - {AllColors[x]}''')
-                time.sleep(0.25)
+                sleep(0.25)
             
             You = NumChoiceWithQuit(range(1,5))
             if You == "Quit":
@@ -102,12 +103,12 @@ def FourCorners(OnePlayerName,TwoPlayerName):
             try:
                 clearScreen()
                 print(f"{OnePlayerName} chose {AllColors[You]}.\n")
-                time.sleep(1)
+                sleep(1)
                 print(f"{TwoPlayerName}! Choose your color.")
-                time.sleep(0.5)
+                sleep(0.5)
                 for x in range(1,5):
                     print(f'''\n {x} - {AllColors[x]}''')
-                    time.sleep(0.25)
+                    sleep(0.25)
 
                 TwoPlr = NumChoiceWithQuit(range(1,5))
                 if TwoPlr == "Quit":
@@ -119,9 +120,9 @@ def FourCorners(OnePlayerName,TwoPlayerName):
                 continue
             AllPlayers = [[TwoPlr,TwoPlrLives,"Raphael"],[Mike,MikeLives,"Mike"],[Jalen,JalenLives,"Jalen"],[Miguel,MiguelLives,"Miguel"],[You,YourLives,"You"]]
             print("The color chosen is......")
-            time.sleep(0.5)
+            sleep(0.5)
             print(f"{AllColors[FourColors - 1]}!!!")
-            time.sleep(0.5)
+            sleep(0.5)
             for Character in AllPlayers:
                 if Character[1] > 0:
                     if Character[0] != FourColors:

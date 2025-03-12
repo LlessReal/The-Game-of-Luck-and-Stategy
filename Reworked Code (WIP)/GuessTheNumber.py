@@ -1,6 +1,7 @@
-import time, math, random
+import math, random
 from guide import NumChoiceWithQuit, ExplanationSuggestion, InvalidInput, MessageStop, NumChoice, YesOrNo
 from UsefulStuff import Red, reset, yellow, Blue, red, clearScreen
+from time import sleep
 
 def GuessTheNumber():
    ExplanationSuggestion("GTN")
@@ -10,41 +11,29 @@ def GuessTheNumber():
    while True:
       v = random.randrange(1,8)
       BotChoice = random.randrange(1,8)
-      print("Guess a number from 1 - 7")
-      time.sleep(0.25)
+      print("Guess a number from 1 - 7"); sleep(0.25)
       YourChoice = NumChoiceWithQuit()
-      if YourChoice == "Redo":
-         continue
-      elif YourChoice == "Quit":
-         return "Quit"
-      elif YourChoice not in range(1,9):
-         InvalidInput()
-         continue
+      if YourChoice == "Redo": continue
+      elif YourChoice == "Quit": return "Quit"
+      elif YourChoice not in range(1,9): InvalidInput(); continue
       
       YourChoiceIsClose = math.isclose(YourChoice, v, abs_tol = 1)
       BotChoiceIsClose = math.isclose(BotChoice, v, abs_tol = 1)
-      print("The number generated was...")
-      time.sleep(1)
-      print(f"{v}!\n")
-      time.sleep(1)
-      if YourChoice == v:
-         GTNWins += 1
-         print(f"You chose {YourChoice}, so you get a point")
-      elif YourChoice != v and YourChoiceIsClose == True:
-         GTNWins += 0.5
-         print(f"You chose {YourChoice}, so you get half a point")
-      elif YourChoice != v and YourChoiceIsClose == False:
-         print(f"You chose {YourChoice}, so you get no points")
-      time.sleep(1)
+      print("The number generated was..."); sleep(1)
+      print(f"{v}!\n"); sleep(1)
+      if YourChoice == v: GTNWins += 1; print(f"You chose {YourChoice}, so you get a point")
+      elif YourChoice != v and YourChoiceIsClose == True: GTNWins += 0.5; print(f"You chose {YourChoice}, so you get half a point")
+      elif YourChoice != v and YourChoiceIsClose == False: print(f"You chose {YourChoice}, so you get no points")
+      sleep(1)
       if BotChoice == v:
          GTNLoses = GTNLoses + 1
-         BotsDecision = "Your opponent chose {}, so your opponent gets a point"
+         print(f"Your opponent chose {BotChoice}, so your opponent gets a point")
       elif BotChoice != v and BotChoiceIsClose == True:
          GTNLoses = GTNLoses + 0.5
-         BotsDecision = "Your opponent chose {}, so your opponent gets half a point"
+         print(f"Your opponent chose {BotChoice}, so your opponent gets half a point")
       elif BotChoice != v and BotChoiceIsClose == False:
-         BotsDecision = f"Your opponent chose {BotChoice}, so your opponent gets no points"
-      time.sleep(1)
+         print(f"Your opponent chose {BotChoice}, so your opponent gets no points")
+      sleep(1)
       MessageStop("\n" + Scorebrd.format(GTNWins,GTNLoses))
       if GTNWins >= 3 and GTNLoses < 3:
          MessageStop('''You were the first to reach 3 points, 
@@ -55,10 +44,8 @@ Therefore, '''+Blue+'''you won the game of Guess the Number!'''+reset)
 Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
          return "L"
       elif GTNWins >= 3 and GTNLoses >= 3:
-         print("It looks like you both hit 3 or over 3 at the same time! ")
-         time.sleep(1)
-         print("\n Time for a tie breaker!")
-         time.sleep(1)
+         print("It looks like you both hit 3 or over 3 at the same time! "); sleep(1)
+         print("\n Time for a tie breaker!"); sleep(1)
          def tiebreaker_function():
             MessageStop('''This time, the number generated will be from 1 - 5
    First challenger to guess it wins!
@@ -71,14 +58,10 @@ Therefore, '''+Red+'''you lost the game of Guess the Number.'''+reset)
                except:
                   InvalidInput()
                   continue 
-               print("The number generated was...")
-               time.sleep(1)
-               print(f"{v}!")
-               time.sleep(1)
-               print(f"\nYou chose {YourChoice}")
-               time.sleep(1)
-               print(f"\nYour opponent chose {BotChoice}")
-               time.sleep(1)
+               print("The number generated was..."); sleep(1)
+               print(f"{v}!"); sleep(1)
+               print(f"\nYou chose {YourChoice}"); sleep(1)
+               print(f"\nYour opponent chose {BotChoice}"); sleep(1)
                if YourChoice == v and BotChoice == v :
                   MessageStop('''\nYou and your opponent guessed the number correctly
 \nTherefore, the tiebreaker has not been settled yet''')
@@ -103,43 +86,30 @@ def GuessTheNumber(OnePlayerName,TwoPlayerName):
    Scorebrdpvp = '''Scoreboard:\n\nYou - {} pts. \n\nBot - {} pts'''
    while True:
       v = random.randrange(1,8)
-      print("{}! Guess a number from 1 - 7".format(OnePlayerName))
-      time.sleep(0.25)
+      print(f"{OnePlayerName}! Guess a number from 1 - 7"); sleep(0.25)
       YourChoice = NumChoiceWithQuit()
-      if YourChoice == "Redo":
-         continue
-      elif YourChoice == "Quit":
-         return "Quit"
-      if YourChoice <= 0 or YourChoice >= 8:
-         InvalidInput()
-         continue
+      if YourChoice == "Redo": continue
+      elif YourChoice == "Quit": return "Quit"
+      if YourChoice <= 0 or YourChoice >= 8: InvalidInput(); continue
       while True:
-         print("{}! Guess a number from 1 - 7".format(TwoPlayerName))
-         time.sleep(0.25)
+         print("{}! Guess a number from 1 - 7".format(TwoPlayerName)); sleep(0.25)
          BotChoice = NumChoiceWithQuit()
-         if BotChoice == "Redo":
-            continue
-         elif BotChoice == "Quit":
-            return "Quit"
-         if BotChoice <= 0 or BotChoice >= 8:
-            InvalidInput()
-            continue
+         if BotChoice == "Redo": continue
+         elif BotChoice == "Quit": return "Quit"
+         if BotChoice <= 0 or BotChoice >= 8: InvalidInput(); continue
          break
       YourChoiceIsClose = math.isclose(YourChoice, v, abs_tol = 1)
       BotChoiceIsClose = math.isclose(BotChoice, v, abs_tol = 1)
-      print("The number generated was...")
-      time.sleep(0.5)
+      print("The number generated was..."); sleep(0.5)
       TheNumber = f"\n{v}!\n"
       if YourChoice == v:
          GTNWins = GTNWins + 1
-         YourDecision = "{0} chose {1}, so {0} get a point"
+         YourDecision = "{0} chose {1}, so {0} gets a point"
       elif YourChoice != v and YourChoiceIsClose == True:
          GTNWins = GTNWins + 0.5
-         YourDecision = "{0} chose {1}, so {0} get half a point"
+         print(f"{OnePlayerName} chose {YourChoice}, so {OnePlayerName} gets half a point"); sleep(0.25)
       elif YourChoice != v and YourChoiceIsClose == False:
-         YourDecision = "{0} chose {1}, so {0} get no points"
-      print(YourDecision.format(OnePlayerName,YourChoice))
-      time.sleep(0.25)
+         print(f"{OnePlayerName} chose {YourChoice}, so {OnePlayerName} gets no points"); sleep(0.25)
       if BotChoice == v:
          GTNLoses = GTNLoses + 1
          BotsDecision = "{0} chose {1}, so {0} gets a point"
@@ -148,8 +118,7 @@ def GuessTheNumber(OnePlayerName,TwoPlayerName):
          BotsDecision = "{0} chose {1}, so {0} gets half a point"
       elif BotChoice != v and BotChoiceIsClose == False:
          BotsDecision = "{0} chose {1}, so {0} gets no points"
-      print(BotsDecision.format(TwoPlayerName,BotChoice))
-      time.sleep(0.25)
+      print(BotsDecision.format(TwoPlayerName,BotChoice)); sleep(0.25)
       MessageStop("\n" + Scorebrdpvp.format(OnePlayerName,GTNWins,TwoPlayerName,GTNLoses))
       if GTNWins >= 3 and GTNLoses < 3:
          MessageStop(f"{OnePlayerName} {Blue} was the first to reach 3 points! {reset}")
@@ -159,9 +128,8 @@ def GuessTheNumber(OnePlayerName,TwoPlayerName):
          return "L"
       elif GTNWins >= 3 and GTNLoses >= 3:
          print("It looks like {0} and {1} both hit 3 or over 3 at the same time! ".format(OnePlayerName,TwoPlayerName))
-         time.sleep(1)
-         print("\n Time for a tie breaker!")
-         time.sleep(1)
+         sleep(1)
+         print("\n Time for a tie breaker!"); sleep(1)
          def tiebreaker_function():
             print('''This time, the number generated will be from 1 - 5
          First challenger to guess it wins!
@@ -178,13 +146,13 @@ def GuessTheNumber(OnePlayerName,TwoPlayerName):
                   InvalidInput()
                   continue 
                print("The number generated was...")
-               time.sleep(1)
+               sleep(1)
                TheNumber = f"{v}!"
-               time.sleep(1)
+               sleep(1)
                YourDecision = f"\n{OnePlayerName} chose {YourChoice}"
-               time.sleep(1)
-               BotsDecision = "\n{TwoPlayerName} chose {BotChoice}"
-               time.sleep(1)
+               sleep(1)
+               BotsDecision = f"\n{TwoPlayerName} chose {BotChoice}"
+               sleep(1)
                if YourChoice == v and BotChoice == v:
                   MessageStop(f'''\nIt looks like {OnePlayerName} and {TwoPlayerName} guessed the number correctly
          \nTherefore, the tiebreaker has not been settled yet''')

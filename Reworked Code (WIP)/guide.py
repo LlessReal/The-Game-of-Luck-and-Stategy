@@ -1,39 +1,32 @@
-import time
+from time import sleep
 from UsefulStuff import clearScreen
 from UsefulStuff import Red, reset, yellow, Blue
 import inspect
 # Press enter to continue (With Message if there is one)
 def MessageStop(Message=""): 
-    if Message != "":
-        print(Message)
+    if Message != "": print(Message)
     input(f"\n{yellow}(Press Enter to Continue){reset}\n")
     clearScreen()
 # Press a number to continue
 def NumChoice(NumberLimit): 
     NumberChoice = int(input(f"\n{yellow}(Press a number and then Enter to choose){reset}"))
-    if NumberChoice not in NumberLimit: # If it's not within the limit
-        raise ValueError("Number not within limit") 
-    else:
-        return NumberChoice
+    if NumberChoice not in NumberLimit: raise ValueError("Number not within limit") 
+    else: return NumberChoice
 # Press a number to continue, but with a quit option.
 
 # Invalid Input detected (Usually put this under except:) 
 def InvalidInput(IS="You must press the number on the left. \nThen, you press enter to choose."): # Default message
     clearScreen()
-    print(f"{Red}Invalid Input{reset}")
-    time.sleep(1)
+    print(f"{Red}Invalid Input{reset}"); sleep(1)
     MessageStop(IS)
     # ALWAYS PUT A CONTINUE AFTER THIS FUNCTION ENDS
 
 # Yes / No | (ALWAYS PUT THIS UNDER try: IN A TRY AND EXCEPT PLS)
 # clearScreen before this is optional
 def YesOrNo(YNQuestion="\nConfirm?"):
-    print(YNQuestion)
-    time.sleep(0.5)
-    print(f"\n 1 - {Blue}Yes{reset}")
-    time.sleep(0.25)
-    print(f"\n 2 - {Red}No{reset}")
-    time.sleep(0.25)
+    print(YNQuestion); sleep(0.5)
+    print(f"\n 1 - {Blue}Yes{reset}"); sleep(0.25)
+    print(f"\n 2 - {Red}No{reset}"); sleep(0.25)
     YONChoice = NumChoice() # An error could occur here (Follow above if u havent)
     if YONChoice not in range(1,3): raise ValueError("not 1 or 2")
     else: return YONChoice
@@ -43,35 +36,26 @@ def NumChoiceWithQuit(NumberLimit):
     FileThatCalledFunction = frame.f_code.co_filename
     while True:
         NumberChoice = int(input(f"\n{yellow}(Press a number and then Enter to choose. {reset}{Red}Press 0 to {reset}{Red}quit.{reset}{yellow}){reset}\n"))
-        if NumberChoice not in NumberLimit: # If it's not within the limit
-            raise ValueError("Number not within limit") 
-        elif NumberChoice != 0: # If we didn't choose to quit
-            return NumberChoice
+        # If it's not within the limit
+        if NumberChoice not in NumberLimit: raise ValueError("Number not within limit") 
+        # If we didn't choose to quit
+        elif NumberChoice != 0: return NumberChoice
         else: # If we chose to quit
             while True:
                 clearScreen()
-                try:
-                    YON = YesOrNo(f"Are you sure you want to {Red}quit{reset}?")
-                except: 
-                    InvalidInput()
-                    continue
+                try: YON = YesOrNo(f"Are you sure you want to {Red}quit{reset}?")
+                except: InvalidInput(); continue
                 if YON == 1:
                     if "MenuScreen" in FileThatCalledFunction: # If the function was called from MenuScreen.py
                         return "Quit" # Get on with it
                     else:
-                        print("\nUnderstood. You will now return to the menu screen.")
-                        time.sleep(2)
+                        print("\nUnderstood. You will now return to the menu screen."); sleep(2)
                         return "Quit"
-                if YON == 2:
-                    print("\n Alrighty then!")
-                    time.sleep(1)
-                    return "Redo"
+                if YON == 2: print("\n Alrighty then!"); sleep(1); return "Redo"
 # Prepare to put something like below after this.
 """
-if GameChoice == "Redo":
-    continue
-elif GameChoice == "Quit":
-    return
+if GameChoice == "Redo": continue
+elif GameChoice == "Quit": return
 """
         
 ####################################
@@ -163,17 +147,9 @@ def ExplanationSuggestion(GametoExplain):
     while True:
         try:
             Explanationchoice = YesOrNo("Would you like an explanation on this game?" if Explained == False else "Would you like another explanation on this game?")
-        except:
-            InvalidInput()
-            continue
+        except: InvalidInput(); continue
         if Explanationchoice == 1:
-            print("Alright, allow me to explain the game for you.")
-            time.sleep(2)
-            clearScreen()
+            print("Alright, allow me to explain the game for you."); sleep(2)
             GameExplanation(GametoExplain) # "Game System", "RPS" , "4C" , "GTN" , "BG" , "TTT" , "Connect4"
             Explained = True # No Continue needed
-        elif Explanationchoice == 2:
-            print("Alright, GOOD LUCK!")
-            time.sleep(1.5)
-            clearScreen()
-            break
+        elif Explanationchoice == 2: print("Alright, GOOD LUCK!"); sleep(1.5); clearScreen(); break
