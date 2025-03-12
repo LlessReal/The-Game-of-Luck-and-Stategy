@@ -7,12 +7,12 @@ def MessageStop(Message=""):
     if Message != "": print(Message)
     input(f"\n{yellow}(Press Enter to Continue){reset}\n")
     clearScreen()
+
 # Press a number to continue
-def NumChoice(NumberLimit): 
+def NumChoice(x,y): 
     NumberChoice = int(input(f"\n{yellow}(Press a number and then Enter to choose){reset}"))
-    if NumberChoice not in NumberLimit: raise ValueError("Number not within limit") 
-    else: return NumberChoice
-# Press a number to continue, but with a quit option.
+    if NumberChoice in range(x,y): return NumberChoice
+    else: raise ValueError("Number not within limit") 
 
 # Invalid Input detected (Usually put this under except:) 
 def InvalidInput(IS="You must press the number on the left. \nThen, you press enter to choose."): # Default message
@@ -30,28 +30,29 @@ def YesOrNo(YNQuestion="\nConfirm?"):
     YONChoice = NumChoice() # An error could occur here (Follow above if u havent)
     if YONChoice not in range(1,3): raise ValueError("not 1 or 2")
     else: return YONChoice
-# Similar to Yes or No, try to put under try 
-def NumChoiceWithQuit(NumberLimit): 
+
+
+# Press a number to continue, but with a quit option.
+def NumChoiceWithQuit(x,y): 
     frame = inspect.currentframe().f_back
     FileThatCalledFunction = frame.f_code.co_filename
     while True:
         NumberChoice = int(input(f"\n{yellow}(Press a number and then Enter to choose. {reset}{Red}Press 0 to {reset}{Red}quit.{reset}{yellow}){reset}\n"))
-        # If it's not within the limit
-        if NumberChoice not in NumberLimit: raise ValueError("Number not within limit") 
-        # If we didn't choose to quit
-        elif NumberChoice != 0: return NumberChoice
-        else: # If we chose to quit
+        if NumberChoice != 0 and NumberChoice in range(x,y): return NumberChoice
+        elif NumberChoice == 0: # If we chose to quit
             while True:
                 clearScreen()
                 try: YON = YesOrNo(f"Are you sure you want to {Red}quit{reset}?")
                 except: InvalidInput(); continue
                 if YON == 1:
-                    if "MenuScreen" in FileThatCalledFunction: # If the function was called from MenuScreen.py
-                        return "Quit" # Get on with it
+                    # If the function was called from MenuScreen.py
+                    if "MenuScreen" in FileThatCalledFunction: return "Quit" # Get on with it
                     else:
                         print("\nUnderstood. You will now return to the menu screen."); sleep(2)
                         return "Quit"
                 if YON == 2: print("\n Alrighty then!"); sleep(1); return "Redo"
+        else: raise ValueError("Number not within limit") 
+        
 # Prepare to put something like below after this.
 """
 if GameChoice == "Redo": continue
@@ -146,7 +147,7 @@ def ExplanationSuggestion(GametoExplain):
     clearScreen()
     while True:
         try:
-            Explanationchoice = YesOrNo("Would you like an explanation on this game?" if Explained == False else "Would you like another explanation on this game?")
+            Explanationchoice = YesOrNo(f"Would you like {"an" if Explained == False else "another"} explanation on this game?")
         except: InvalidInput(); continue
         if Explanationchoice == 1:
             print("Alright, allow me to explain the game for you."); sleep(2)

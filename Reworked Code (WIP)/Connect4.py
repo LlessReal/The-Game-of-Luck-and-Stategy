@@ -25,10 +25,10 @@ Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]
 YourSd = Blue+"O"+reset # Your defaultly blue
 BotSd = Red+"O"+reset # Bot is defaultly red
 
-def NewConnect4Board(a,b):
-       a = b
-       clearScreen()
-       Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
+def NewConnect4Board():
+	clearScreen()
+	global Connect4Board
+	Connect4Board = f'''7 | {C4List[42]} | {C4List[43]} | {C4List[44]} | {C4List[45]} | {C4List[46]} | {C4List[47]} | {C4List[48]}
 -----------------------------
 6 | {C4List[35]} | {C4List[36]} | {C4List[37]} | {C4List[38]} | {C4List[39]} | {C4List[40]} | {C4List[41]}
 -----------------------------
@@ -42,236 +42,192 @@ def NewConnect4Board(a,b):
 -----------------------------
 1 | {C4List[0]} | {C4List[1]} | {C4List[2]} | {C4List[3]} | {C4List[4]} | {C4List[5]} | {C4List[6]}
     1 | 2 | 3 | 4 | 5 | 6 | 7''' # Connect4Board meant to be used by all functions
-       print(Connect4Board)
-       return Connect4Board
+	print(Connect4Board)
+	return Connect4Board
 
-def ListColumnChoices():
-       time.sleep(0.25)
-       print("1 - 1st Column     2 - 2nd Column     3 - 3rd Column     4 - 4th Column")
-       time.sleep(0.25)
-       print("\n5 - 5th Column     6 - 6th Column     7 - 7th Column")
+def ListColumnChoices(PlayerName=""):
+	print(Connect4Board)
+	if PlayerName == "": print(f"It's your turn! Choose your Column")
+	else: print(f"It's {PlayerName}'s turn! Choose your Column")
+	time.sleep(0.25); print("1 - 1st Column     2 - 2nd Column     3 - 3rd Column     4 - 4th Column")
+	time.sleep(0.25); print("\n5 - 5th Column     6 - 6th Column     7 - 7th Column")
 
 def Connect4Check(): # Win condition
-       Connect4Analyzation = ""
-       for i in range(28): # Towers (Goes through all 1st 4 rows and check if a tower occurs)
-              if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21] and C4List[i] != "_": # Checks for a match (That aren't empty)
-                     input("Error 1")
-                     Connect4Analyzation = "game" # Match occurs after either person's turn means they won
-       for i in range(0,28,7): # For going to the next row
-              for i2 in range(4): # Starts at column indexes 0 - 3, 7 - 10, etc and goes up
-                     if C4List[i2 + i] == C4List[i2 + i + 8] == C4List[i2 + i + 16] == C4List[i2 + i + 24] and C4List[i2] != "_":
-                            print(i2)
-                            input("Error 2")
-                            Connect4Analyzation = "game"
-       for i in range(0,28,7): 
-              for i2 in range(6,2,-1): # Starts at column indexes 6 - 3 and goes down (Starts from the right edge this time)
-                     if C4List[i2 + i] == C4List[i2 + i + 6] == C4List[i2 + i + 12] == C4List[i2 + i + 18 and C4List[i2] != "_"]:
-                            input("Error 3")
-                            Connect4Analyzation = "game"
-       for i in range(0,42,7): # Straights (Starts at each row, and checks if there's a connect 4 starting from index 0 up to starting at index 3)
-              for i2 in range(4): 
-                     if C4List[i2 + i] == C4List[i2 + i + 1] == C4List[i2 + i + 2] == C4List[i2 + i + 3] and C4List[i2] != "_":
-                            input("Error 4") 
-                            Connect4Analyzation = "game"
-       if "_" not in C4List and Connect4Analyzation == "": # If there's no more empty areas
-              Connect4Analyzation = "draw"
-       return Connect4Analyzation
+	Connect4Analyzation = ""
+	for i in range(28): # Towers (Goes through all 1st 4 rows and check if a tower occurs)
+		if C4List[i] == C4List[i + 7] == C4List[i + 14] == C4List[i + 21] and C4List[i] != "_": # Checks for a match (That aren't empty)
+			input("Error 1")
+			Connect4Analyzation = "game" # Match occurs after either person's turn means they won
+	for i in range(0,28,7): # For going to the next row
+		for i2 in range(4): # Starts at column indexes 0 - 3, 7 - 10, etc and goes up
+			if C4List[i2 + i] == C4List[i2 + i + 8] == C4List[i2 + i + 16] == C4List[i2 + i + 24] and C4List[i2] != "_":
+				print(i2)
+				input("Error 2")
+				Connect4Analyzation = "game"
+	for i in range(0,28,7): 
+		for i2 in range(6,2,-1): # Starts at column indexes 6 - 3 and goes down (Starts from the right edge this time)
+			if C4List[i2 + i] == C4List[i2 + i + 6] == C4List[i2 + i + 12] == C4List[i2 + i + 18 and C4List[i2] != "_"]:
+				input("Error 3")
+				Connect4Analyzation = "game"
+	for i in range(0,42,7): # Straights (Starts at each row, and checks if there's a connect 4 starting from index 0 up to starting at index 3)
+		for i2 in range(4): 
+			if C4List[i2 + i] == C4List[i2 + i + 1] == C4List[i2 + i + 2] == C4List[i2 + i + 3] and C4List[i2] != "_":
+				input("Error 4") 
+				Connect4Analyzation = "game"
+	if "_" not in C4List and Connect4Analyzation == "": Connect4Analyzation = "draw"
+	return Connect4Analyzation
 
 def DrawFunction():
-       MessageStop("\n DRAW! \n")
-       clearScreen()
-       temp = BotSd
-       BotSd = YourSd 
-       YourSd = temp # Swap variables/coin colors
-       for i in C4List:
-              C4List[i] = "_" # All items are _ again
+	MessageStop("\n DRAW! \n"); clearScreen()
+	temp = BotSd
+	BotSd = YourSd 
+	YourSd = temp # Swap variables/coin colors
+	for i in C4List: C4List[i] = "_" # All items are _ again
 
 def Connect4():  
-       while True:
-              DifficultyModes = ["Easy","Hard"]
-              print("\n Choose your difficulty for Connect FOUR:")
-              time.sleep(0.5)
-              print("\n" + Blue + "Easy (Bot has no brain)" + reset)
-              time.sleep(0.25)
-              print("\n" + Red + "Hard (Bot has big brain) " + reset)
-              time.sleep(0.25)
-              NumChoice()
-              try:
-                     DifficultyChoice = DifficultyModes[int(input(""))] - 1
-                     print(f"Alright! {DifficultyChoice} difficulty of Connect FOUR loading!")
-                     time.sleep(1.5)
-                     clearScreen()
-                     break                                              
-              except:
-                     InvalidInput()
-                     continue
-       ExplanationSuggestion("Connect4")
-       Yourturn = True
-       while True: 
-              while Yourturn == True:
-                     print(Connect4Board)
-                     print("It's your turn! Choose your Column")
-                     ListColumnChoices()
-                     try:
-                            Yourgo = NumChoiceWithQuit(range(1,7))
-                     except:
-                            InvalidInput()
-                            continue
+	while True:
+		DifficultyModes = ["Easy","Hard"]
+		print("\n Choose your difficulty for Connect FOUR:"); time.sleep(0.5)
+		print("\n" + Blue + "Easy (Bot has no brain)" + reset); time.sleep(0.25)
+		print("\n" + Red + "Hard (Bot has big brain) " + reset); time.sleep(0.25)
+		NumChoice()
+		try:
+			DifficultyChoice = DifficultyModes[int(input(""))] - 1
+			print(f"Alright! {DifficultyChoice} difficulty of Connect FOUR loading!")
+			time.sleep(1.5)
+			clearScreen()
+			break                                              
+		except: InvalidInput(); continue
+	ExplanationSuggestion("Connect4")
+	Yourturn = True
+	while True: 
+		while Yourturn == True:
+			ListColumnChoices()
+			try: Yourgo = NumChoiceWithQuit(range(1,7))
+			except: InvalidInput(); continue
 
-                     for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
-                            ColumnFull = True
-                            if C4List[Yourgo - 1 + i] != "_": # If your slot in the row is not empty, continues
-                                   continue
-                            else:
-                                   NewConnect4Board(C4List[Yourgo - 1 + i],YourSd)
-                                   ColumnFull = False
-                                   print(f"You chose to fill in Row {math.ceil(Yourgo + i)}, Column {Yourgo}")
-                                   Yourturn = False
-                                   time.sleep(1)
-                                   clearScreen()
-                                   break
-                     if ColumnFull == True:
-                            MessageStop(Red+"Column is filled"+reset)
-                            continue
+			for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
+				ColumnFull = True
+				if C4List[Yourgo - 1 + i] != "_": continue
+				else:
+					NewConnect4Board(C4List[Yourgo - 1 + i],YourSd)
+					ColumnFull = False
+					print(f"You chose to fill in Row {math.ceil(Yourgo + i)}, Column {Yourgo}")
+					Yourturn = False
+					time.sleep(1)
+					clearScreen()
+					break
+			if ColumnFull == True: MessageStop(Red+"Column is filled"+reset); continue
 
-              Connect4Results = Connect4Check()  # Checks if your go was the win
-              if Connect4Results != "":
-                     print(Connect4Board)
-                     if Connect4Results == "game":
-                            print(Blue+"\n You have connected four! \n"+reset)
-                            MessageStop()
-                            if DifficultyChoice == "Easy":
-                                   return "EW"
-                            elif DifficultyChoice == "Medium":
-                                   return "MW"
-                            elif DifficultyChoice == "Hard":
-                                   return "HW"
-                     elif Connect4Results == "draw":
-                            DrawFunction()
-       
-              while Yourturn == False:
-                     if DifficultyChoice == "Hard": # Still working on this lol
-                            for i in range(28): # Diagonals
-                                   TowerCheckList = [C4List[i],C4List[i + 7],C4List[i + 14],C4List[i + 21]]
-                                   DiagonalRightCheckList = [C4List[i],C4List[i + 8],C4List[i + 16],C4List[i + 24]]
-                                   DiagonalLeftCheckList = [C4List[i],C4List[i + 6],C4List[i + 12],C4List[i + 18]]
-                                   if TowerCheckList.count(YourSd) == 3:
-                                          Oppgo = TowerCheckList[TowerCheckList.index("_")]   
-                                   elif DiagonalRightCheckList.count(YourSd) == 3:
-                                          Oppgo = DiagonalRightCheckList[DiagonalRightCheckList.index("_")]  
-                                   elif DiagonalLeftCheckList.count(YourSd) == 3:
-                                          Oppgo = DiagonalLeftCheckList[DiagonalLeftCheckList.index("_")]  
-                                         
-                            for i in range(4): # Straights
-                                   RowCheckList1 = C4List[i] == C4List[i + 1] == C4List[i + 2] == C4List[i + 3]
-                                   RowCheckList2 = C4List[i + 7] == C4List[i + 8] == C4List[i + 9] == C4List[i + 10]
-                                   RowCheckList3 = C4List[i + 14] == C4List[i + 15] == C4List[i + 16] == C4List[i + 17]
-                                   RowCheckList4 = C4List[i + 21] == C4List[i + 22] == C4List[i + 23] == C4List[i + 24]
-                     else:
-                            Oppgo = random.randrange(1,8)
+		Connect4Results = Connect4Check()  # Checks if your go was the win
+		if Connect4Results != "":
+			print(Connect4Board)
+			if Connect4Results == "game":
+				print(Blue+"\n You have connected four! \n"+reset); MessageStop()
+				if DifficultyChoice == "Easy": return "EW"
+				elif DifficultyChoice == "Medium": return "MW"
+				elif DifficultyChoice == "Hard": return "HW"
+			elif Connect4Results == "draw":  DrawFunction()
+	
+		while Yourturn == False:
+			if DifficultyChoice == "Hard": # Still working on this lol
+				for i in range(28): # Diagonals
+					TowerCheckList = [C4List[i],C4List[i + 7],C4List[i + 14],C4List[i + 21]]
+					DiagonalRightCheckList = [C4List[i],C4List[i + 8],C4List[i + 16],C4List[i + 24]]
+					DiagonalLeftCheckList = [C4List[i],C4List[i + 6],C4List[i + 12],C4List[i + 18]]
+					if TowerCheckList.count(YourSd) == 3:
+						Oppgo = TowerCheckList[TowerCheckList.index("_")]   
+					elif DiagonalRightCheckList.count(YourSd) == 3:
+						Oppgo = DiagonalRightCheckList[DiagonalRightCheckList.index("_")]  
+					elif DiagonalLeftCheckList.count(YourSd) == 3:
+						Oppgo = DiagonalLeftCheckList[DiagonalLeftCheckList.index("_")]  
+					      
+				for i in range(4): # Straights
+					RowCheckList1 = C4List[i] == C4List[i + 1] == C4List[i + 2] == C4List[i + 3]
+					RowCheckList2 = C4List[i + 7] == C4List[i + 8] == C4List[i + 9] == C4List[i + 10]
+					RowCheckList3 = C4List[i + 14] == C4List[i + 15] == C4List[i + 16] == C4List[i + 17]
+					RowCheckList4 = C4List[i + 21] == C4List[i + 22] == C4List[i + 23] == C4List[i + 24]
+			else: Oppgo = random.randrange(1,8)
 
-                     for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
-                            ColumnFull = True # May delete because by this time, the bot may already know where they wanna go
-                            if C4List[Oppgo - 1 + i] != "_": # If your slot in the row is not empty, continues
-                                   continue
-                            else:
-                                   C4List[Oppgo - 1 + i] = BotSd
-                                   ColumnFull = False # Same
-                                   print(Connect4Board)
-                                   print(f"Bot chose to fill in Row {math.ceil(Oppgo + i)}, Column {Oppgo}")
-                                   Yourturn = True
-                                   time.sleep(1)
-                                   clearScreen()
-                     if ColumnFull == True:
-                            continue
-                     Connect4Results = Connect4Check() # Solves the winner
-                     if Connect4Results != "":
-                            print(Connect4Board)
-                            if Connect4Results == "game":
-                                   MessageStop(Red+"\n Your opponent has connected four! \n"+reset)
-                                   if DifficultyChoice == "Easy":
-                                          return "EL"
-                                   elif DifficultyChoice == "Medium":
-                                          return "ML"
-                                   elif DifficultyChoice == "Hard":
-                                          return "HL"
-                            elif Connect4Results == "draw":
-                                   DrawFunction()
+			for i in range(0,42,7): # Doesn't go to 42 as it will go over the limit
+				ColumnFull = True # May delete because by this time, the bot may already know where they wanna go
+				# If your slot in the row is not empty, continues
+				if C4List[Oppgo - 1 + i] != "_": continue
+				else:
+					C4List[Oppgo - 1 + i] = BotSd
+					ColumnFull = False # Same
+					NewConnect4Board()
+					print(f"Bot chose to fill in Row {math.ceil(Oppgo + i)}, Column {Oppgo}")
+					Yourturn = True
+					time.sleep(1)
+					clearScreen()
+			if ColumnFull == True: continue
+			Connect4Results = Connect4Check() # Solves the winner
+			if Connect4Results != "":
+				print(Connect4Board)
+				if Connect4Results == "game":
+					MessageStop(Red+"\n Your opponent has connected four! \n"+reset)
+					if DifficultyChoice == "Easy": return "EL"
+					elif DifficultyChoice == "Medium": return "ML"
+					elif DifficultyChoice == "Hard": return "HL"
+				elif Connect4Results == "draw": DrawFunction()
    
 def Connect4(Player1Name,Player2Name): # PVP Mode
-       ExplanationSuggestion("Connect4") # Game gets explained
-       Yourturn = True
-       while True: 
-              while Yourturn == True:
-                     print(Connect4Board)
-                     print(f"It's {Player1Name}'s turn! Choose your Column")
-                     ListColumnChoices() # List Choices
-                     try:
-                            Yourgo = NumChoiceWithQuit(range(1,7))
-                     except:
-                            InvalidInput()
-                            continue
+	ExplanationSuggestion("Connect4") # Game gets explained
+	Yourturn = True
+	while True: 
+		while Yourturn == True:
+			ListColumnChoices(Player1Name) # List Choices
+			try: Yourgo = NumChoiceWithQuit(1,7)
+			except: InvalidInput(); continue
 
-                     for i in range(0,42,7): # Doesn't go to 49 as it will go over the limit
-                            ColumnFull = True # Assumes column is full for now
-                            if C4List[Yourgo - 1 + i] != "_": # If your slot in the current row isn't empty, goes to next row
-                                   continue
-                            else:
-                                   Connect4Board = NewConnect4Board(C4List[Yourgo - 1 + i],YourSd)
-                                   C4List[Yourgo - 1 + i] = YourSd
-                                   ColumnFull = False # Column wasn't full after all
-                                   print(f"{Player1Name} chose to fill in Row {math.ceil((Yourgo + i) / 7)}, Column {Yourgo}") # Row Calculation: You chose column 2. (2 + 7) / 7 ceiled is 2, so you're on row 2. Ofc column is the # u chose
-                                   Yourturn = False # No longer your turn
-                                   time.sleep(1)
-                                   clearScreen()
-                                   break
-                     if ColumnFull == True: # Column isn't proved to not be full
-                            MessageStop(Red+"Column is filled"+reset)
-                            continue # Turn repeats
+			for i in range(0,42,7): # Doesn't go to 49 as it will go over the limit
+				ColumnFull = True # Assumes column is full for now
+				if C4List[Yourgo - 1 + i] != "_": continue# If your slot in the current row isn't empty, goes to next row
+				else:
+					Connect4Board = NewConnect4Board(C4List[Yourgo - 1 + i],YourSd)
+					C4List[Yourgo - 1 + i] = YourSd
+					ColumnFull = False # Column wasn't full after all
+					print(f"{Player1Name} chose to fill in Row {math.ceil((Yourgo + i) / 7)}, Column {Yourgo}") # Row Calculation: You chose column 2. (2 + 7) / 7 ceiled is 2, so you're on row 2. Ofc column is the # u chose
+					Yourturn = False # No longer your turn
+					time.sleep(1)
+					clearScreen()
+					break
+			# Column isn't proved to not be full
+			if ColumnFull == True: MessageStop(Red+"Column is filled"+reset); continue # Turn repeats
 
-                     Connect4Results = Connect4Check()
-                     if Connect4Results != "":
-                            print(Connect4Board)
-                            if Connect4Results == "game":
-                                   MessageStop(Blue+f"\n {Player1Name} have connected four! \n"+reset)
-                                   return "W" # Returns back to select, signifying Player 1 the winner
-                            elif Connect4Results == "draw":
-                                   DrawFunction() # Announces draw, swaps coins, resets board
+			Connect4Results = Connect4Check()
+			if Connect4Results != "":
+				print(Connect4Board)
+				if Connect4Results == "game":
+					MessageStop(Blue+f"\n {Player1Name} have connected four! \n"+reset)
+					return "W" # Returns back to select, signifying Player 1 the winner
+				elif Connect4Results == "draw": DrawFunction() # Announces draw, swaps coins, resets board
  
-              while Yourturn == False: # Player 2's turn
-                     print(Connect4Board)
-                     print(f"It's {Player2Name}'s turn!")
-                     ListColumnChoices()
-                     try:
-                            Oppgo = NumChoiceWithQuit(range(1,7))
-                     except:
-                            InvalidInput()
-                            continue
+		while Yourturn == False: # Player 2's turn 
+			ListColumnChoices(Player2Name)
+			try: Oppgo = NumChoiceWithQuit(1,7)
+			except: InvalidInput(); continue
 
-                     for i in range(0, 42, 7): 
-                            ColumnFull = True 
-                            if C4List[Oppgo - 1 + i] != "_": 
-                                   continue
-                            else:
-                                   C4List[Oppgo - 1 + i] = BotSd
-                                   ColumnFull = False # Same
-                                   clearScreen()
-                                   print(Connect4Board)
-                                   print(f"{Player2Name} chose to fill in Row {math.ceil(Oppgo + i)}, Column {Oppgo}")
-                                   Yourturn = True
-                                   time.sleep(1)
-                                   clearScreen()
-                                   break # breaks outta loop to not repeat
-                     if ColumnFull == True:
-                            MessageStop(Red+"Column is filled"+reset)
-                            continue # Turn repeats
-                     
-                     Connect4Results = Connect4Check()
-                     if Connect4Results != "":
-                            print(Connect4Board)
-                            if Connect4Results == "game":
-                                   MessageStop(Red+f"\n {Player2Name} has connected four! \n"+reset)
-                                   return "L" # Loser for player 1
-                            elif Connect4Results == "draw":
-                                   DrawFunction()
+			for i in range(0, 42, 7): 
+				ColumnFull = True 
+				if C4List[Oppgo - 1 + i] != "_": continue
+				else:
+					C4List[Oppgo - 1 + i] = BotSd
+					ColumnFull = False # Same
+					NewConnect4Board()
+					print(f"{Player2Name} chose to fill in Row {math.ceil(Oppgo + i)}, Column {Oppgo}")
+					Yourturn = True
+					time.sleep(1)
+					clearScreen()
+					break # breaks outta loop to not repeat
+			if ColumnFull == True: MessageStop(Red+"Column is filled"+reset); continue # Turn repeats
+			
+			Connect4Results = Connect4Check()
+			if Connect4Results != "":
+				print(Connect4Board)
+				if Connect4Results == "game":
+					MessageStop(Red+f"\n {Player2Name} has connected four! \n"+reset)
+					return "L" # Loser for player 1
+				elif Connect4Results == "draw": DrawFunction()
 #CONNECT FOUR

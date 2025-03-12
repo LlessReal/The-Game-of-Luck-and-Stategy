@@ -33,28 +33,24 @@ def PVC():
             elif GameChoice == "Quit": return
             GameChosen = gamelist[GameChoice - 1][0] # If this is not in the list, an error will return
             PointWorth = gamelist[GameChoice - 1][1]
-        except:
-            InvalidInput()
-            continue  
+        except: InvalidInput(); continue  
         while True:
             GameDecision = GameSelected(GameChosen,PointWorth)
             ChosenDifficulty = "N/A" # By default there's no difficulty
             # Checks to see what game we're doing, and calls that script based on it
+            
             # RPS 
             if GameDecision == "Rock Paper Scissors":
                 GamePointChange = 300
                 GameInSession = RPS()
-                clearScreen()
-                if GameInSession == "Quit":
-                    return # Back to the main screen
+                if GameInSession == "Quit": return # Back to the main screen
                 GamePoints += GamePointChange if GameInSession == "W" else -(GamePointChange / 2)
                 # This is all used to generate a statement            
+            
             # Four Corners    
             elif GameDecision == "Four Corners":
                 GameInSession = FourCorners()
-                clearScreen()
-                if GameInSession == "Quit":
-                    return 
+                if GameInSession == "Quit": return 
                 Meanings = [["EW",100],["MW",300],["EW",500],["EL",-50],["ML",-150],["HL",-250]]
                 Difficulties = ["Easy","Medium","Hard"]
                 for Difficulty in Difficulties:
@@ -69,16 +65,12 @@ def PVC():
             elif GameDecision == "Guess the number":
                 GameInSession = GuessTheNumber()
                 GamePointChange = 300
-                clearScreen()
-                if GameInSession == "Quit":
-                    return
+                if GameInSession == "Quit": return
                 GamePoints += GamePointChange if GameInSession == "W" else -(GamePointChange / 2)
 
             elif GameDecision == "Board Game":
                 GameInSession = BoardGame()
-                clearScreen()
-                if GameInSession == "Quit":
-                    return
+                if GameInSession == "Quit": return
                 Meanings = [["EW",100],["MW",300],["EW",500],["EL",-50],["ML",-150],["HL",-250]]
                 Difficulties = ["Easy","Medium","Hard"]
                 for Difficulty in Difficulties:
@@ -92,9 +84,7 @@ def PVC():
             # Tic-Tac-Toe
             elif GameDecision == "Tic-Tac-Toe":
                 GameInSession = TicTacToe()
-                clearScreen()
-                if GameInSession == "Quit":
-                    return 
+                if GameInSession == "Quit": return 
                 Meanings = [["EW",100],["MW",300],["EW",500],["EL",-50],["ML",-150],["HL",-250]]
                 Difficulties = ["Easy","Medium","Hard"]
                 for Difficulty in Difficulties:
@@ -108,10 +98,7 @@ def PVC():
             # Connect Four
             elif GameDecision == "Connect Four":
                 GameInSession = Connect4()
-                clearScreen()
-                if GameInSession == "Quit":
-                    return 
-                clearScreen()
+                if GameInSession == "Quit": return 
                 Meanings = [["EW",100],["MW",300],["EW",500],["EL",-50],["ML",-150],["HL",-250]]
                 Difficulties = ["Easy","Medium","Hard"]
                 for Difficulty in Difficulties:
@@ -144,19 +131,15 @@ def PVC():
         print(f"{Red} {random.choice(RoastingPhrases)} {reset}")
 
     elif GamePoints > 0 and GamePoints < 500: print(f"{GamePoints} {reset}.")
-
     if GamePoints >= 500 and GamePoints < 1000: print(f"{Blue} {GamePoints} {reset}!\n Not bad challenger!")
-
     elif GamePoints >= 1000 and GamePoints < 2000: print(f"{Blue} {GamePoints} {reset}!\nYou did great challenger!!")
-
     elif GamePoints >= 2000 and GamePoints < 3000: print(f"{Blue} {GamePoints} {reset}!\n You're crazy challenger! Well done!!")
-
     elif GamePoints >= 3000:
             print(f"{Blue} {GamePoints} {reset}.")
             glazelines = ["Woah! That's a very big score!","You're not a challenger anymore...","You're a "+blue_back+"GOD!"+reset]
-            for glazing in glazelines:
-                print(glazing)
-                if glazelines.index(glazing) != len(glazelines) - 1: time.sleep(1)
+            for glaze in glazelines:
+                print(glaze)
+                if glazelines.index(glaze) != len(glazelines) - 1: time.sleep(1)
     time.sleep(1)
     MessageStop("\nFeel free to share your score with your friends!")
 

@@ -5,10 +5,8 @@ import RPS, GuessTheNumber, TicTacToe, Connect4
 from PVC import GameSelected # Borrowing this function from PVC
 
 def WinStatementFunc(GameStatus,TheGame,PONGiven,PTNGiven):
-    if GameStatus == "W":
-        return f"{green}{PONGiven} {Blue}has won the game of {TheGame}! {reset}"
-    elif GameStatus == "L":
-        return f"{red}{PTNGiven} {Blue}has won the game of {TheGame}! {reset}"
+    if GameStatus == "W": return f"{green}{PONGiven} {Blue}has won the game of {TheGame}! {reset}"
+    elif GameStatus == "L": return f"{red}{PTNGiven} {Blue}has won the game of {TheGame}! {reset}"
 
 def PVP():
     PlrOnePts = PlrTwoPts = 0 # Point initialization
@@ -26,16 +24,13 @@ def PVP():
                     PONNoColor = PlayerOneName
                     PlayerOneName = green + PlayerOneName + reset
                     MessageStop(f"\n Player 1 Name: {PlayerOneName}")
-                    time.sleep(1.5)
-                    clearScreen()
                     PONSelection = False
                     break
                 elif PONConfirmation == 2: print("Understood."); time.sleep(1); clearScreen(); break
-                else: InvalidInput()
+                else: InvalidInput(); continue
         else: 
             InvalidInput('''Name must contain atleast one letter and be no longer than 10 characters.)
-(Your name also cannot be the same as Player 1's name''')
-            continue
+(Your name also cannot be the same as Player 1's name'''); continue
 
     PTNSelection = True
     while PTNSelection == True:
@@ -52,8 +47,7 @@ def PVP():
                     if PTNSelection == 1:
                         print("Great!"); time.sleep(1)
                         PlayerTwoName = red + PlayerTwoName + reset
-                        print(f"\nPlayer 2 Name: {PlayerTwoName}"); time.sleep(1.5)
-                        clearScreen()
+                        MessageStop(f"\n Player 1 Name: {PlayerOneName}")
                         PTNSelection = False
                         break
                     elif PTNSelection == 2:
@@ -100,7 +94,6 @@ Whichever opponent reaches 3 wins in the games first will win the game of luck a
         else:
             MessageStop(WinStatementFunc(GameInSession,GameDecision,PlayerOneName,PlayerTwoName))
             MessageStop(f"Score Board:\n\n{PlayerOneName} - {PlrOnePts} win(s). \n\n{PlayerTwoName} - {PlrTwoPts} win(s).")
-            clearScreen()
             GamesLeft -= 1
             if GamesLeft != 0: MessageStop(f"\n You and your opponent get to play {GamesLeft} more game(s)")
         # Loop

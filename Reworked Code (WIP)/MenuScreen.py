@@ -7,8 +7,8 @@ def MenuScreen():
         try:
             print("Menu Screen:") # Label
             MenuOptions = ["Vs. Computer","PVP","What even is this game?"] # All menu options
-            for MenuOption in MenuOptions:
-                print(f"\n{MenuOptions.index(MenuOption) + 1} - {MenuOption}") # Lays em out on page like a list
+            for Option in MenuOptions:
+                print(f"\n{MenuOptions.index(Option) + 1} - {Option}") # Lays em out on page like a list
                 sleep(0.25) 
             MenuOptionChoice = NumChoiceWithQuit() # Prompt Choice with quit option
             if MenuOptionChoice == "Quit": return "Quit"
